@@ -116,7 +116,7 @@ tr:hover td{background:var(--card);color:var(--fg2)}
   nav li a.active{border-bottom-color:var(--amber-b)}
   .nav-sec{display:none}
   nav li.sub{display:none}
-  #sw{display:none}
+  #sw{padding:.8rem 1.2rem}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -1426,24 +1426,94 @@ tr:hover td{background:var(--card);color:var(--fg2)}
 </div>
 
 <script>
-function nc(a){document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}
-function xt(btn){const b=btn.nextElementSibling;const o=b.classList.toggle('open');btn.textContent=(o?'▾':'▸')+btn.textContent.slice(1)}
-function doSearch(q){
-  const main=document.getElementById('main');
-  main.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));
-  if(!q.trim())return;
-  const lq=q.toLowerCase();
-  function walk(n){
-    if(n.nodeType===3){const t=n.textContent,li=t.toLowerCase();if(!li.includes(lq))return;
-      const f=document.createDocumentFragment();let i=0,j;
-      while((j=li.indexOf(lq,i))!==-1){f.appendChild(document.createTextNode(t.slice(i,j)));const m=document.createElement('mark');m.textContent=t.slice(j,j+lq.length);f.appendChild(m);i=j+lq.length}
-      f.appendChild(document.createTextNode(t.slice(i)));n.replaceWith(f);
-    }else if(n.nodeType===1&&!['SCRIPT','STYLE'].includes(n.tagName)){Array.from(n.childNodes).forEach(walk)}
-  }
-  walk(main);
+function nc(a){
+  document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
 }
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('nav a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id)})}})},{threshold:.15});
-document.querySelectorAll('.sec[id], div[id]').forEach(s=>{if(s.id)obs.observe(s)});
+
+function xt(btn){
+  const b=btn.nextElementSibling;
+  const o=b.classList.toggle('open');
+  btn.textContent=(o?'▾':'▸')+btn.textContent.slice(1);
+}
+
+function doSearch(q) {
+  const main = document.getElementById('main');
+  
+  // 1. Clean up existing highlights cleanly
+  const marks = main.querySelectorAll('mark');
+  marks.forEach(mark => {
+    const parent = mark.parentNode;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+    parent.normalize(); // Merges adjacent text nodes so future searches don't break
+  });
+
+  const query = q.trim().toLowerCase();
+  if (!query) return;
+
+  // 2. Safely collect text nodes FIRST without modifying DOM during traversal
+  const textNodes = [];
+  const walker = document.createTreeWalker(
+    main,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: node => {
+        const tag = node.parentNode.tagName;
+        if (['SCRIPT', 'STYLE', 'MARK'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        return node.textContent.toLowerCase().includes(query) 
+          ? NodeFilter.FILTER_ACCEPT 
+          : NodeFilter.FILTER_SKIP;
+      }
+    }
+  );
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  // 3. Highlight matches safely after traversal is complete
+  textNodes.forEach(node => {
+    const text = node.textContent;
+    const lowerText = text.toLowerCase();
+    const fragment = document.createDocumentFragment();
+    let lastIdx = 0;
+    let matchIdx = lowerText.indexOf(query);
+
+    while (matchIdx !== -1) {
+      if (matchIdx > lastIdx) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIdx, matchIdx)));
+      }
+      
+      const mark = document.createElement('mark');
+      mark.textContent = text.slice(matchIdx, matchIdx + query.length);
+      fragment.appendChild(mark);
+
+      lastIdx = matchIdx + query.length;
+      matchIdx = lowerText.indexOf(query, lastIdx);
+    }
+
+    if (lastIdx < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIdx)));
+    }
+
+    node.parentNode.replaceChild(fragment, node);
+  });
+}
+
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('nav a').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id)
+      })
+    }
+  })
+},{threshold:.15});
+
+document.querySelectorAll('.sec[id], div[id]').forEach(s=>{
+  if(s.id)obs.observe(s)
+});
 </script>
 </body>
 </html>
