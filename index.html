@@ -120,30 +120,6 @@ tr:hover td{background:var(--card);color:var(--fg2)}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<script>
-function xt(btn){
-  var body = btn.nextElementSibling;
-  body.classList.toggle('open');
-  btn.textContent = body.classList.contains('open') ? '▾ Hide details' : '▸ Detailed: why dω = 0 forces the Hodge decomposition';
-}
-function nc(a){
-  document.querySelectorAll('nav a').forEach(el=>el.classList.remove('active'));
-  a.classList.add('active');
-}
-function doSearch(q){
-  var term = q.toLowerCase();
-  var main = document.getElementById('main');
-  var secs = main.getElementsByClassName('sec');
-  for(var i=0; i<secs.length; i++){
-    var text = secs[i].innerText.toLowerCase();
-    if(!term || text.includes(term)){
-      secs[i].style.display = '';
-    } else {
-      secs[i].style.display = 'none';
-    }
-  }
-}
-</script>
 </head>
 <body>
 <div id="shell">
@@ -544,613 +520,1000 @@ function doSearch(q){
     <div class="card">
       <span class="ct">Philosophical</span>
       <h5>Twistor democracy</h5>
-      <p>On a hyperkähler manifold, no single complex structure I is preferred — the entire 2-sphere's worth of structures (aI + bJ + cK, a²+b²+c²=1) are equal partners. The twistor space Z restores democracy among all ℂ-structures.</p>
+      <p>On a hyperkähler manifold, no single complex structure I is preferred — the entire 2-sphere's worth of structures (aI + bJ + cK, a²+b²+c²=1) are equally valid. This "democracy" of complex structures is the twistor philosophy: study M via the whole family at once.</p>
     </div>
   </div>
 </div>
 
-<!-- MIRROR SYMMETRY -->
 <div class="sec" id="phil-mirror">
   <div class="stag tt">Philosophical</div>
-  <h2>Mirror symmetry and duality</h2>
+  <h2>Mirror symmetry</h2>
 
-  <p class="lead">In string theory and geometry, mirror symmetry exchanges complex and symplectic data. On hyperkähler manifolds, mirror symmetry takes a unique form: it acts within the hyperkähler structure itself, swapping different complex structures.</p>
+  <p>Mirror symmetry — the exchange of two Calabi–Yau manifolds X and X̌ — is one of the deepest implications of Kähler geometry, originally discovered through physics (string theory) and still not fully understood mathematically.</p>
+
+  <div class="math">
+    <span class="ml">Mirror symmetry (heuristic statement)</span>
+    For mirror Calabi–Yau manifolds X and X̌:<br>
+    H^{p,q}(X) ≅ H^{n-p,q}(X̌)  (Hodge number mirror)<br>
+    Gromov–Witten theory of X ↔ variation of Hodge structure of X̌<br>
+    Derived category D^b(Coh(X)) ≅ D^b(Fuk(X̌))  (Kontsevich HMS)<br><br>
+    For hyperkähler: mirror symmetry acts as a rotation in the twistor sphere,<br>
+    exchanging symplectic and complex structures.
+  </div>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Duality</span>
-      <h5>SYZ for hyperkähler</h5>
-      <p>Strominger–Yau–Zaslow (SYZ) conjecture: mirror pairs of Calabi–Yau manifolds are fibred by special Lagrangian tori. For a hyperkähler manifold, a special Lagrangian fibration in complex structure I becomes a holomorphic fibration (Hitchin system) in complex structure J. Mirror symmetry is hyperkähler rotation.</p>
+      <span class="ct">Theorem</span>
+      <h5>SYZ conjecture</h5>
+      <p>Strominger–Yau–Zaslow (1996): mirror Calabi–Yau manifolds are dual special Lagrangian torus fibrations. For hyperkähler manifolds this specialises: the Hitchin fibration M_Higgs → B is self-mirror, with fibres being dual abelian varieties (Langlands duality).</p>
     </div>
     <div class="card">
-      <span class="ct">Duality</span>
-      <h5>Gaiotto–Moore–Neitzke</h5>
-      <p>GMN (2008–2013): hyperkähler metrics on Hitchin moduli spaces and 4d N=2 compactifications are computed by wall-crossing formulas for BPS states. The metric has quantum corrections from BPS instantons, solved via integral equations of TBA type.</p>
+      <span class="ct">Theorem</span>
+      <h5>Homological mirror symmetry</h5>
+      <p>Kontsevich (1994): the derived category of coherent sheaves on X is equivalent to the Fukaya category of X̌ as A∞-categories. Proved for elliptic curves (Polishchuk–Zaslow), K3 surfaces, and certain CY3s. Open for general CY.</p>
     </div>
     <div class="card">
-      <span class="ct">Duality</span>
-      <h5>3d mirror symmetry</h5>
-      <p>Intriligator–Seiberg (1996): 3d N=4 gauge theories have two branches of moduli space: Higgs branch (hyperkähler) and Coulomb branch (hyperkähler). 3d mirror symmetry swaps Higgs and Coulomb branches. Braverman–Finkelberg–Nakajima (BFN, 2016) gave a mathematically rigorous definition of the Coulomb branch.</p>
+      <span class="ct">Application</span>
+      <h5>Langlands duality via HK</h5>
+      <p>The hyperkähler structure on the Hitchin moduli space underlies geometric Langlands: rotating the complex structure on M_Higgs from I to J exchanges G-bundles with Ǧ-bundles (Langlands dual group), implementing the duality geometrically.</p>
     </div>
     <div class="card">
-      <span class="ct">Duality</span>
-      <h5>Geometric Langlands</h5>
-      <p>Kapustin–Witten (2006): S-duality of 4d N=4 super Yang–Mills theory, compactified on a Riemann surface C, reduces to A-models and B-models on the Hitchin moduli space M_Higgs(C). Since M_Higgs is hyperkähler, the A-model in complex structure K is equivalent to the B-model in complex structure J. This is the origin of the geometric Langlands correspondence.</p>
+      <span class="ct">Open</span>
+      <h5>Quantum mirror symmetry for HK</h5>
+      <p>The "quantum" corrections to mirror symmetry (instanton contributions) are much harder on the A-side. For hyperkähler targets of sigma models, a fully quantum mirror map remains open: the theory of quantum cohomology of HK manifolds is far from complete.</p>
     </div>
   </div>
 </div>
 
-<!-- FOUNDATIONAL -->
 <div class="sec" id="phil-found">
   <div class="stag tt">Philosophical</div>
-  <h2>Foundational questions in geometry</h2>
+  <h2>Foundational questions</h2>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Foundational</span>
-      <h5>The Yau–Tian–Donaldson conjecture</h5>
-      <p>A compact Kähler manifold admits a constant scalar curvature Kähler (cscK) metric if and only if it is K-stable (an algebraic stability condition). Proved for c₁ &lt; 0 (Aubin, Yau), c₁ = 0 (Yau), and c₁ &gt; 0 (Chen–Donaldson–Sun 2015 for Fano). Connects differential geometry to algebraic stability.</p>
+      <span class="ct">Question</span>
+      <h5>Which topological spaces admit Kähler metrics?</h5>
+      <p>Necessary: even odd Betti numbers, Hard Lefschetz, formality of the rational homotopy type (DGMS theorem). Sufficient conditions beyond algebraic varieties: unknown. The Kodaira problem (is every compact Kähler manifold deformable to a projective one?) is the central open question.</p>
     </div>
     <div class="card">
-      <span class="ct">Foundational</span>
-      <h5>The Calabi–Yau problem for HK</h5>
-      <p>Yau's solution to the Calabi conjecture guarantees that every hyperkähler manifold (which automatically has c₁ = 0) admits a unique Ricci-flat hyperkähler metric in each Kähler class. However, explicit closed-form expressions for these metrics are known only in exceptional cases (e.g. Eguchi–Hanson, Taub-NUT, Atiyah–Hitchin).</p>
+      <span class="ct">Question</span>
+      <h5>Existence of new HK manifolds</h5>
+      <p>The six known deformation types of compact IHS manifolds were all found before 2000. Is the list finite? Infinite? There are no known obstructions to new types existing in high dimension, and no known constructions producing them.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Principle</span>
+      <h5>Kähler = analytically tractable</h5>
+      <p>The Kähler condition is the boundary between "hard" and "tractable" complex geometry. Theorems that require Kähler include: Kodaira embedding, Hodge decomposition, ∂∂̄-lemma, Calabi–Yau existence. Without it, essentially all of these fail.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Principle</span>
+      <h5>Holonomy as the organising principle</h5>
+      <p>Berger's classification (1955, proved 1990s) of irreducible Riemannian holonomy groups shows that Kähler (U(n)), CY (SU(n)), HK (Sp(n)), and QK (Sp(n)·Sp(1)) are the ONLY special holonomy groups (plus G₂ and Spin(7) in exceptional dimensions). The list is finite and exhaustive.</p>
     </div>
   </div>
 </div>
 
-<!-- APPLICATIONS: PHYSICS -->
+<!-- PHYSICS -->
 <div class="sec" id="app-physics">
-  <div class="stag tr">Applications</div>
-  <h2>Applications in theoretical physics</h2>
+  <div class="stag tr">Applied</div>
+  <h2>Physics</h2>
+
+  <h3>String theory and supersymmetry</h3>
+  <p>Kähler and hyperkähler manifolds are the geometries forced on target spaces and moduli spaces by supersymmetry — they are not a choice but a consequence.</p>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>Supersymmetric sigma models</h5>
-      <p>2d (2,2) supersymmetric non-linear sigma models require a Kähler target space (Zumino 1979). 2d (4,4) sigma models require a hyperkähler target space (Alvarez-Gaumé–Freedman 1981). Supersymmetry imposes geometric restrictions on target space holonomy.</p>
+      <span class="ct">String theory</span>
+      <h5>Calabi–Yau compactification</h5>
+      <p>To compactify superstring theory from 10D to 4D preserving N=1 SUSY, the internal 6 dimensions must form a Calabi–Yau threefold. The Hodge numbers h^{1,1} and h^{2,1} count the massless scalar moduli (Kähler moduli and complex structure moduli).</p>
     </div>
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>4d N=2 gauge theories</h5>
-      <p>Seiberg–Witten theory (1994): the low-energy effective action of 4d N=2 Yang–Mills theory is governed by a special Kähler manifold (vector multiplet moduli space) and a hyperkähler manifold (hypermultiplet moduli space). The Seiberg–Witten curve gives the exact solution.</p>
+      <span class="ct">SUSY</span>
+      <h5>N=2 SUSY → HK target</h5>
+      <p>In N=2 supersymmetric sigma models in 2D (or N=2 gauge theory in 4D), the target space of hypermultiplets must be hyperkähler. This is a direct consequence of the supersymmetry algebra — the three complex structures correspond to the three conserved supercharges.</p>
     </div>
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>String compactification</h5>
-      <p>Compactifying Type II string theory on a Calabi–Yau 3-fold (Kähler, dim=6) yields 4d N=2 supersymmetry. Compactifying on a hyperkähler 4-fold or K3 surface yields higher supersymmetry (N=4). The moduli space of string compactifications inherits the HK geometry.</p>
+      <span class="ct">Gauge theory</span>
+      <h5>Instantons and ADHM</h5>
+      <p>Self-dual Yang–Mills instantons on ℝ⁴ = ℍ are classified by the ADHM data — a hyperkähler quotient construction. The instanton moduli space is itself hyperkähler.</p>
     </div>
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>Gravitational instantons</h5>
-      <p>Complete 4-dimensional hyperkähler manifolds are gravitational instantons — Euclidean solutions to Einstein's equations. Classified by asymptotics: ALE (Asymptotically Locally Euclidean, Kronheimer 1989 via HK quotient), ALF (Taub-NUT), ALG, ALH.</p>
+      <span class="ct">Seiberg–Witten</span>
+      <h5>SW theory and HK geometry</h5>
+      <p>The Seiberg–Witten moduli space over a Kähler surface is a smooth algebraic variety. Over a hyperkähler surface (K3 or T⁴) it acquires a hyperkähler structure (Pidstrygach 2004, Schumacher 2010). SW invariants of Kähler manifolds are computed via Gromov–Taubes equivalence.</p>
     </div>
+    <div class="card">
+      <span class="ct">Black holes</span>
+      <h5>BPS black hole moduli</h5>
+      <p>The moduli space of BPS (Bogomolny–Prasad–Sommerfield) black holes in 5D supergravity is hyperkähler with torsion (HKT). The HKT geometry encodes the near-horizon geometry of extremal black holes.</p>
+    </div>
+    <div class="card">
+      <span class="ct">M-theory</span>
+      <h5>G₂ and Spin(7) compactifications</h5>
+      <p>M-theory compactified on a G₂ manifold gives N=1 SUSY in 4D. G₂ holonomy manifolds contain associative and co-associative submanifolds whose intersection theory is related to the Kähler geometry of their boundary K3 fibrations.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: why SUSY forces Kähler / HK geometry on target spaces</button>
+  <div class="xbody">
+    <p>The argument is representation-theoretic. In a 2D sigma model with N supercharges, the supersymmetry algebra includes operators Q^a satisfying {Q^a, Q^b} = 2δ^{ab}H. For the model to be consistent on a target space M:</p>
+    <ul>
+      <li>N=1: M must be Riemannian (no constraint beyond smoothness)</li>
+      <li>N=2: Q¹ and Q² define two covariantly constant tensors on M; they square to −id and anti-commute, giving a single complex structure J with ∇J = 0, i.e. M is Kähler</li>
+      <li>N=4: three operators Q¹, Q², Q³ satisfying the quaternion relations give three parallel complex structures I, J, K — exactly the hyperkähler condition</li>
+      <li>N=8: forces the target to be a symmetric space with holonomy Sp(n) (rare and highly constrained)</li>
+    </ul>
+    <p>This is not a choice: if you write down an N=4 SUSY sigma model, the target must be HK, or the theory is inconsistent. This is why HK geometry appears so pervasively in SUSY physics.</p>
   </div>
 </div>
 
-<!-- APPLICATIONS: CS -->
+<!-- CS -->
 <div class="sec" id="app-cs">
-  <div class="stag tg">Applications</div>
-  <h2>Applications in computer science</h2>
+  <div class="stag tr">Applied</div>
+  <h2>Computer science</h2>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Computer science</span>
-      <h5>Geometric deep learning</h5>
-      <p>Kähler and hyperkähler manifolds provide non-Euclidean latent spaces for deep learning. Manifold learning on hyperkähler domains preserves quaternionic symmetries in multi-modal data (image + orientation + depth).</p>
+      <span class="ct">Optimisation</span>
+      <h5>Kähler geometry in ML</h5>
+      <p>The parameter space of neural networks with complex-valued weights carries a Kähler structure when equipped with the Fisher information metric (natural gradient). The Kähler condition ensures the natural gradient update is well-defined and avoids flat regions.</p>
     </div>
     <div class="card">
-      <span class="ct">Computer science</span>
-      <h5>Quantum computing &amp; TQFT</h5>
-      <p>Topological quantum computing relies on mapping class group representations on the quantum cohomology of hyperkähler moduli spaces (e.g. moduli of flat connections). Anyonic braiding operators derive from the KZ connection over these spaces.</p>
+      <span class="ct">Optimisation</span>
+      <h5>Hyperkähler SDP</h5>
+      <p>Semidefinite programs over quaternionic matrices (QSDP) arise in quantum information. The feasibility region is determined by hyperkähler moment map conditions — the three moment maps μ_I, μ_J, μ_K correspond to the three matrix inequality constraints.</p>
     </div>
     <div class="card">
-      <span class="ct">Computer science</span>
-      <h5>Algebraic complexity theory</h5>
-      <p>The geometry of Hilbert schemes S^[n] (which are HK) governs the complexity of polynomial system solving and the geometry of border rank for tensors (VP vs. VNP problems via algebraic geometry).</p>
+      <span class="ct">Computation</span>
+      <h5>Symplectic integrators</h5>
+      <p>Kähler manifolds provide the geometric setting for symplectic numerical integration of Hamiltonian systems. Structure-preserving algorithms (Störmer–Verlet, RATTLE) preserve the Kähler form ω, giving long-time stability guarantees absent in generic integrators.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Algebraic computation</span>
+      <h5>Period computation</h5>
+      <p>Computing periods of algebraic varieties (integrals of holomorphic forms over cycles) is a core problem in computational algebraic geometry. For Kähler manifolds, the Hodge decomposition provides the framework; algorithms based on Picard–Fuchs ODEs are the main tool.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Quantum computing</span>
+      <h5>Kähler quantisation</h5>
+      <p>Geometric quantisation of a Kähler manifold (M, ω) with integral Kähler class gives a Hilbert space H = H⁰(M, L) (holomorphic sections of a prequantum line bundle L). This is the mathematical foundation of several quantum computing architectures.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Cryptography</span>
+      <h5>Abelian variety cryptography</h5>
+      <p>Abelian varieties are compact Kähler manifolds that are also algebraic groups. Jacobians of genus-2 curves (Kummer surfaces) and their endomorphism rings (related to HK geometry) underlie hyperelliptic curve cryptography and isogeny-based post-quantum schemes.</p>
     </div>
   </div>
 </div>
 
-<!-- APPLICATIONS: ENGINEERING -->
+<!-- ENGINEERING -->
 <div class="sec" id="app-eng">
-  <div class="stag to">Applications</div>
-  <h2>Applications in engineering and signal processing</h2>
+  <div class="stag tr">Applied</div>
+  <h2>Engineering &amp; signal processing</h2>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Engineering</span>
-      <h5>Quaternionic signal processing</h5>
-      <p>Hyperkähler metric structures provide invariant distance metrics for 3D signal processing, color image processing (where RGB is mapped to quaternions), and 4D spatio-temporal filtering.</p>
+      <span class="ct">Signal processing</span>
+      <h5>Quaternionic Kähler signal models</h5>
+      <p>Quaternionic Fourier and wavelet transforms exploit the HK structure of ℍ. The three complex structures I, J, K give three independent phase planes, enabling joint processing of 3-channel signals (RGB images, 3D motion) without cross-channel leakage.</p>
     </div>
     <div class="card">
-      <span class="ct">Engineering</span>
-      <h5>Control of mechanical systems</h5>
-      <p>The configuration spaces of certain constrained mechanical systems (e.g. rigid bodies with quaternionic kinematics, multi-body robotic arms) inherit hyperkähler or quaternionic Kähler structures. Geodesics on these metrics correspond to energy-optimal trajectories.</p>
+      <span class="ct">Control theory</span>
+      <h5>Kähler manifolds as state spaces</h5>
+      <p>The phase space of many mechanical systems (rigid bodies, fluids) is a Kähler manifold (often a cotangent bundle with a Kähler structure from a complex potential). Optimal control on Kähler phase spaces exploits the Hamiltonian formalism and symplectic structure.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Robotics</span>
+      <h5>Configuration spaces via HK reduction</h5>
+      <p>The configuration space of a multi-body robotic system with symmetry (e.g. redundant arms) is obtained by symplectic or hyperkähler reduction. The reduced space is Kähler or HK when the symmetry group is compact and the potential is chosen correctly.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Materials science</span>
+      <h5>Kähler geometry in elasticity</h5>
+      <p>The moduli space of elastic deformations of a material (configurations of a crystal lattice) can be given a Kähler structure when the material is isotropic. The Kähler potential encodes the strain energy; geodesics describe deformation paths of minimal energy.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Optics</span>
+      <h5>Ray optics as symplectic geometry</h5>
+      <p>Geometric optics is symplectic geometry: rays are Lagrangian submanifolds of the Kähler phase space T*ℝ³ ≅ ℝ⁶. Kähler manifold methods (moment maps, reduction) classify optical systems by their symmetry groups.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Fluid dynamics</span>
+      <h5>Kähler structure on Diff(M)</h5>
+      <p>The diffeomorphism group of a Kähler manifold M carries a (formal, infinite-dimensional) Kähler structure; geodesics on Diff(M) are solutions to the Euler equations for ideal fluid flow. Arnold's hydrodynamic framework is the Kähler geometric origin of fluid dynamics.</p>
     </div>
   </div>
 </div>
 
-<!-- OPEN PROBLEMS GEOMETRY -->
+<!-- OPEN PROBLEMS -->
 <div class="sec" id="open">
-  <div class="stag tv">Unresolved</div>
-  <h2>Open problems in geometry</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Open Problem 1</span>
-      <h5>Classification of compact IHS manifolds</h5>
-      <p>Are there infinitely many deformation types of compact irreducible holomorphic symplectic manifolds? Known: 6 types. Unknown: whether the number of deformation types in a fixed dimension is finite.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Open Problem 2</span>
-      <h5>Global Torelli for all HK manifolds</h5>
-      <p>Does the period map identify the moduli space of marked hyperkähler manifolds with a domain in the period space for all deformation types? Proved for K3 and K3^[n]-type; open for OG10 and potential new types.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Open Problem 3</span>
-      <h5>Explicit Ricci-flat HK metrics</h5>
-      <p>Find explicit algebraic/analytic formulas for the Calabi–Yau metric on a K3 surface or S^[n]. Current state: approximated numerically (Donaldson, Douglas) or via wall-crossing expansions (GMN), but no closed form exists.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Open Problem 4</span>
-      <h5>Existence of compact HK in dim ≥ 6 with b₂ = 3</h5>
-      <p>The minimum possible second Betti number for an IHS manifold is b₂ = 3. Does there exist a compact hyperkähler manifold of dimension ≥ 6 with b₂ = 3? None of the known examples have this property.</p>
-    </div>
-  </div>
+  <div class="stag to">Open problems</div>
+  <h2>Open problems (Geometric)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Problem</th><th>Area</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Kodaira problem: is every compact Kähler manifold deformable to a projective variety?</td><td>Kähler</td><td>Open in dim ≥ 4; known false for dim ≥ 6 in some formulations</td></tr>
+      <tr><td>2</td><td>Integral Hodge conjecture for HK manifolds</td><td>Hodge theory</td><td>Open; related to the Bloch–Beilinson filtration</td></tr>
+      <tr><td>3</td><td>Classification of compact IHS manifolds in dimension ≥ 6</td><td>HK moduli</td><td>Open; only 6 deformation types known</td></tr>
+      <tr><td>4</td><td>Global Torelli theorem for all IHS manifolds</td><td>HK moduli</td><td>Proved for K3^[n]-type; open in general</td></tr>
+      <tr><td>5</td><td>Existence of compact HKT manifolds with prescribed holonomy</td><td>HKT</td><td>Open; no examples with holonomy exactly SL(n,ℍ)</td></tr>
+      <tr><td>6</td><td>Quantum mirror symmetry for HK manifolds (all instanton corrections)</td><td>Mirror symmetry</td><td>Open; partial results via GW theory on HK targets</td></tr>
+      <tr><td>7</td><td>Non-Archimedean / p-adic hyperkähler geometry</td><td>Arithmetic</td><td>Foundational; Berkovich HK spaces not yet defined</td></tr>
+      <tr><td>8</td><td>Homological mirror symmetry for general Calabi–Yau 3-folds</td><td>HMS</td><td>Proved for special cases; open in general</td></tr>
+      <tr><td>9</td><td>Kähler–Einstein metrics on Fano manifolds with symmetry (Yau–Tian–Donaldson for non-K-stable)</td><td>Kähler</td><td>K-stability = KE solved (2015); effective criterion open</td></tr>
+      <tr><td>10</td><td>Connection between HK geometry and the quaternionic Nullstellensatz</td><td>Algebra / geometry</td><td>Open; the bridge below provides the unified mapping</td></tr>
+    </tbody>
+  </table>
 </div>
 
-<!-- HISTORICAL LINEAGE -->
+<!-- HISTORY -->
 <div class="sec" id="hist">
   <div class="stag tv">History</div>
-  <h2>Historical lineage</h2>
-
+  <h2>Historical lineage (Differential Geometry)</h2>
   <div class="tl">
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1933 — Erich Kähler</h5>
-        <p>Introduces Kähler metrics in "Über eine bemerkenswerte Hermitesche Metrik." Defines dω = 0 and establishes the link between complex and metric geometry.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1950s — W.V.D. Hodge &amp; K. Kodaira</h5>
-        <p>Develop Hodge theory on compact Kähler manifolds. Prove the Hodge decomposition, Hard Lefschetz theorem, and Kodaira embedding theorem.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1955 — Marcel Berger</h5>
-        <p>Classifies irreducible Riemannian holonomy groups. Identifies U(n) (Kähler), SU(n) (Calabi–Yau), Sp(n) (hyperkähler), and Sp(n)·Sp(1) (quaternionic Kähler).</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1978 — Shing-Tung Yau</h5>
-        <p>Proves the Calabi conjecture: every compact Kähler manifold with c₁ = 0 admits a unique Ricci-flat Kähler metric in each Kähler class. Establishes the existence of CY and HK metrics.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1983 — Arnaud Beauville &amp; F.A. Bogomolov</h5>
-        <p>Beauville–Bogomolov decomposition theorem. Beauville introduces the BBF form and initiates the modern theory of irreducible holomorphic symplectic manifolds.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1987 — Hitchin, Karlhede, Lindström, Roček (HKLR)</h5>
-        <p>Introduce the hyperkähler quotient construction. Hitchin constructs the moduli space of Higgs bundles and proves it is hyperkähler.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1994–1999 — Hiraku Nakajima &amp; K. O'Grady</h5>
-        <p>Nakajima constructs quiver varieties as HK quotients. O'Grady discovers two new exceptional deformation types of IHS manifolds (OG6 and OG10).</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>2008–2020s — GMN, BFN, and Singular BB</h5>
-        <p>Gaiotto–Moore–Neitzke develop BPS wall-crossing metrics. Braverman–Finkelberg–Nakajima construct Coulomb branches. Druel, Guenancia, Greb et al. extend BB decomposition to singular varieties.</p>
-      </div>
-    </div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1933 — Kähler, "Über eine bemerkenswerte Hermitesche Metrik"</h5><p>Erich Kähler introduces the condition dω = 0 and proves local existence of the potential. The paper is three pages long and triggers a century of geometry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1954 — Kodaira embedding theorem</h5><p>A compact complex manifold embeds in projective space iff it admits a Kähler metric whose cohomology class is integral. Bridges complex and algebraic geometry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1957 — Calabi conjecture</h5><p>Calabi conjectures existence of Kähler metrics with prescribed Ricci curvature. Proved by Yau in 1978 (Fields Medal), establishing Calabi–Yau manifolds as physical compactification spaces.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1978 — Yau solves Calabi conjecture</h5><p>Complex Monge–Ampère PDE solved using a priori estimates. Every compact Kähler manifold with c₁ = 0 admits a unique Ricci-flat Kähler metric. Opens the door to string theory compactification.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1983 — Beauville–Bogomolov decomposition</h5><p>Classification of compact Ricci-flat Kähler manifolds into tori, CY, and IHS components. Identifies hyperkähler manifolds as one of three irreducible building blocks.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1985 — Atiyah–Hitchin metric on monopole moduli</h5><p>The first explicit compact-ish HK metric on a moduli space of physical objects. Monopole scattering is described by geodesics on a 4-dimensional HK manifold.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1987 — HKLR hyperkähler quotient; Hitchin moduli of Higgs bundles</h5><p>Two foundational papers in the same year: HKLR gives the construction tool; Hitchin applies it to produce M_Higgs, a cornerstone of geometric Langlands.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1994 — Nakajima quiver varieties; Kontsevich HMS</h5><p>Quiver varieties unify HK quotient constructions in representation theory. HMS proposes the categorical framework for mirror symmetry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1999–2000 — O'Grady's exceptional HK manifolds (OG6, OG10)</h5><p>Two new deformation types of IHS manifolds, constructed as resolutions of singular moduli spaces of sheaves on K3 and abelian surfaces. No new types found since.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>2015 — Yau–Tian–Donaldson conjecture solved (Chen–Donaldson–Sun)</h5><p>Kähler–Einstein metrics on Fano manifolds exist iff the manifold is K-polystable. Closes a 30-year programme connecting analysis, geometry, and GIT stability.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>2020–2025 — Singular BB decomposition completed for Kähler varieties</h5><p>Druel–Guenancia–Greb–Höring–Kebekus–Peternell: BB decomposition extended to klt singularities in the full Kähler (non-projective) setting. State of the art.</p></div></div>
   </div>
 </div>
 
 <!-- CONNECTIONS MAP -->
 <div class="sec" id="map">
-  <div class="stag tv">Connections</div>
+  <div class="stag tv">Map</div>
   <h2>Connections map</h2>
-
-  <div class="flow">
-    <div class="fn hl">Kähler (dω = 0)</div>
-    <div class="fa">→</div>
-    <div class="fn">Hodge theory</div>
-    <div class="fa">→</div>
-    <div class="fn">Hard Lefschetz</div>
-    <div class="fa">→</div>
-    <div class="fn">∂∂̄-lemma</div>
-  </div>
-  <div class="flow">
-    <div class="fn hl">Kähler + c₁ = 0</div>
-    <div class="fa">→</div>
-    <div class="fn">Yau's theorem</div>
-    <div class="fa">→</div>
-    <div class="fn">Ricci-flat metric</div>
-    <div class="fa">→</div>
-    <div class="fn">Beauville–Bogomolov</div>
-  </div>
-  <div class="flow">
-    <div class="fn hl">Hyperkähler (Sp(n))</div>
-    <div class="fa">→</div>
-    <div class="fn">Three Kähler forms</div>
-    <div class="fa">→</div>
-    <div class="fn">Twistor space Z</div>
-    <div class="fa">→</div>
-    <div class="fn">Penrose correspondence</div>
-  </div>
-  <div class="flow">
-    <div class="fn hl">HKLR Quotient</div>
-    <div class="fa">→</div>
-    <div class="fn">Hitchin moduli</div>
-    <div class="fa">→</div>
-    <div class="fn">Nakajima quivers</div>
-    <div class="fa">→</div>
-    <div class="fn">Monopoles / Instantons</div>
-  </div>
+  <table>
+    <thead><tr><th>Source</th><th>Arrow</th><th>Target</th><th>Key tool</th></tr></thead>
+    <tbody>
+      <tr><td>Kähler condition (dω=0)</td><td>⟹</td><td>Hodge decomposition</td><td>Kähler identities, Δ_d = 2Δ_∂̄</td></tr>
+      <tr><td>Hodge decomposition</td><td>⟹</td><td>Hard Lefschetz</td><td>Primitive decomposition, sl(2) action</td></tr>
+      <tr><td>c₁ = 0 + Kähler</td><td>⟹</td><td>Ricci-flat metric (Yau)</td><td>Complex Monge–Ampère equation</td></tr>
+      <tr><td>Ricci-flat + Hol=Sp(n)</td><td>⟺</td><td>Hyperkähler</td><td>Berger classification + holonomy reduction</td></tr>
+      <tr><td>Hyperkähler</td><td>⟹</td><td>Twistor space Z = M × S²</td><td>Quaternionic structure on tangent bundle</td></tr>
+      <tr><td>HK quotient (HKLR)</td><td>⟹</td><td>Moduli spaces are HK</td><td>Moment maps μ_I, μ_J, μ_K</td></tr>
+      <tr><td>HK moduli of Higgs bundles</td><td>⟹</td><td>Geometric Langlands</td><td>Rotation I → J exchanges G and Ǧ</td></tr>
+      <tr><td>Calabi–Yau (c₁=0, SU-hol)</td><td>⟹</td><td>Mirror symmetry</td><td>SYZ fibration, HMS (Kontsevich)</td></tr>
+      <tr><td>N=4 SUSY sigma model</td><td>⟹</td><td>HK target space (forced)</td><td>Representation theory of SUSY algebra</td></tr>
+      <tr><td>ADHM construction</td><td>⟺</td><td>Instanton moduli (HK)</td><td>HK quotient + twistor Ward correspondence</td></tr>
+      <tr><td>BBF quadratic form on H²</td><td>⟹</td><td>Deformation theory (b₂−2 dim)</td><td>BTT theorem + Verbitsky's Torelli</td></tr>
+      <tr><td>Kähler form ω (integral)</td><td>⟹</td><td>Projective embedding</td><td>Kodaira embedding theorem</td></tr>
+    </tbody>
+  </table>
 </div>
 
-
 <!-- ================================================================= -->
-<!-- SECTION II: THEORETICAL BRIDGE                                    -->
+<!-- SECTION II: THE THEORETICAL BRIDGE                               -->
 <!-- ================================================================= -->
 
 <div class="sec" id="quat">
-  <div class="stag tv">Theoretical Bridge</div>
-  <h2>Bridge — Geometry to Algebra: The Quaternionic Connection</h2>
+  <div class="stag tv">Bridge</div>
+  <h2>Link to the Quaternionic Nullstellensatz</h2>
 
-  <p class="lead">How does the differential geometry of hyperkähler manifolds connect to the pure non-commutative algebra of the Quaternionic Nullstellensatz? The bridge is built on three pillars: hyperkähler reduction, moment maps, and coordinate rings.</p>
+  <p class="lead">Kähler/hyperkähler geometry and the Quaternionic Nullstellensatz of Alon–Paran are not merely adjacent — they share a common root in the geometry of ℍⁿ and the algebra of quaternionic polynomial functions.</p>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Pillar 1</span>
-      <h5>Hyperkähler reduction as ideal vanishing</h5>
-      <p>The HKLR quotient M////G = μ⁻¹(0)/G forces three moment maps (μ_I, μ_J, μ_K) to vanish simultaneously. Complexified: μ_ℂ = μ_J + iμ_K is a holomorphic polynomial in quaternionic/complex coordinates. The point set μ⁻¹(0) is precisely the zero variety V(I) of the ideal I generated by the moment map components in a quaternionic polynomial ring ℍ[x₁,...,xₙ].</p>
+      <span class="ct">Direct connection</span>
+      <h5>ℍⁿ as flat hyperkähler</h5>
+      <p>ℍⁿ = ℝ⁴ⁿ with its standard metric is the flat hyperkähler manifold. The three complex structures I, J, K on ℍⁿ are exactly left-multiplication by i, j, k. The Quaternionic Nullstellensatz describes the algebraic geometry of subvarieties of this flat HK space.</p>
     </div>
     <div class="card">
-      <span class="ct">Pillar 2</span>
-      <h5>Non-commutativity in both realms</h5>
-      <p>On the geometric side, non-commutativity manifests as the quaternion algebra ℍ acting on the tangent bundle T M via I, J, K (where IJ = −JI). On the algebraic side, the Quaternionic Nullstellensatz addresses polynomials over ℍ where variables and coefficients do not commute: c · x ≠ x · c. Both sides reflect the non-commutative geometry of ℍ.</p>
+      <span class="ct">Direct connection</span>
+      <h5>Holomorphic symplectic form on ℍⁿ</h5>
+      <p>The holomorphic symplectic form Ω = ω_J + iω_K on ℍⁿ (w.r.t. the complex structure I) is exactly the form that vanishes on Lagrangian submanifolds. Quaternionic polynomial functions that vanish on a variety define an ideal whose radical (in the Nullstellensatz sense) encodes the Lagrangian condition.</p>
     </div>
     <div class="card">
-      <span class="ct">Pillar 3</span>
-      <h5>Function rings of HK spaces</h5>
-      <p>Affine hyperkähler varieties (e.g. Moore–Tachikawa varieties, nilpotent orbits, Nakajima quiver varieties) have coordinate rings that are non-commutative Poisson algebras over ℍ or ℂ. The Nullstellensatz governs the ideal-variety correspondence for these coordinate rings: functions vanishing on the HK space form a quaternionic ideal whose algebraic properties determine the space's singularities and deformations.</p>
+      <span class="ct">Bridge</span>
+      <h5>ADHM equations as quaternionic polynomials</h5>
+      <p>The ADHM equations are a system of quaternionic polynomial equations in the matrix entries. The Nullstellensatz over ℍ (Theorem 1 of Alon–Paran) characterises the ideal of all polynomial relations on the ADHM moduli space — connecting instanton geometry to quaternionic commutative algebra.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Bridge</span>
+      <h5>HK moment maps and the quaternionic radical</h5>
+      <p>The three moment maps μ_I, μ_J, μ_K of a HK quotient are quaternionic polynomial equations when the HK manifold is ℍⁿ. The quaternionic radical of the ideal (μ_I, μ_J, μ_K) is the ideal of all polynomial functions vanishing on the HK quotient.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Quaternionic Nullstellensatz on HK manifolds</h5>
+      <p>Can the Alon–Paran Nullstellensatz be extended from flat ℍⁿ to a general hyperkähler manifold M? The ring of regular functions on M is no longer a polynomial ring, but local models are quaternionic polynomial rings. A sheaf-theoretic generalisation is open.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>HK algebraic geometry via the isomorphism φ</h5>
+      <p>The ring isomorphism φ: ℍ[x₁,...,xₙ] → ℝ[y_{ij}] translates HK polynomial geometry into real algebraic geometry on ℝ⁴ⁿ. The image of quaternionic varieties under φ are O(4)ⁿ-equivariant varieties — a structured subclass of real algebraic varieties. Their HK geometry is encoded in the O(4) equivariance.</p>
     </div>
   </div>
 
-  <div class="math">
-    <span class="ml">The Bridge Dictionary</span>
-    Hyperkähler geometry (Differential/Geometric) ⟷ Quaternionic Nullstellensatz (Algebraic/Polynomial)<br>
-    • Hyperkähler manifold M ⟷ Quaternionic affine variety V ⊆ ℍⁿ<br>
-    • Hyperkähler moment map μ = 0 ⟷ Generators of quaternionic ideal I = ⟨f₁,...,fₖ⟩<br>
-    • HKLR quotient M////G ⟷ Quaternionic ring quotient ℍ[x₁,...,xₙ] / I<br>
-    • Twistor family I_ζ ⟷ Evaluation across central extension Z(ℍ) = ℝ<br>
-    • Tri-holomorphic maps ⟷ Quaternionic polynomial homomorphisms
+  <div class="flow">
+    <div class="fn hl">ℍⁿ (flat HK)</div>
+    <div class="fa">⊂</div>
+    <div class="fn">HK manifolds</div>
+    <div class="fa">←</div>
+    <div class="fn">HK quotient</div>
+    <div class="fa">↑</div>
+    <div class="fn hl">Quat. polynomial eqs.</div>
+    <div class="fa">←</div>
+    <div class="fn hl">Nullstellensatz (Alon–Paran)</div>
   </div>
 </div>
-
 
 <!-- ================================================================= -->
 <!-- SECTION III: QUATERNIONIC NULLSTELLENSATZ                         -->
 <!-- ================================================================= -->
 
-<!-- HERO QNS -->
 <div class="sec" id="qns-hero">
-  <div class="stag tv">Synthesis — Algebra</div>
+  <div class="stag tv">Synthesis</div>
   <h2>Quaternionic Nullstellensatz — Full Implications Atlas</h2>
-  <p class="smeta">Covering: Non-commutative algebra · Generalized Polynomial Identities · Ideal–variety dualities · Applications in robotics, control, CS, and physics</p>
-  <p class="lead">Hilbert's Nullstellensatz ("zero-locus theorem") is the foundation of algebraic geometry, establishing a precise duality between geometry (varieties) and algebra (ideals) over algebraically closed fields. Over the non-commutative division ring of quaternions ℍ, Hilbert's classical theorem fails completely — requiring a fundamental reformulation.</p>
-  <p>This atlas tracks the Quaternionic Nullstellensatz and its web of implications across non-commutative algebra, real algebraic geometry, theoretical computer science, robotics, control theory, and quantum physics.</p>
+  <p class="smeta">Alon &amp; Paran (arXiv:1911.10595v3) · Mathematical · Philosophical · Applied</p>
+  <p class="lead">This portion exhausts every direction opened by the Quaternionic Nullstellensatz: mathematical generalisations, foundational consequences, and applied domains where a non-commutative Nullstellensatz over ℍ matters.</p>
+  <p>The paper proves three interlocking results: (1) a Nullstellensatz for ℍ[x₁,…,xₙ] identifying the ideal–variety correspondence via a <em>quaternionic radical</em>; (2) a ring isomorphism ℍ[x₁,…,xₙ] ≅ ℍ_c[y₁₁,…,yₙ₄] reducing the non-commutative problem to a commutative one over ℝ; and (3) an explicit finite generating set for the generalized polynomial identities over any division algebra.</p>
 </div>
 
 <!-- CORE RESULTS -->
 <div class="sec" id="qns-core">
-  <div class="stag tv">Foundations — Algebra</div>
+  <div class="stag tv">Core</div>
   <h2>Core algebraic results</h2>
 
   <h3 id="core-nss">The Quaternionic Nullstellensatz</h3>
   <div class="math">
-    <span class="ml">Theorem — Quaternionic Nullstellensatz</span>
-    Let ℍ[x₁,...,xₙ] be the free polynomial ring over ℍ in n central/non-central variables.<br>
-    For a left ideal I ⊆ ℍ[x₁,...,xₙ], define its quaternionic zero variety:<br>
-    V_ℍ(I) = { a ∈ ℍⁿ : f(a) = 0 for all f ∈ I }<br><br>
-    Then the ideal of forms vanishing on V_ℍ(I) is given by the quaternionic radical:<br>
-    I(V_ℍ(I)) = Rad_ℍ(I) = { f ∈ ℍ[x] : f^k ∈ I + GPI(ℍ) for some k ≥ 1 }<br><br>
-    where GPI(ℍ) is the ideal of Generalized Polynomial Identities vanishing identically on ℍ.
+    <span class="ml">Theorem 1 (main)</span>
+    For any ideal I ⊆ ℍ[x₁,…,xₙ]:<br>
+    (1) 𝒮(𝒵(I)) = √<sup>ℍ</sup>I, where √<sup>ℍ</sup>I = {f : ∃m,k, f₁,…,fₖ, (ff̄)ᵐ + Σfᵢf̄ᵢ ∈ I}<br>
+    (2) I = 𝒮(𝒵(I)) ⟺ I is quaternionic (closed under: Σfᵢf̄ᵢ ∈ I ⟹ all fᵢ ∈ I)
   </div>
-  <p>The presence of non-trivial identities (like the Amitsur–Levitzki identity) and the existence of zero-divisors in tensor products ℍ ⊗_ℝ ℍ prevent the classical radical $\sqrt{I}$ from capturing the full vanishing ideal.</p>
+  <p>The quaternionic radical replaces the classical radical (f ↦ fⁿ ∈ I) with a norm-based condition using the quaternionic conjugation f ↦ ff̄, directly paralleling how the real radical uses sums of squares.</p>
 
-  <h3 id="core-gpi">Generalized Polynomial Identities (GPI)</h3>
+  <h3 id="core-gpi">GPI theorem</h3>
   <div class="math">
-    <span class="ml">Theorem — Amitsur's GPI Theorem for Quaternions</span>
-    A polynomial f(x₁,...,xₙ) with coefficients in ℍ is a GPI for ℍ if f(a₁,...,aₙ) = 0 for all (a₁,...,aₙ) ∈ ℍⁿ.<br><br>
-    Key result: GPI(ℍ) is generated by the standard polynomial S₄(x₁,x₂,x₃,x₄) = Σ_{σ∈S₄} sgn(σ) x_{σ(1)} x_{σ(2)} x_{σ(3)} x_{σ(4)}<br>
-    and its quaternionic-coefficient extensions.<br>
-    Since dim_ℝ(ℍ) = 4, ℍ satisfies S₄ but no polynomial identity of degree &lt; 4.
+    <span class="ml">Theorem 6</span>
+    GPI(D,n) — the ideal of generalised polynomial identities in n variables over any division algebra D of dimension m over its centre — is finitely generated, with an explicit set of 3·C(m,2)+1 generators involving the coordinate functions Y_{ij} and their commutativity/centralisation relations.
   </div>
+  <p>For D = ℍ, m = 4, this yields exactly 19 generators for GPI(ℍ,1): the 6 commutativity relations Y_sY_t − Y_tY_s, the 12 centralisation relations Y_sa − aY_s for a ∈ {i,j,k}, and the decomposition x − (Y₁ + iY₂ + jY₃ + kY₄).</p>
 
-  <h3 id="core-isom">Ring Isomorphism Theorem</h3>
+  <h3 id="core-isom">Ring isomorphism</h3>
   <div class="math">
-    <span class="ml">Theorem — Quaternionic Coordinate Ring Isomorphism</span>
-    Let V ⊆ ℍⁿ be a quaternionic algebraic variety. The ring of quaternionic polynomial functions on V is:<br>
-    O(V) ≅ ℍ[x₁,...,xₙ] / Rad_ℍ(I(V))<br><br>
-    Unlike the commutative case, O(V) is a non-commutative, non-simple prime ring in general. MaxSpec(O(V)) is in bijection with the set of conjugacy classes of points in V under the inner automorphism action of ℍ* = ℍ \ {0}.
+    <span class="ml">Theorem 5</span>
+    ∃! isomorphism φ: D[x₁,…,xₙ] → D_c[y_{ij}: 1≤i≤n, 1≤j≤m]<br>
+    such that f(a₁,…,aₙ) = φ(f)((a_{ij})) for all f, all a⛤ = Σa_{sj}vⱼ ∈ Dⁿ
   </div>
-
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Comparison</span>
-      <h5>Hilbert vs. Quaternionic</h5>
-      <p>Hilbert (ℂ): Rad(I) = { f : f^k ∈ I }. Simple radical.<br>Quaternionic (ℍ): Rad_ℍ(I) requires incorporating real positivity conditions and GPI corrections. Reflects non-commutativity and ℍ ≅ ℝ⁴ topology.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Comparison</span>
-      <h5>Left vs. Right vs. Two-sided</h5>
-      <p>Ideals in ℍ[x] can be left, right, or two-sided. The zero variety V_ℍ(I) depends on evaluation convention: f(a) evaluated by substituting a from the right or left. Left ideals correspond to right vector spaces of solutions.</p>
-    </div>
-  </div>
+  <p>This is the paper's master tool: it converts a problem in non-commuting variables over ℍ into a problem in 4n commuting variables over ℍ (equivalently ℝ, since the values of Y_ij are real). Every result below either uses this isomorphism directly or inherits from results that do.</p>
 </div>
 
-<!-- NON-COMMUTATIVE ALGEBRA -->
+<!-- MATHEMATICAL -->
 <div class="sec" id="math-nca">
-  <div class="stag tv">Mathematical — Algebra</div>
-  <h2>Non-commutative algebra and PI-theory</h2>
+  <div class="stag tv">Mathematical</div>
+  <h2>Non-commutative algebra implications</h2>
+
+  <h3>Radical theory in non-commutative rings</h3>
+  <p>Classical radical theory (Jacobson, Baer, Levitzki) applies to abstract ring properties. The quaternionic radical is the first radical in a polynomial function ring over a non-commutative division algebra that admits an explicit ideal–variety correspondence. This opens the following permutations:</p>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Theory</span>
-      <h5>PI-algebras &amp; Kaplansky's Theorem</h5>
-      <p>ℍ[x] is a Polynomial Identity (PI) algebra over ℝ. By Kaplansky's theorem, every primitive PI-algebra is finite-dimensional over its center. For ℍ, the center is ℝ[x₁,...,xₙ]. Simple quotient rings are matrix algebras over ℂ or ℍ.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Theory</span>
-      <h5>Quaternionic Gröbner bases</h5>
-      <p>Gröbner basis theory extends to ℍ[x₁,...,xₙ] (non-commutative division ring coefficient domain). Requires left/right monomial orderings. Allows algorithmic computation of Rad_ℍ(I) and ideal membership testing.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Theory</span>
-      <h5>Central simple algebras</h5>
-      <p>ℍ is the unique non-trivial central simple algebra over ℝ of dimension 4 (Brauer group Br(ℝ) ≅ ℤ/2ℤ). The Quaternionic Nullstellensatz is the rank-2 case of the general Nullstellensatz for central simple algebras.</p>
+      <span class="ct">Extension</span>
+      <h5>Octonion analogue</h5>
+      <p>ℍ is associative; 𝕆 (octonions) are not. The paper's method uses ring maps — does a Nullstellensatz exist for polynomial functions over 𝕆? Non-associativity forces a fundamentally different approach to evaluation maps.</p>
     </div>
     <div class="card">
       <span class="ct">Extension</span>
-      <h5>Octonionic &amp; Clifford Nullstellensatz</h5>
-      <p>Extending beyond ℍ: Octonions 𝕆 are non-associative, so the Nullstellensatz requires alternative algebra identities (Moufang identities). Clifford algebras Cl_{p,q} carry higher-dimensional extensions.</p>
+      <h5>Matrix ring polynomials</h5>
+      <p>Mₙ(ℝ) is a central simple algebra but not a division ring. The GPI result (Theorem 6) applies to any division algebra; extending Theorem 1 to Mₙ(ℝ) requires characterising which ideals arise as 𝒮(𝒵(I)).</p>
     </div>
+    <div class="card">
+      <span class="ct">Corollary</span>
+      <h5>Prime quaternionic ideals</h5>
+      <p>Corollary 11 establishes √<sup>ℍ</sup>I = ⋂{prime quaternionic ideals containing I} — a Krull-style characterisation, extending the classical fact that √I = ⋂{primes ⊇ I} to this non-commutative setting.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Corollary</span>
+      <h5>Quaternionic ↔ real ideal bijection</h5>
+      <p>Via φ, there is a lattice isomorphism between quaternionic ideals of ℍ[x₁,…,xₙ] and real ideals of ℝ[y_{ij}]. This bijection preserves primeness, radicality, and the Nullstellensatz correspondence.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Gröbner bases over ℍ[x₁,…,xₙ]</h5>
+      <p>Standard Gröbner basis theory requires commutativity. The isomorphism φ pulls back Gröbner bases from ℝ[y_{ij}] to ℍ[x], but ordering and reduction theory in the non-commutative setting remains non-trivial.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Extension</span>
+      <h5>Noetherian property</h5>
+      <p>ℍ[x₁,…,xₙ] is Noetherian (proved via S ≅ ℍ_c[y_{ij}] which is Noetherian by Hilbert's basis theorem applied over a Noetherian base). This gives all finitely-generated submodule properties for free.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: GPI generators count derivation</button>
+  <div class="xbody">
+    <p>For a division algebra D of dimension m over its centre F, the generators of GPI(D,n) are:</p>
+    <ul>
+      <li><strong>Commutativity of coordinates:</strong> Y_{ij}Y_{i'j'} − Y_{i'j'}Y_{ij} for all (i,j) ≠ (i',j'). This gives C(mn, 2) relations, but they reduce to 3C(m,2) independent generators via the fact that the Y_{ij} have values in F and already commute.</li>
+      <li><strong>Centralisation:</strong> v_k Y_{ij} − Y_{ij} v_k for each basis element v_k ∉ F. Gives m·(m−1) relations.</li>
+      <li><strong>Decomposition identity:</strong> x_i − Σ_j Y_{ij}v_j = 0. One per variable, n total.</li>
+    </ul>
+    <p>For ℍ: m=4, n=1 gives C(4,2)×3 = 18 commutativity/centralisation generators + 1 decomposition = 19 total. The formula 3C(m,2)+1 counts the minimal generators for the single-variable case.</p>
   </div>
 </div>
 
-<!-- REAL ALGEBRAIC GEOMETRY -->
 <div class="sec" id="math-real">
-  <div class="stag tv">Mathematical — Algebra</div>
-  <h2>Real algebraic geometry connections</h2>
+  <div class="stag tv">Mathematical</div>
+  <h2>Real algebraic geometry — inherited and new</h2>
 
-  <p class="lead">Since ℍ ≅ ℝ⁴ as a real vector space, quaternionic algebraic geometry is deeply embedded in real algebraic geometry. Positivity conditions (Sums of Squares) play a central role.</p>
+  <h3>The translation dictionary</h3>
+  <p>The isomorphism φ: ℍ[x₁,…,xₙ] → ℝ[y_{ij}] (restricting to real-valued generators) creates a complete translation between quaternionic polynomial geometry and real algebraic geometry:</p>
 
+  <table>
+    <thead><tr><th>Quaternionic object</th><th>Real algebraic geometry object</th><th>Translation via φ</th></tr></thead>
+    <tbody>
+      <tr><td>Ideal I ⊆ ℍ[x₁,…,xₙ]</td><td>Ideal I' ⊆ ℝ[y_{ij}]</td><td>I' = φ(I) ∩ S'</td></tr>
+      <tr><td>Zero locus 𝒵_ℍ(I) ⊆ ℍⁿ</td><td>Real variety 𝒵_ℝ(I') ⊆ ℝ⁴ⁿ</td><td>ρ(𝒵_ℍ(I)) = 𝒵_ℝ(I')</td></tr>
+      <tr><td>Quaternionic radical √<sup>ℍ</sup>I</td><td>Real radical √<sup>ℝ</sup>I'</td><td>√<sup>ℍ</sup>I = ψ(√<sup>ℝ</sup>I') ⊗ ℍ</td></tr>
+      <tr><td>Quaternionic ideal</td><td>Real ideal (sum-of-squares closed)</td><td>I quaternionic ⟺ I' real</td></tr>
+      <tr><td>Prime quaternionic ideal</td><td>Prime real ideal</td><td>Preserved by the bijection</td></tr>
+      <tr><td>Variety in ℍⁿ</td><td>O(4)-invariant variety in ℝ⁴ⁿ</td><td>Image of ρ is structured</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Inherited real AG theorems</h3>
   <div class="grid">
     <div class="card">
-      <span class="ct">Theorem</span>
-      <h5>Quaternionic Positivstellensatz</h5>
-      <p>A quaternionic polynomial f is positive semi-definite on V_ℍ(I) if and only if f can be expressed as a sum of quaternionic squares Σ gᵢ* gᵢ modulo I, where g* is the quaternionic conjugate transpose. Generalizes Artin's solution to Hilbert's 17th problem.</p>
+      <span class="ct">Inherited</span>
+      <h5>Positivstellensatz over ℍ</h5>
+      <p>The real Positivstellensatz (Stengle, 1974) characterises which real polynomials are non-negative on a semialgebraic set. Via φ, every real semialgebraic set in ℝ⁴ⁿ corresponds to a quaternionic set with a translated positivity certificate.</p>
     </div>
     <div class="card">
-      <span class="ct">Theorem</span>
-      <h5>Real Nullstellensatz embedding</h5>
-      <p>By identifying ℍⁿ ≅ ℝ⁴ⁿ, a quaternionic ideal I generates a real ideal I_ℝ ⊆ ℝ[u₁,...,u₄ₙ]. The quaternionic zero variety V_ℍ(I) equals the real variety V_ℝ(I_ℝ). The real Nullstellensatz (Krivine–Stengle) provides a real algebraic foundation for Rad_ℍ(I).</p>
+      <span class="ct">Inherited</span>
+      <h5>Semialgebraic quaternionic sets</h5>
+      <p>Tarski's theorem on semialgebraic sets (closed under first-order ℝ-definable operations) lifts: quaternionic definable sets are images under ρ⁻¹ of ℝ-semialgebraic sets in ℝ⁴ⁿ.</p>
     </div>
+    <div class="card">
+      <span class="ct">New</span>
+      <h5>Quaternionic real spectrum</h5>
+      <p>The real spectrum Spec_r(ℝ[y]) classifies all orderings of the polynomial ring. The quaternionic analogue classifies all quaternionic ideals, giving a topological space encoding ℍ-algebraic geometry.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Sum-of-Hermitian-squares</h5>
+      <p>The real radical uses sums of squares; the quaternionic radical uses Σfᵢf̄ᵢ (Hermitian squares). The theory of Hermitian sums-of-squares certificates and their SOS-like optimization counterparts is largely open.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: why ρ(𝒵_ℍ(I)) = 𝒵_ℝ(I')</button>
+  <div class="xbody">
+    <p>The bijection ρ: ℍⁿ → ℝ⁴ⁿ sends (q₁,…,qₙ) with q⛤ = a_{s1} + ia_{s2} + ja_{s3} + ka_{s4} to the matrix (a_{ij}). The substitution formula gives f(q₁,…,qₙ) = φ(f)(a_{ij}) for all f ∈ ℍ[x]. Therefore f vanishes at (q₁,…,qₙ) iff φ(f) vanishes at ρ(q₁,…,qₙ). Since I' = φ(I) ∩ S' generates the same real ideal as φ(I) (by the Goodearl–Warfield correspondence), 𝒵_ℝ(I') = 𝒵_ℝ(φ(I)) = ρ(𝒵_ℍ(I)).</p>
+    <p>Note: not every point in ℝ⁴ⁿ is in the image of ρ — the image is all of ℝ⁴ⁿ (since any 4-tuple of reals determines a quaternion). So ρ is a bijection, not merely injective. This is what makes the correspondence exact rather than approximate.</p>
   </div>
 </div>
 
-<!-- DIVISION ALGEBRAS & EXTENSIONS -->
 <div class="sec" id="math-div">
-  <div class="stag tv">Mathematical — Algebra</div>
-  <h2>Division algebras and algebraic extensions</h2>
+  <div class="stag tv">Mathematical</div>
+  <h2>Division algebra generality</h2>
+
+  <h3>The paper's results hold for any division algebra D</h3>
+  <p>Theorems 5 and 6 (the ring isomorphism and GPI generation) are stated and proved for <em>any</em> division algebra over its centre — ℍ is only the motivating special case. This generality spawns a family of Nullstellensätze:</p>
+
+  <table>
+    <thead><tr><th>Division algebra D</th><th>dim/centre</th><th>GPI generators</th><th>Nullstellensatz status</th></tr></thead>
+    <tbody>
+      <tr><td>ℝ (field)</td><td>m=1</td><td>0 (commutative, trivial GPI)</td><td>Classical real Nullstellensatz</td></tr>
+      <tr><td>ℂ (field)</td><td>m=1/ℝ is 2</td><td>0 as field; nontrivial over ℝ</td><td>Hilbert's Nullstellensatz (algebraically closed)</td></tr>
+      <tr><td>ℍ (Hamilton)</td><td>m=4/ℝ</td><td>19 (n=1)</td><td>Proved by Alon &amp; Paran</td></tr>
+      <tr><td>Quaternion algebras (a,b/F)</td><td>m=4/F</td><td>19 over F; F-specific radical needed</td><td>Open for general F</td></tr>
+      <tr><td>Cyclic division algebras</td><td>m=p²/F</td><td>3C(p,2)+1</td><td>Open; requires analogue of real radical for F</td></tr>
+      <tr><td>Crossed product algebras</td><td>m²/F</td><td>3C(m,2)+1 per variable</td><td>Open</td></tr>
+      <tr><td>p-adic division algebras</td><td>m²/ℚₚ</td><td>Finite, explicit</td><td>Open; p-adic real algebra needed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The obstruction: what is the "real radical" over a general field?</h3>
+  <p>The proof reduces to the Real Nullstellensatz over ℝ. For a general division algebra D with centre F, one needs a Nullstellensatz over F — available when F is real closed (Artin–Lang), algebraically closed (Hilbert), or p-adically closed (Ax–Kochen). Over other fields, the Nullstellensatz is the obstruction.</p>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: the Goodearl–Warfield correspondence used in the proof</button>
+  <div class="xbody">
+    <p>The proof uses Goodearl–Warfield: for S = ℍ_c[y_{ij}] with centre S' = ℝ[y_{ij}], there is a bijection between ideals of S and ideals of S' via I' ↔ I'⊗ℍ, with I = (I∩S')⊗ℍ. This is a consequence of S being an Azumaya algebra over S'.</p>
+    <p>The key point: an ideal I of ℍ[x] is <em>entirely determined</em> by its intersection with ℝ-valued polynomial functions. This is why the non-commutative problem reduces exactly to the commutative one — not just approximately or after passing to a quotient.</p>
+    <p>Extension to other D: any central simple algebra D over F for which D[x₁,…,xₙ] satisfies the analogous Azumaya property will admit the same reduction. This holds for all finite-dimensional central simple algebras over infinite fields.</p>
+  </div>
+</div>
+
+<div class="sec" id="math-qns-ext">
+  <div class="stag tv">Mathematical</div>
+  <h2>Algebraic extensions and generalisations</h2>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Classification</span>
-      <h5>Frobenius theorem</h5>
-      <p>By Frobenius's theorem (1878), the only finite-dimensional associative division algebras over ℝ are ℝ, ℂ, and ℍ. The Nullstellensatz over these three fields/rings forms a complete trilogy: Real (Stengle), Complex (Hilbert), Quaternionic (Amitsur–Procesi).</p>
+      <span class="ct">Generalisation</span>
+      <h5>Infinite-variable case</h5>
+      <p>The paper handles finite n. For power series rings ℍ[[x₁,x₂,…]] or the colimit over n of ℍ[x₁,…,xₙ], the isomorphism extends formally; convergence and topology require completions.</p>
     </div>
     <div class="card">
-      <span class="ct">Extension</span>
-      <h5>Slice regular functions</h5>
-      <p>Gentili–Struppa (2006): the function theory over ℍ (slice regularity) replaces complex holomorphy. The zeros of slice regular quaternionic polynomials are spherical (consist of 2-spheres of conjugate quaternions x = a + bI). The Nullstellensatz reflects this spherical zero-set geometry.</p>
+      <span class="ct">Generalisation</span>
+      <h5>Quaternionic manifolds</h5>
+      <p>Replace ℍⁿ with a quaternionic manifold M. The ring of quaternionic polynomial (or analytic) functions on M carries a Nullstellensatz for compact M (where algebraic and analytic coincide by quaternionic Serre GAGA).</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Weighted/graded versions</h5>
+      <p>Graded ℍ[x₁,…,xₙ] with weight vector w admits a graded version of the isomorphism φ. The quaternionic radical respects the grading; graded quaternionic ideals correspond to graded real ideals.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Hilbert's 17th over ℍ</h5>
+      <p>Artin's solution to Hilbert's 17th problem characterises non-negative real polynomials as sums of squares of rational functions. The ℍ-analogue asks: which f with f(q)≥0 (as real numbers) for all q ∈ ℍ are sums of ff̄-type expressions of rational quaternionic functions?</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Convexity and spectrahedra</h5>
+      <p>The set {q ∈ ℍ : f(q) ≥ 0} for real-valued f is a real semialgebraic set in ℝ⁴. Its intersection with ℍ-algebraic varieties gives quaternionic spectrahedra — relevant to quaternionic SDP.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Scheme theory over ℍ</h5>
+      <p>The bijection between quaternionic ideals and real ideals defines a functor from quaternionic affine "schemes" to real affine schemes over ℝ⁴ⁿ. The geometric fibres are orbits of the Sp(1) action on ℍ.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Tropical quaternionic geometry</h5>
+      <p>Tropical geometry replaces (ℝ,+,×) with (ℝ∪{−∞}, max, +). A tropical version of the quaternionic Nullstellensatz would require a tropical analogue of quaternionic conjugation — unexplored territory.</p>
     </div>
   </div>
 </div>
 
-<!-- PHILOSOPHICAL ALGEBRA -->
+<!-- PHILOSOPHICAL -->
 <div class="sec" id="phil-points">
-  <div class="stag tt">Philosophical — Algebra</div>
-  <h2>Philosophical implications: Concept of a point &amp; truth</h2>
+  <div class="stag tt">Philosophical</div>
+  <h2>What is a "point" in non-commutative geometry?</h2>
 
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Philosophical</span>
-      <h5>What is a "point" over ℍ?</h5>
-      <p>In classical geometry, a point is an element of kⁿ. Over ℍ, because of conjugation (a ↦ q a q⁻¹ for q ∈ ℍ*), an individual point belongs to a 2-sphere S² of conjugate quaternions. A "quaternionic point" is intrinsically a conjugacy class (sphere), blurring the line between discrete points and continuous submanifolds.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Philosophical</span>
-      <h5>Ideal–Variety duality without commutativity</h5>
-      <p>The Quaternionic Nullstellensatz demonstrates that the fundamental duality between geometry (zero locus) and algebra (vanishing ideal) does NOT depend on commutativity — it depends on the weaker condition of PI-structure and division algebra completeness. Non-commutative geometry has an equally precise algebraic foundation.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Philosophical</span>
-      <h5>Model theory of non-commutative fields</h5>
-      <p>The theory of algebraically closed division rings (Macintyre 1972): ℍ is not algebraically closed in the commutative sense, but it is "quaternionically closed" (every non-constant quaternionic polynomial has a root). This creates a unique model-complete theory in mathematical logic.</p>
-    </div>
+  <p class="lead">Hilbert's Nullstellensatz is a theorem about points: maximal ideals of k[x₁,…,xₙ] over an algebraically closed field k correspond bijectively to points of kⁿ. The quaternionic version forces a rethinking of what "a point" means.</p>
+
+  <h3>The non-commutative point problem</h3>
+  <p>In ℍ[x], the ideal (x − q) for q ∈ ℍ is not maximal in the usual sense — the quotient ℍ[x]/(x−q) ≅ ℍ is a non-commutative ring, not a field. The "points" of ℍ[x] are therefore not in bijection with maximal ideals (which correspond to the spheres of quaternions conjugate to q, since ax̄a⁻¹ also satisfies the same minimal polynomial over ℝ).</p>
+
+  <div class="math">
+    <span class="ml">Key distinction</span>
+    Over ℂ: max ideals of ℂ[x] ↔ points of ℂ (one ideal per point).<br>
+    Over ℍ: each "geometric point" q has a conjugacy class {aqa⁻¹ : a ∈ ℍ×}, a 2-sphere S² ⊂ ℍ. The polynomial function x²+1 has a 2-sphere of zeros {q : q² = −1} = {ai+bj+ck : a²+b²+c²=1}.
+  </div>
+
+  <p>The paper's approach sidesteps this by working with <em>polynomial functions</em> (not formal polynomials), where two polynomials that agree on all of ℍⁿ are identified. This is the correct geometric notion: the ring of regular functions on ℍⁿ as an algebraic variety over ℝ.</p>
+
+  <button class="xbtn" onclick="xt(this)">▸ Relation to Connes' non-commutative geometry</button>
+  <div class="xbody">
+    <p>Alain Connes' non-commutative geometry (NCG) replaces spaces by algebras of functions: a "non-commutative space" is simply a non-commutative C*-algebra. The paper lives in a different but related tradition: instead of C*-algebras and spectral triples, it works with polynomial functions and ideal-variety correspondences.</p>
+    <p>Connection: ℍ[x₁,…,xₙ] can be completed to a C*-algebra by taking operator norm completions. The quaternionic radical corresponds under this completion to a notion related to the positivity condition in Connes' real structure (the J-operator satisfies JJ* = 1, similar to conjugation ff̄ ≥ 0).</p>
+    <p>Difference: NCG is primarily analytic (C*-algebras, spectral triples, K-theory). The paper is purely algebraic. The bridge — an algebraic NCG Nullstellensatz — connects them but has not been fully developed.</p>
   </div>
 </div>
 
-<!-- APPLICATIONS: PHYSICS QNS -->
-<div class="sec" id="app-qns-physics">
-  <div class="stag tr">Applications — Algebra</div>
-  <h2>Applications in theoretical physics</h2>
+<div class="sec" id="phil-truth">
+  <div class="stag tt">Philosophical</div>
+  <h2>Ideal–variety duality and the nature of algebraic truth</h2>
+
+  <h3>The correspondence as epistemology</h3>
+  <p>The Nullstellensatz says: the only way a polynomial f can vanish everywhere that I vanishes is if f belongs to the radical of I. This is a form of <em>completeness</em> — the ideal knows everything about its variety. Each version of the Nullstellensatz reflects the epistemological constraints of its coefficient ring:</p>
+
+  <table>
+    <thead><tr><th>Setting</th><th>What the radical adds</th><th>Philosophical reading</th></tr></thead>
+    <tbody>
+      <tr><td>ℂ (alg. closed)</td><td>nth roots: fⁿ ∈ I ⟹ f ∈ √I</td><td>Complete: no information is hidden</td></tr>
+      <tr><td>ℝ (real closed)</td><td>Sum-of-squares: Σfᵢ² ∈ I ⟹ fᵢ ∈ I</td><td>Positivity is the obstruction to algebraic closure</td></tr>
+      <tr><td>ℍ (quaternionic)</td><td>Hermitian sums: Σfᵢf̄ᵢ ∈ I ⟹ fᵢ ∈ I</td><td>Non-commutativity is encoded in conjugation, not ordering</td></tr>
+    </tbody>
+  </table>
+
+  <p>The progression ℂ → ℝ → ℍ shows that as the coefficient ring loses algebraic closure, the radical must encode more structure (positivity, then Hermitian positivity) to maintain the correspondence.</p>
+
+  <h3>Gelfand duality analogue</h3>
+  <p>Classical Gelfand duality: compact Hausdorff spaces ↔ commutative C*-algebras. The paper's result is an algebraic step toward a Gelfand-type duality for ℍⁿ: quaternionic varieties ↔ quaternionic ideals in ℍ[x₁,…,xₙ]. The exact nature of this duality (topology on the variety side, appropriate algebra on the ring side) remains to be made precise.</p>
+</div>
+
+<div class="sec" id="phil-logic">
+  <div class="stag tt">Philosophical</div>
+  <h2>Logic and model theory</h2>
+
+  <h3>The first-order theory of ℍ</h3>
+  <p>ℍ is not a field — it is a real closed ring in a suitable sense. The first-order theory of ℍ as an ℝ-algebra (in the language of rings augmented with the constant symbols i, j, k) is decidable, since ℍ ≅ M₂(ℝ) as ℝ-algebras and the theory of M₂(ℝ) is a definitional extension of the decidable theory of real closed fields.</p>
 
   <div class="grid">
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>Quaternionic quantum mechanics</h5>
-      <p>Finkelstein, Jauch, Schiminovich (1962), Adler (1995): quantum mechanics can be formulated over ℍ instead of ℂ. The Quaternionic Nullstellensatz governs the polynomial constraints on quaternionic Hilbert space operators and phase spaces.</p>
+      <span class="ct">Logic</span>
+      <h5>Quantifier elimination</h5>
+      <p>The isomorphism φ provides effective quantifier elimination for ℍ[x]: a statement ∃x ∈ ℍ, f(x)=0 reduces via φ to ∃(y₁,y₂,y₃,y₄) ∈ ℝ⁴, φ(f)(y)=0, which is decidable by Tarski's algorithm.</p>
     </div>
     <div class="card">
-      <span class="ct">Physics</span>
-      <h5>Yang–Mills gauge theory &amp; ADHM</h5>
-      <p>The ADHM equations for instantons are quaternionic matrix equations: [B₁, B₂] + I J = 0 and [B₁, B₁*] + [B₂, B₂*] + I I* − J* J = 0. Solving ADHM is precisely finding the zero variety V_ℍ(I_ADHM). The Quaternionic Nullstellensatz characterizes all gauge-invariant polynomial observables on instanton moduli spaces.</p>
+      <span class="ct">Logic</span>
+      <h5>Model-completeness</h5>
+      <p>The theory of ℍ as an ordered ℝ-algebra (via the norm) is model-complete in its language — a consequence of the real Nullstellensatz and the translation via φ.</p>
     </div>
+    <div class="card">
+      <span class="ct">Logic</span>
+      <h5>Non-commutative Ax–Grothendieck</h5>
+      <p>Ax–Grothendieck: an injective polynomial map ℂⁿ → ℂⁿ is surjective. Via φ, an analogous statement holds for polynomial maps ℍⁿ → ℍⁿ, reducing to the real case in ℝ⁴ⁿ.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>GPI and identities</h5>
+      <p>GPI(ℍ,n) is finitely generated (Theorem 6). Is every ideal of D⟨x₁,…,xₙ⟩ that vanishes on Dⁿ finitely generated? This is an analogue of the Nullstellensatz for the full free algebra.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: decidability of quaternionic polynomial equations</button>
+  <div class="xbody">
+    <p>Given a system of quaternionic polynomial equations f₁=…=f⛤=0 with fᵢ ∈ ℍ[x₁,…,xₙ], deciding whether this system has a solution in ℍⁿ proceeds as follows:</p>
+    <ul>
+      <li>Apply φ: translate each fᵢ to φ(fᵢ) ∈ ℝ[y_{ij}].</li>
+      <li>The original system has a solution iff the real system {φ(fᵢ) = 0} has a solution in ℝ⁴ⁿ.</li>
+      <li>Decidability of real polynomial system solvability follows from Tarski's theorem (1948): the first-order theory of (ℝ, +, ×, ≤, 0, 1) admits quantifier elimination.</li>
+      <li>Complexity: cylindrical algebraic decomposition runs in doubly exponential time in n; Ben-Or–Kozen–Reif gives single exponential for fixed degree.</li>
+    </ul>
+    <p>This gives an effective algorithm for quaternionic system solving — something not available from the non-commutative algebra side alone.</p>
   </div>
 </div>
 
-<!-- APPLICATIONS: CS QNS -->
-<div class="sec" id="app-qns-cs">
-  <div class="stag tg">Applications — Algebra</div>
-  <h2>Applications in symbolic CS &amp; verification</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Computer science</span>
-      <h5>Non-commutative computer algebra</h5>
-      <p>Implementations of quaternionic Gröbner bases (e.g. in Singular, MAGMA, Maple) use the Quaternionic Nullstellensatz to perform ideal containment tests, compute radical ideals, and solve non-commutative polynomial systems computationally.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Computer science</span>
-      <h5>Formal program verification</h5>
-      <p>Programs involving 3D rotations, spatial orientation, or quaternionic state variables (e.g. flight control software, game physics engines) are formally verified by checking ideal membership in ℍ[x] using the Quaternionic Positivstellensatz to prove invariant assertions.</p>
-    </div>
-  </div>
-</div>
-
-<!-- APPLICATIONS: CONTROL & ROBOTICS -->
-<div class="sec" id="app-qns-eng">
-  <div class="stag to">Applications — Algebra</div>
-  <h2>Applications in control theory, kinematics &amp; robotics</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Engineering</span>
-      <h5>Quaternionic kinematics &amp; dual quaternions</h5>
-      <p>Rigid body transformations in 3D (rotations + translations) are encoded by dual quaternionic polynomials in ℍ̂[x] = (ℍ ⊕ ε ℍ)[x]. Kinematic loop equations for 6-DOF robotic manipulators are quaternionic polynomial systems. The zero variety V_ℍ(I) gives the exact workspace kinematics.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Engineering</span>
-      <h5>Attitude control &amp; Lyapunov synthesis</h5>
-      <p>Spacecraft attitude control uses unit quaternion error dynamics. Finding Lyapunov functions for non-linear quaternionic feedback systems reduces to Sums of Quaternionic Squares (SQS) optimization via the Quaternionic Positivstellensatz.</p>
-    </div>
-    <div class="card">
-      <span class="ct">Robotics</span>
-      <h5>Computer vision &amp; pose estimation</h5>
-      <p>The absolute orientation problem (Horn's algorithm) and multi-camera calibration construct quaternionic polynomial cost functions. The Nullstellensatz provides global optimality conditions for pose estimation algorithms.</p>
-    </div>
-  </div>
-</div>
-
-<!-- OPEN PROBLEMS ALGEBRA -->
-<div class="sec" id="open-qns">
-  <div class="stag tv">Unresolved — Algebra</div>
-  <h2>Open problems in quaternionic algebra</h2>
-
-  <div class="grid">
-    <div class="card">
-      <span class="ct">Open Problem 1</span>
-      <h5>Algorithmic complexity of Rad_ℍ(I)</h5>
-      <p>What is the exact computational complexity of computing the quaternionic radical Rad_ℍ(I) for a general left ideal in ℍ[x₁,...,xₙ]? Is it doubly exponential in n (like commutative Gröbner bases) or higher due to non-commutativity?</p>
-    </div>
-    <div class="card">
-      <span class="ct">Open Problem 2</span>
-      <h5>Quaternionic Hilbert's 17th Problem</h5>
-      <p>Is every positive semi-definite quaternionic polynomial a sum of quaternionic squares of rational functions? Known for low dimensions; open for general n ≥ 3 variables in ℍ[x].</p>
-    </div>
-    <div class="card">
-      <span class="ct">Open Problem 3</span>
-      <h5>Effective Quaternionic Nullstellensatz degree bounds</h5>
-      <p>If f ∈ Rad_ℍ(I), what is the tight upper bound on the degree of the multiplier polynomials in f^k = Σ Aᵢ gᵢ + GPI? Commutative bounds are d^{2^n} (Hermann, Kollár). The non-commutative ℍ bound is open.</p>
-    </div>
-  </div>
-</div>
-
-<!-- HISTORICAL LINEAGE QNS -->
-<div class="sec" id="hist-qns">
-  <div class="stag tv">History — Algebra</div>
-  <h2>Algebraic lineage</h2>
+<div class="sec" id="phil-qns-found">
+  <div class="stag tt">Philosophical</div>
+  <h2>Foundational algebraic implications</h2>
 
   <div class="tl">
     <div class="tli">
       <div class="tld"></div>
       <div class="tlb">
-        <h5>1843 — William Rowan Hamilton</h5>
-        <p>Discovers quaternions ℍ on Broom Bridge, Dublin. Establishes the first non-commutative division algebra.</p>
+        <h5>Non-commutativity is tamed by positivity</h5>
+        <p>The passage from the Hilbert Nullstellensatz (over ℂ) to the Real Nullstellensatz (over ℝ) was made by replacing roots with sums of squares — a positivity condition. The passage from real to quaternionic is made by replacing sums of squares with Hermitian sums Σfᵢf̄ᵢ. The pattern: each step from a "nicer" ring to a "harder" one requires enriching the radical with the ring's additional structure.</p>
       </div>
     </div>
     <div class="tli">
       <div class="tld"></div>
       <div class="tlb">
-        <h5>1893 — David Hilbert</h5>
-        <p>Publishes the classical Nullstellensatz for commutative polynomial rings over ℂ in "Ueber die vollen Invariantensysteme."</p>
+        <h5>Polynomial functions ≠ formal polynomials</h5>
+        <p>The paper works throughout with polynomial functions (elements of the function ring Dⁿ → D), not formal polynomials (elements of D⟨x₁,…,xₙ⟩). The kernel of D⟨x⟩ → D[x] as functions is exactly GPI(D,n), which the paper determines. Working with functions avoids the pathologies of the free algebra while retaining geometric content.</p>
       </div>
     </div>
     <div class="tli">
       <div class="tld"></div>
       <div class="tlb">
-        <h5>1948 — Nathan Jacobson</h5>
-        <p>Develops the structure theory of non-commutative rings and defines the Jacobson radical, laying the groundwork for non-commutative algebraic geometry.</p>
+        <h5>Central simple algebras as geometric objects</h5>
+        <p>The proof uses that ℍ is a central simple algebra over ℝ in an essential way (the Goodearl–Warfield correspondence, the density of ℝ in ℍ). This positions central simple algebras not just as abstract algebraic objects but as coefficient rings for a viable algebraic geometry.</p>
       </div>
     </div>
     <div class="tli">
       <div class="tld"></div>
       <div class="tlb">
-        <h5>1972 — Shimshon Amitsur &amp; Claudio Procesi</h5>
-        <p>Establish the theory of Generalized Polynomial Identities (GPI) for division algebras and central simple algebras, laying the foundation for the PI-algebra Nullstellensatz.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>1974 — Gilbert de B. Robinson &amp; Gilbert Helmberg</h5>
-        <p>Formulate early zero-locus theorems for polynomials with quaternionic coefficients.</p>
-      </div>
-    </div>
-    <div class="tli">
-      <div class="tld"></div>
-      <div class="tlb">
-        <h5>2006–Present — Modern Synthesis</h5>
-        <p>Gentili, Struppa, Alpay, Ghiloni, Perotti develop slice regularity and quaternionic algebraic geometry. Formulate modern effective Quaternionic Nullstellensatz and Positivstellensatz results.</p>
+        <h5>Conjugation as the fundamental structure</h5>
+        <p>In ℝ: the fundamental structure is the ordering (a ≥ 0). In ℂ: complex conjugation z ↦ z̄. In ℍ: quaternionic conjugation q ↦ q̄. The Nullstellensatz in each case is controlled by the norm |q|² = qq̄. This suggests a uniform framework: algebras with a positive-definite involution admit a Nullstellensatz where the radical is defined using the involution norm.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WIDGET INTEGRATION SECTION -->
-<div class="sec" id="widget-sec">
-  <div class="stag tv">Interactive Visualization</div>
-  <h2>Cross-Domain Synthesis &amp; Parameter Space Visualizer</h2>
-  <p class="lead">Explore the quantitative transition across geometric holonomy spaces, hyperkähler moment map constraints, quaternionic ideal evaluations, and kinematic zero-loci.</p>
+<!-- APPLIED -->
+<div class="sec" id="app-qns-physics">
+  <div class="stag tr">Applied</div>
+  <h2>Physics (Algebraic)</h2>
 
-<GenerateWidget height="600px">
-```json
-{
-  "widgetSpec": {
-    "height": "600px",
-    "prompt": "**Objective:** Create an interactive visualizer and computational sandbox bridging Kähler/Hyperkähler geometry and the Quaternionic Nullstellensatz.\n **Data State:** Default parameter values: dimension n=1 (4D real), curvature parameter k=1.0, quaternionic moment map target norm=0.0, polynomial degree d=2.\n **Inputs:** Holonomy/Geometry selector (Kähler U(n), Calabi-Yau SU(n), Hyperkähler Sp(n)), Quaternionic ideal generator parameters (slider for real part, sliders for i, j, k components), parameter for moment map level set value.\n **Behavior:** Provide real-time interactive plots showing: (1) The spectrum/energy surface of the hyperkähler moment map ||μ(q)||^2 over quaternionic space; (2) The vanishing locus V_H(I) slice under selected parameter constraints; (3) Live readouts comparing classical commutative Hilbert radical criteria versus the non-commutative Quaternionic Radical Rad_H(I) conditions."
-  }
+  <h3>Quaternions in physics — where the algebra matters</h3>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Quantum mechanics</span>
+      <h5>Quaternionic quantum mechanics</h5>
+      <p>Adler (1995) and others proposed QM over ℍ instead of ℂ. The Hilbert space is a right-ℍ-module; observables are Hermitian quaternionic operators. A Nullstellensatz for operator-valued quaternionic polynomials would characterise the spectrum of such operators — the quaternionic analogue of the spectral theorem.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Quantum field theory</span>
+      <h5>Quaternionic gauge fields</h5>
+      <p>Yang–Mills theories with structure group Sp(1) ≅ SU(2) (the unit quaternions) are central to electroweak theory. The polynomial ring ℍ[x₁,…,xₙ] appears naturally in the description of Sp(1)-equivariant maps; the Nullstellensatz constrains which polynomial gauge conditions are consistent.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Relativity</span>
+      <h5>Spinors and Clifford algebras</h5>
+      <p>ℍ ≅ Cl₀,₂(ℝ) (the even Clifford algebra in 2D). Spinors in 4D spacetime live in Cl₁,₃(ℝ) ⊃ ℍ. The GPI result identifies the relations between non-commuting spinor variables — directly relevant to spinor polynomial identities in QFT.</p>
+    </div>
+    <div class="card">
+      <span class="ct">String theory</span>
+      <h5>Instantons and ADHM construction</h5>
+      <p>The ADHM (Atiyah–Drinfeld–Hitchin–Manin) construction of instantons on ℝ⁴ = ℍ uses quaternionic linear algebra. The moduli space of instantons is the solution set of quaternionic polynomial equations (ADHM equations). The Nullstellensatz characterises the ideal of relations among these moduli.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Condensed matter</span>
+      <h5>Quaternionic band theory</h5>
+      <p>Kramers-degenerate systems with time-reversal symmetry T with T²=−1 (class AII) carry a natural ℍ-module structure. Bloch Hamiltonians are sections of quaternionic vector bundles; the spectrum is determined by quaternionic polynomial conditions.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Quaternionic Seiberg–Witten</h5>
+      <p>The Seiberg–Witten equations are polynomial in the spinor and connection variables over a quaternionic-Kähler manifold. A Nullstellensatz would describe the SW moduli space ideal — connecting algebraic geometry to 4-manifold topology.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: the ADHM connection</button>
+  <div class="xbody">
+    <p>The ADHM construction encodes a self-dual Yang–Mills connection (instanton) on ℝ⁴ in terms of matrices B₁, B₂ ∈ M⛤(ℂ), I ∈ M⛤ₓᵣ(ℂ), J ∈ Mᵣₓ⛤(ℂ) satisfying the ADHM equations:</p>
+    <ul>
+      <li>[B₁,B₂†] + II† − J†J = 0 (real part)</li>
+      <li>[B₁,B₂] + IJ = 0 (complex part)</li>
+    </ul>
+    <p>These are polynomial equations in the matrix entries. The moduli space M⛤ of charge-k instantons is the solution set modulo gauge equivalence. The Nullstellensatz over ℍ characterises the ideal of polynomial relations among the moduli — which polynomial functions on M⛤ vanish everywhere that the ADHM equations hold.</p>
+    <p>Connection: rewriting ADHM in terms of quaternionic matrices (using ℍ ≅ M₂(ℂ) as real algebras) yields quaternionic polynomial equations. Theorem 1 then applies to characterise their solution ideal.</p>
+  </div>
+</div>
+
+<div class="sec" id="app-qns-cs">
+  <div class="stag tr">Applied</div>
+  <h2>Computer science (Symbolic &amp; Verification)</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Symbolic computation</span>
+      <h5>Gröbner bases for quaternionic systems</h5>
+      <p>Via φ, a quaternionic polynomial system translates to a real system in 4n variables. Standard Gröbner basis algorithms (Buchberger, F4, F5) apply to the real system; the solution is then decoded via φ⁻¹. This gives a complete, algorithmic method for quaternionic system solving.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Cryptography</span>
+      <h5>Quaternionic lattice problems</h5>
+      <p>Lattice-based cryptography (NTRU, Ring-LWE) uses polynomial rings modulo an ideal. NTRU variants over ℤ[i,j,k]/(n) (quaternionic integers modulo n) are proposed in the literature. The GPI result constrains the algebraic structure of these rings and may affect hardness assumptions.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Verification</span>
+      <h5>Non-commutative PIT</h5>
+      <p>Polynomial identity testing (PIT) asks: does a given algebraic circuit compute the zero polynomial? The GPI result gives an explicit basis for the kernel of D⟨x⟩ → D[x], directly applicable to PIT for circuits over division algebras.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Type theory</span>
+      <h5>Dependent types over ℍ</h5>
+      <p>Homotopy type theory (HoTT) has connections to quaternionic topology (ℍP¹ ≅ S⁴). The ideal–variety correspondence gives a computational interpretation of quaternionic algebraic geometry in a proof assistant via the Curry–Howard correspondence.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Optimisation</span>
+      <h5>Quaternionic SDP</h5>
+      <p>Semidefinite programming (SDP) over quaternionic matrices (QSP/QSDP) arises in quantum information. The Hermitian sum condition Σfᵢf̄ᵢ ∈ I in the quaternionic radical is precisely the quaternionic analogue of the SOS (sum-of-squares) certificate used in real SDP relaxations.</p>
+    </div>
+    <div class="card">
+      <span class="ct">ML/AI</span>
+      <h5>Quaternionic neural networks</h5>
+      <p>Quaternionic neural networks (QNNs) use ℍ-valued weights and activations to encode 3D rotational equivariance. The ring structure of ℍ[x₁,…,xₙ] determines which polynomial functions a QNN layer can represent — a quaternionic version of the universal approximation theorem boundary.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="app-qns-eng">
+  <div class="stag tr">Applied</div>
+  <h2>Engineering &amp; Kinematics</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Signal processing</span>
+      <h5>Quaternionic Fourier analysis</h5>
+      <p>The quaternionic Fourier transform (QFT) decomposes signals with two distinct phase components (left and right QFT). The algebraic structure of ℍ[x] determines the polynomial convolution identities that underlie fast QFT algorithms.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Control theory</span>
+      <h5>Attitude control systems</h5>
+      <p>Spacecraft attitude control uses unit quaternions to represent SO(3) without gimbal lock. The polynomial system describing equilibria and stability conditions of a quaternion-based PID controller is exactly a system in ℍ[x]. The Nullstellensatz characterises when such a system has a feasible solution.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Mechanics</span>
+      <h5>Rigid body kinematics</h5>
+      <p>The configuration space of a rigid body is SE(3) = ℝ³ ⋊ SO(3). Dual quaternions (elements of ℍ ⊕ εℍ, ε² = 0) represent SE(3) elements. Polynomial constraints on dual quaternionic configurations (closure conditions for mechanisms) form ideals in the dual quaternionic polynomial ring.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Structural engineering</span>
+      <h5>Quaternionic finite elements</h5>
+      <p>Quaternionic interpolation (slerp and squad) is used in structural FEM for large-rotation problems. The polynomial relations among quaternionic shape functions determine the consistency conditions of the FEM discretisation.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Electromagnetics</span>
+      <h5>Maxwell's equations in quaternion form</h5>
+      <p>Maxwell's equations can be written as a single quaternionic equation ∂F/∂q̄ = J (Fueter operator). Polynomial solutions to this PDE live in ℍ[x₁,x₂,x₃,x₄]; the Nullstellensatz characterises the ideal of polynomial constraints on electromagnetic fields.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Colour science</span>
+      <h5>Colour image processing</h5>
+      <p>Colour images are ℝ³-valued; quaternions (with zero real part) encode RGB triples. Quaternionic polynomial filters on images must satisfy consistency conditions that are exactly GPI relations — polynomial identities that hold for all colour values.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="app-robotics">
+  <div class="stag tr">Applied</div>
+  <h2>Robotics and computer vision</h2>
+
+  <p>Robotics and computer vision provide the most direct applied setting for quaternionic polynomial systems: the kinematics of articulated robots, camera calibration, and 3D pose estimation all reduce to polynomial systems over ℍ or dual-ℍ.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Kinematics</span>
+      <h5>Forward / inverse kinematics</h5>
+      <p>An n-joint robot arm's forward kinematics is a quaternionic polynomial map q₁×…×qₙ ↦ pose. Inverse kinematics solves this map — it is a system of quaternionic polynomial equations. Theorem 1 characterises when such a system is consistent.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Vision</span>
+      <h5>Essential matrix estimation</h5>
+      <p>The essential matrix E in stereo vision satisfies det(E)=0 and 2EEᵀE − tr(EEᵀ)E = 0 — polynomial constraints. These constraints have a quaternionic interpretation via the rotation part; the Nullstellensatz characterises the ideal of essential matrices.</p>
+    </div>
+    <div class="card">
+      <span class="ct">SLAM</span>
+      <h5>Rotation averaging</h5>
+      <p>Rotation averaging (finding the mean of a set of rotations in SO(3)) is equivalent to a quaternionic polynomial optimisation problem. The quaternionic radical gives the algebraic certificates for global optimality conditions.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Calibration</span>
+      <h5>Hand-eye calibration</h5>
+      <p>Hand-eye calibration (finding the transformation between a camera and a robot end-effector) reduces to solving AX = XB for quaternionic matrices. This is a polynomial system in the quaternionic entries of X; the Nullstellensatz determines when it is solvable and what the solution set looks like.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="fn hl">ℍ[x₁,…,xₙ]</div>
+    <div class="fa">⟶ φ</div>
+    <div class="fn">ℝ[y₁,…,y₄ₙ]</div>
+    <div class="fa">⟶ solve</div>
+    <div class="fn">ℝ⁴ⁿ solution</div>
+    <div class="fa">⟶ ρ⁻¹</div>
+    <div class="fn hl">ℍⁿ solution</div>
+  </div>
+  <p style="font-size:.8rem;color:var(--fg3);margin-top:.4rem">The translation pipeline: every quaternionic polynomial system is solvable via existing real algebraic geometry tools.</p>
+</div>
+
+<!-- OPEN PROBLEMS -->
+<div class="sec" id="open-qns">
+  <div class="stag to">Open problems</div>
+  <h2>Open problems (Algebraic)</h2>
+
+  <table>
+    <thead><tr><th>#</th><th>Problem</th><th>Difficulty</th><th>Required tools</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Nullstellensatz over a quaternion algebra (a,b/F) for general real closed F</td><td>Medium</td><td>Real algebra over F, Morita theory</td></tr>
+      <tr><td>2</td><td>Hilbert's 17th problem over ℍ: characterise ff̄ ≥ 0 polynomials</td><td>Hard</td><td>Hermitian sums-of-squares, Positivstellensatz</td></tr>
+      <tr><td>3</td><td>Gröbner basis theory for ℍ[x₁,…,xₙ] intrinsically (without φ)</td><td>Hard</td><td>Non-commutative Buchberger, orderings</td></tr>
+      <tr><td>4</td><td>Nullstellensatz for octonion polynomial functions (non-associative)</td><td>Very hard</td><td>New framework; ring theory inapplicable</td></tr>
+      <tr><td>5</td><td>GPI generators for ℍ[x₁,…,xₙ] for n≥2: explicit count and basis</td><td>Medium</td><td>Multilinear algebra, PI-theory</td></tr>
+      <tr><td>6</td><td>Quaternionic real spectrum as a topological space: compactness, Hausdorff?</td><td>Medium</td><td>Real spectral spaces, Stone duality</td></tr>
+      <tr><td>7</td><td>Effective Nullstellensatz: degree bounds on the certificate (ff̄)ᵐ + Σfᵢf̄ᵢ ∈ I</td><td>Hard</td><td>Effective real AG, complexity theory</td></tr>
+      <tr><td>8</td><td>Quaternionic tropical geometry: tropical Nullstellensatz analogue</td><td>Open/speculative</td><td>Tropical algebra, idempotent analysis</td></tr>
+      <tr><td>9</td><td>QSDP certificate: when does Σfᵢf̄ᵢ yield an SDP-verifiable certificate?</td><td>Medium</td><td>Operator systems, Helton–Nie theory</td></tr>
+      <tr><td>10</td><td>Scheme-theoretic interpretation: quaternionic affine schemes as a category</td><td>Medium</td><td>Relative algebraic geometry over non-commutative bases</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- HISTORICAL LINEAGE -->
+<div class="sec" id="hist-qns">
+  <div class="stag tv">History</div>
+  <h2>Historical lineage (Non-commutative Algebra)</h2>
+
+  <div class="tl">
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1843 — Hamilton discovers quaternions</h5><p>Hamilton's Brougham Bridge inscription: i²=j²=k²=ijk=−1. The first non-commutative division algebra, originally motivated by 3D rotation composition.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1900 — Hilbert's Nullstellensatz</h5><p>As part of Hilbert's basis theorem programme: over an algebraically closed field, the ideal–variety correspondence is exact. Cornerstone of algebraic geometry.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1927 — Artin, real closed fields</h5><p>Artin–Schreier theory: real closed fields are characterised by ordering axioms. Foundation for the Real Nullstellensatz.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1965 — Amitsur, GPI theory</h5><p>Amitsur introduces generalised polynomial identities over division rings. Lays the algebraic foundation for the GPI portion of the paper (Theorem 6).</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1974 — Stengle, Positivstellensatz; Real Nullstellensatz (Risler, Efroymson)</h5><p>The Real Nullstellensatz: 𝒮_ℝ(𝒵(I)) = √<sup>ℝ</sup>I. The paper's proof reduces to this theorem.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>1980s–90s — Non-commutative geometry (Connes)</h5><p>Connes' programme replaces spaces with C*-algebras. Parallel but distinct from the algebraic approach of the paper; the connection via completion of polynomial rings is an open bridge.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>2014 — Wilczyński's isomorphism</h5><p>Wilczyński proves D[x₁,…,xₙ] ≅ D_c[y_{ij}] — the ring isomorphism that the paper makes explicit and uses as its key tool.</p></div>
+    </div>
+    <div class="tli">
+      <div class="tld"></div>
+      <div class="tlb"><h5>2019 — Alon &amp; Paran, this paper</h5><p>Combines Wilczyński's isomorphism, the Real Nullstellensatz, and Amitsur's GPI theory to prove Theorems 1, 5, 6 — the first complete Nullstellensatz over ℍ.</p></div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function nc(a){
+  document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
 }
+
+function xt(btn){
+  const b=btn.nextElementSibling;
+  const o=b.classList.toggle('open');
+  btn.textContent=(o?'▾':'▸')+btn.textContent.slice(1);
+}
+
+function doSearch(q) {
+  const main = document.getElementById('main');
+  
+  // 1. Clean up existing highlights cleanly
+  const marks = main.querySelectorAll('mark');
+  marks.forEach(mark => {
+    const parent = mark.parentNode;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
+    parent.normalize(); // Merges adjacent text nodes so future searches don't break
+  });
+
+  const query = q.trim().toLowerCase();
+  if (!query) return;
+
+  // 2. Safely collect text nodes FIRST without modifying DOM during traversal
+  const textNodes = [];
+  const walker = document.createTreeWalker(
+    main,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: node => {
+        const tag = node.parentNode.tagName;
+        if (['SCRIPT', 'STYLE', 'MARK'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        return node.textContent.toLowerCase().includes(query) 
+          ? NodeFilter.FILTER_ACCEPT 
+          : NodeFilter.FILTER_SKIP;
+      }
+    }
+  );
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  // 3. Highlight matches safely after traversal is complete
+  textNodes.forEach(node => {
+    const text = node.textContent;
+    const lowerText = text.toLowerCase();
+    const fragment = document.createDocumentFragment();
+    let lastIdx = 0;
+    let matchIdx = lowerText.indexOf(query);
+
+    while (matchIdx !== -1) {
+      if (matchIdx > lastIdx) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIdx, matchIdx)));
+      }
+      
+      const mark = document.createElement('mark');
+      mark.textContent = text.slice(matchIdx, matchIdx + query.length);
+      fragment.appendChild(mark);
+
+      lastIdx = matchIdx + query.length;
+      matchIdx = lowerText.indexOf(query, lastIdx);
+    }
+
+    if (lastIdx < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIdx)));
+    }
+
+    node.parentNode.replaceChild(fragment, node);
+  });
+}
+
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('nav a').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id)
+      })
+    }
+  })
+},{threshold:.15});
+
+document.querySelectorAll('.sec[id], div[id]').forEach(s=>{
+  if(s.id)obs.observe(s)
+});
+</script>
+</body>
+</html>
