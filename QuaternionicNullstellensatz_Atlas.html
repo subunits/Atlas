@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quaternionic Nullstellensatz — Full Implications Atlas</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--slate:#1B3A5C;--mid:#2A5480;
+  --amber:#E8A020;--teal:#2A8F8F;--rose:#C0455A;
+  --fg:#F0F4F8;--fg2:#B8C8D8;--fg3:#7090A8;
+  --card:#172840;--card2:#1E3550;--border:#2A4060;
+  --amber-dim:rgba(232,160,32,.15);--teal-dim:rgba(42,143,143,.15);
+  --rose-dim:rgba(192,69,90,.15);
+  --r:6px;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;background:var(--navy);color:var(--fg);font-family:Georgia,serif;font-size:16px;line-height:1.7}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+#shell{display:flex;min-height:100%}
+#nav{width:260px;flex-shrink:0;background:var(--slate);border-right:1px solid var(--border);
+     position:sticky;top:0;height:100vh;overflow-y:auto;padding:0 0 2rem}
+#main{flex:1;min-width:0;padding:3rem 3.5rem;max-width:900px}
+
+/* Nav */
+#nav-head{padding:1.4rem 1.4rem 1rem;border-bottom:1px solid var(--border)}
+#nav-head h1{font-size:.78rem;font-family:system-ui,sans-serif;letter-spacing:.12em;
+             text-transform:uppercase;color:var(--amber);font-weight:600;line-height:1.3}
+#nav-head p{font-size:.72rem;color:var(--fg3);font-family:system-ui,sans-serif;margin-top:.3rem}
+nav ul{list-style:none;padding:.6rem 0}
+nav li a{display:block;padding:.38rem 1.4rem;font-size:.8rem;font-family:system-ui,sans-serif;
+         color:var(--fg2);transition:background .15s,color .15s;border-left:2px solid transparent}
+nav li a:hover,nav li a.active{background:rgba(232,160,32,.08);color:var(--amber);
+                               border-left-color:var(--amber);text-decoration:none}
+nav li.sub a{padding-left:2.2rem;font-size:.74rem;color:var(--fg3)}
+nav li.sub a:hover{color:var(--fg2)}
+.nav-section{padding:.5rem 1.4rem .15rem;font-size:.65rem;letter-spacing:.1em;
+             text-transform:uppercase;color:var(--fg3);font-family:system-ui,sans-serif;margin-top:.5rem}
+
+/* Typography */
+h2{font-size:1.65rem;color:var(--fg);font-weight:normal;margin-bottom:.3rem;line-height:1.25}
+h3{font-size:1.1rem;color:var(--amber);font-weight:normal;font-family:system-ui,sans-serif;
+   letter-spacing:.02em;margin:2rem 0 .7rem}
+h4{font-size:.9rem;color:var(--fg2);font-family:system-ui,sans-serif;font-weight:600;
+   text-transform:uppercase;letter-spacing:.08em;margin:1.4rem 0 .5rem}
+p{margin-bottom:1rem;color:var(--fg2);max-width:72ch}
+.lead{font-size:1.05rem;color:var(--fg);line-height:1.8;margin-bottom:1.5rem}
+.section-meta{font-size:.78rem;color:var(--fg3);font-family:system-ui,sans-serif;margin-bottom:1.8rem}
+
+/* Section wrapper */
+.section{padding:3rem 0;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-tag{display:inline-block;font-size:.68rem;font-family:system-ui,sans-serif;
+             letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;
+             border-radius:3px;margin-bottom:.8rem;font-weight:600}
+.tag-math{background:var(--amber-dim);color:var(--amber)}
+.tag-phil{background:var(--teal-dim);color:var(--teal)}
+.tag-app{background:var(--rose-dim);color:var(--rose)}
+.tag-open{background:rgba(255,255,255,.06);color:var(--fg3)}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.2rem 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      padding:1.2rem 1.3rem;cursor:pointer;transition:border-color .2s,background .2s}
+.card:hover{border-color:var(--amber);background:var(--card2)}
+.card h5{font-size:.88rem;font-family:system-ui,sans-serif;font-weight:600;color:var(--fg);margin-bottom:.4rem}
+.card p{font-size:.8rem;color:var(--fg3);margin:0;line-height:1.55}
+.card .card-tag{font-size:.65rem;font-family:system-ui,sans-serif;letter-spacing:.08em;
+                text-transform:uppercase;color:var(--amber);margin-bottom:.5rem;display:block}
+
+/* Expandable */
+.expand-btn{background:none;border:1px solid var(--border);color:var(--fg2);
+            font-family:system-ui,sans-serif;font-size:.78rem;padding:.35rem .8rem;
+            border-radius:3px;cursor:pointer;margin:.5rem 0;transition:border-color .15s,color .15s}
+.expand-btn:hover{border-color:var(--amber);color:var(--amber)}
+.expand-body{display:none;background:var(--card);border:1px solid var(--border);
+             border-radius:var(--r);padding:1.2rem 1.4rem;margin:.5rem 0 1rem}
+.expand-body.open{display:block}
+.expand-body p{font-size:.85rem}
+.expand-body ul{padding-left:1.4rem;margin:.5rem 0}
+.expand-body li{font-size:.85rem;color:var(--fg2);margin-bottom:.4rem}
+
+/* Math blocks */
+.math-block{background:var(--card);border-left:3px solid var(--amber);padding:.9rem 1.2rem;
+            margin:1rem 0;border-radius:0 var(--r) var(--r) 0;font-family:Georgia,serif;
+            font-size:.92rem;color:var(--fg);line-height:1.8}
+.math-block .label{font-size:.7rem;font-family:system-ui,sans-serif;letter-spacing:.1em;
+                    text-transform:uppercase;color:var(--amber);margin-bottom:.4rem;display:block}
+
+/* Table */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.83rem;font-family:system-ui,sans-serif}
+th{text-align:left;padding:.6rem .9rem;background:var(--slate);color:var(--fg2);
+   font-weight:600;border-bottom:1px solid var(--border)}
+td{padding:.55rem .9rem;border-bottom:1px solid var(--border);color:var(--fg3);vertical-align:top}
+tr:hover td{background:var(--card);color:var(--fg2)}
+
+/* Diagram */
+.flow{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0;align-items:center}
+.flow-node{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+           padding:.5rem 1rem;font-size:.8rem;font-family:system-ui,sans-serif;color:var(--fg2)}
+.flow-node.hl{border-color:var(--amber);color:var(--amber)}
+.flow-arr{color:var(--fg3);font-size:1rem}
+
+/* Timeline */
+.timeline{margin:1rem 0}
+.tl-item{display:flex;gap:1.2rem;margin-bottom:1.2rem}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--amber);
+         flex-shrink:0;margin-top:.5rem}
+.tl-body h5{font-size:.88rem;font-family:system-ui,sans-serif;font-weight:600;color:var(--fg);margin-bottom:.2rem}
+.tl-body p{font-size:.8rem;margin:0;color:var(--fg3)}
+
+/* Search */
+#search-wrap{padding:1rem 1.4rem}
+#search{width:100%;background:var(--navy);border:1px solid var(--border);border-radius:var(--r);
+        color:var(--fg);font-family:system-ui,sans-serif;font-size:.8rem;padding:.45rem .8rem}
+#search:focus{outline:none;border-color:var(--amber)}
+#search::placeholder{color:var(--fg3)}
+
+/* Highlight */
+mark{background:var(--amber-dim);color:var(--amber);border-radius:2px;padding:0 2px}
+
+/* Mobile */
+@media(max-width:720px){
+  #shell{flex-direction:column}
+  #nav{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border)}
+  #main{padding:1.8rem 1.2rem}
+  nav ul{display:flex;flex-wrap:wrap;padding:.4rem .6rem}
+  nav li a{padding:.3rem .7rem;border-left:none;border-bottom:2px solid transparent;white-space:nowrap}
+  nav li a.active{border-bottom-color:var(--amber)}
+  .nav-section{display:none}
+  nav li.sub{display:none}
+  #search-wrap{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="shell">
+
+<!-- ── NAV ── -->
+<aside id="nav">
+  <div id="nav-head">
+    <h1>Quaternionic Nullstellensatz</h1>
+    <p>Alon &amp; Paran, 2019 — Implications Atlas</p>
+  </div>
+  <div id="search-wrap">
+    <input id="search" type="search" placeholder="Search topics…" oninput="doSearch(this.value)">
+  </div>
+  <nav>
+    <div class="nav-section">Paper</div>
+    <ul>
+      <li><a href="#core" onclick="navClick(this)">Core results</a></li>
+      <li class="sub"><a href="#core-nss" onclick="navClick(this)">Nullstellensatz</a></li>
+      <li class="sub"><a href="#core-gpi" onclick="navClick(this)">GPI theorem</a></li>
+      <li class="sub"><a href="#core-isom" onclick="navClick(this)">Ring isomorphism</a></li>
+    </ul>
+    <div class="nav-section">Mathematical</div>
+    <ul>
+      <li><a href="#math-nca" onclick="navClick(this)">Non-commutative algebra</a></li>
+      <li><a href="#math-real" onclick="navClick(this)">Real algebraic geometry</a></li>
+      <li><a href="#math-div" onclick="navClick(this)">Division algebras</a></li>
+      <li><a href="#math-ext" onclick="navClick(this)">Extensions &amp; generalisations</a></li>
+    </ul>
+    <div class="nav-section">Philosophical</div>
+    <ul>
+      <li><a href="#phil-points" onclick="navClick(this)">What is a point?</a></li>
+      <li><a href="#phil-truth" onclick="navClick(this)">Ideal–variety duality</a></li>
+      <li><a href="#phil-logic" onclick="navClick(this)">Logic &amp; model theory</a></li>
+      <li><a href="#phil-found" onclick="navClick(this)">Foundations</a></li>
+    </ul>
+    <div class="nav-section">Applied</div>
+    <ul>
+      <li><a href="#app-physics" onclick="navClick(this)">Physics</a></li>
+      <li><a href="#app-cs" onclick="navClick(this)">Computer science</a></li>
+      <li><a href="#app-eng" onclick="navClick(this)">Engineering</a></li>
+      <li><a href="#app-robotics" onclick="navClick(this)">Robotics &amp; vision</a></li>
+    </ul>
+    <div class="nav-section">Landscape</div>
+    <ul>
+      <li><a href="#open" onclick="navClick(this)">Open problems</a></li>
+      <li><a href="#hist" onclick="navClick(this)">Historical lineage</a></li>
+      <li><a href="#map" onclick="navClick(this)">Connections map</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- ── MAIN ── -->
+<main id="main">
+
+<!-- HERO -->
+<div class="section" id="hero">
+  <div class="section-tag tag-math">Synthesis</div>
+  <h2>All permutations of the Quaternionic Nullstellensatz</h2>
+  <p class="section-meta">Alon &amp; Paran (arXiv:1911.10595v3) · Mathematical · Philosophical · Applied</p>
+  <p class="lead">This atlas exhausts every direction the paper opens: mathematical generalisations, foundational consequences, and applied domains where a non-commutative Nullstellensatz over ℍ matters. Each section is self-contained; follow the left rail or read in order.</p>
+  <p>The paper proves three interlocking results: (1) a Nullstellensatz for ℍ[x₁,…,xₙ] identifying the ideal–variety correspondence via a <em>quaternionic radical</em>; (2) a ring isomorphism ℍ[x₁,…,xₙ] ≅ ℍ_c[y₁₁,…,yₙ₄] reducing the non-commutative problem to a commutative one over ℝ; and (3) an explicit finite generating set for the generalized polynomial identities over any division algebra. Every implication below flows from one or more of these roots.</p>
+</div>
+
+<!-- CORE RESULTS -->
+<div class="section" id="core">
+  <div class="section-tag tag-math">Core</div>
+  <h2>Core results</h2>
+
+  <h3 id="core-nss">The Quaternionic Nullstellensatz</h3>
+  <div class="math-block">
+    <span class="label">Theorem 1 (main)</span>
+    For any ideal I ⊆ ℍ[x₁,…,xₙ]:<br>
+    (1) 𝒮(𝒵(I)) = √<sup>ℍ</sup>I, where √<sup>ℍ</sup>I = {f : ∃m,k, f₁,…,fₖ, (ff̄)ᵐ + Σfᵢf̄ᵢ ∈ I}<br>
+    (2) I = 𝒮(𝒵(I)) ⟺ I is quaternionic (closed under: Σfᵢf̄ᵢ ∈ I ⟹ all fᵢ ∈ I)
+  </div>
+  <p>The quaternionic radical replaces the classical radical (f ↦ fⁿ ∈ I) with a norm-based condition using the quaternionic conjugation f ↦ ff̄, directly paralleling how the real radical uses sums of squares.</p>
+
+  <h3 id="core-gpi">GPI theorem</h3>
+  <div class="math-block">
+    <span class="label">Theorem 6</span>
+    GPI(D,n) — the ideal of generalised polynomial identities in n variables over any division algebra D of dimension m over its centre — is finitely generated, with an explicit set of 3·C(m,2)+1 generators involving the coordinate functions Y_{ij} and their commutativity/centralisation relations.
+  </div>
+  <p>For D = ℍ, m = 4, this yields exactly 19 generators for GPI(ℍ,1): the 6 commutativity relations Y_sY_t − Y_tY_s, the 12 centralisation relations Y_sa − aY_s for a ∈ {i,j,k}, and the decomposition x − (Y₁ + iY₂ + jY₃ + kY₄).</p>
+
+  <h3 id="core-isom">Ring isomorphism</h3>
+  <div class="math-block">
+    <span class="label">Theorem 5</span>
+    ∃! isomorphism φ: D[x₁,…,xₙ] → D_c[y_{ij}: 1≤i≤n, 1≤j≤m]<br>
+    such that f(a₁,…,aₙ) = φ(f)((a_{ij})) for all f, all aₛ = Σa_{sj}vⱼ ∈ Dⁿ
+  </div>
+  <p>This is the paper's master tool: it converts a problem in non-commuting variables over ℍ into a problem in 4n commuting variables over ℍ (equivalently ℝ, since the values of Y_ij are real). Every result below either uses this isomorphism directly or inherits from results that do.</p>
+</div>
+
+<!-- MATHEMATICAL -->
+<div class="section" id="math-nca">
+  <div class="section-tag tag-math">Mathematical</div>
+  <h2 id="math-nca">Non-commutative algebra implications</h2>
+
+  <h3>Radical theory in non-commutative rings</h3>
+  <p>Classical radical theory (Jacobson, Baer, Levitzki) applies to abstract ring properties. The quaternionic radical is the first radical in a polynomial function ring over a non-commutative division algebra that admits an explicit ideal–variety correspondence. This opens the following permutations:</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Extension</span>
+      <h5>Octonion analogue</h5>
+      <p>ℍ is associative; 𝕆 (octonions) are not. The paper's method uses ring maps — does a Nullstellensatz exist for polynomial functions over 𝕆? Non-associativity forces a fundamentally different approach to evaluation maps.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Extension</span>
+      <h5>Matrix ring polynomials</h5>
+      <p>Mₙ(ℝ) is a central simple algebra but not a division ring. The GPI result (Theorem 6) applies to any division algebra; extending Theorem 1 to Mₙ(ℝ) requires characterising which ideals arise as 𝒮(𝒵(I)).</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Corollary</span>
+      <h5>Prime quaternionic ideals</h5>
+      <p>Corollary 11 establishes √<sup>ℍ</sup>I = ⋂{prime quaternionic ideals containing I} — a Krull-style characterisation, extending the classical fact that √I = ⋂{primes ⊇ I} to this non-commutative setting.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Corollary</span>
+      <h5>Quaternionic ↔ real ideal bijection</h5>
+      <p>Via φ, there is a lattice isomorphism between quaternionic ideals of ℍ[x₁,…,xₙ] and real ideals of ℝ[y_{ij}]. This bijection preserves primeness, radicality, and the Nullstellensatz correspondence.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Open</span>
+      <h5>Gröbner bases over ℍ[x₁,…,xₙ]</h5>
+      <p>Standard Gröbner basis theory requires commutativity. The isomorphism φ pulls back Gröbner bases from ℝ[y_{ij}] to ℍ[x], but ordering and reduction theory in the non-commutative setting remains non-trivial.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Extension</span>
+      <h5>Noetherian property</h5>
+      <p>ℍ[x₁,…,xₙ] is Noetherian (proved via S ≅ ℍ_c[y_{ij}] which is Noetherian by Hilbert's basis theorem applied over a Noetherian base). This gives all finitely-generated submodule properties for free.</p>
+    </div>
+  </div>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Detailed: GPI generators count derivation</button>
+  <div class="expand-body">
+    <p>For a division algebra D of dimension m over its centre F, the generators of GPI(D,n) are:</p>
+    <ul>
+      <li><strong>Commutativity of coordinates:</strong> Y_{ij}Y_{i'j'} − Y_{i'j'}Y_{ij} for all (i,j) ≠ (i',j'). This gives C(mn, 2) relations, but they reduce to 3C(m,2) independent generators via the fact that the Y_{ij} have values in F and already commute.</li>
+      <li><strong>Centralisation:</strong> v_k Y_{ij} − Y_{ij} v_k for each basis element v_k ∉ F. Gives m·(m−1) relations.</li>
+      <li><strong>Decomposition identity:</strong> x_i − Σ_j Y_{ij}v_j = 0. One per variable, n total.</li>
+    </ul>
+    <p>For ℍ: m=4, n=1 gives C(4,2)×3 = 18 commutativity/centralisation generators + 1 decomposition = 19 total. The formula 3C(m,2)+1 counts the minimal generators for the single-variable case.</p>
+  </div>
+</div>
+
+<div class="section" id="math-real">
+  <div class="section-tag tag-math">Mathematical</div>
+  <h2>Real algebraic geometry — inherited and new</h2>
+
+  <h3>The translation dictionary</h3>
+  <p>The isomorphism φ: ℍ[x₁,…,xₙ] → ℝ[y_{ij}] (restricting to real-valued generators) creates a complete translation between quaternionic polynomial geometry and real algebraic geometry:</p>
+
+  <table>
+    <thead><tr><th>Quaternionic object</th><th>Real algebraic geometry object</th><th>Translation via φ</th></tr></thead>
+    <tbody>
+      <tr><td>Ideal I ⊆ ℍ[x₁,…,xₙ]</td><td>Ideal I' ⊆ ℝ[y_{ij}]</td><td>I' = φ(I) ∩ S'</td></tr>
+      <tr><td>Zero locus 𝒵_ℍ(I) ⊆ ℍⁿ</td><td>Real variety 𝒵_ℝ(I') ⊆ ℝ⁴ⁿ</td><td>ρ(𝒵_ℍ(I)) = 𝒵_ℝ(I')</td></tr>
+      <tr><td>Quaternionic radical √<sup>ℍ</sup>I</td><td>Real radical √<sup>ℝ</sup>I'</td><td>√<sup>ℍ</sup>I = ψ(√<sup>ℝ</sup>I') ⊗ ℍ</td></tr>
+      <tr><td>Quaternionic ideal</td><td>Real ideal (sum-of-squares closed)</td><td>I quaternionic ⟺ I' real</td></tr>
+      <tr><td>Prime quaternionic ideal</td><td>Prime real ideal</td><td>Preserved by the bijection</td></tr>
+      <tr><td>Variety in ℍⁿ</td><td>O(4)-invariant variety in ℝ⁴ⁿ</td><td>Image of ρ is structured</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Inherited real AG theorems</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Inherited</span>
+      <h5>Positivstellensatz over ℍ</h5>
+      <p>The real Positivstellensatz (Stengle, 1974) characterises which real polynomials are non-negative on a semialgebraic set. Via φ, every real semialgebraic set in ℝ⁴ⁿ corresponds to a quaternionic set with a translated positivity certificate.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Inherited</span>
+      <h5>Semialgebraic quaternionic sets</h5>
+      <p>Tarski's theorem on semialgebraic sets (closed under first-order ℝ-definable operations) lifts: quaternionic definable sets are images under ρ⁻¹ of ℝ-semialgebraic sets in ℝ⁴ⁿ.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">New</span>
+      <h5>Quaternionic real spectrum</h5>
+      <p>The real spectrum Spec_r(ℝ[y]) classifies all orderings of the polynomial ring. The quaternionic analogue classifies all quaternionic ideals, giving a topological space encoding ℍ-algebraic geometry.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Open</span>
+      <h5>Sum-of-Hermitian-squares</h5>
+      <p>The real radical uses sums of squares; the quaternionic radical uses Σfᵢf̄ᵢ (Hermitian squares). The theory of Hermitian sums-of-squares certificates and their SOS-like optimization counterparts is largely open.</p>
+    </div>
+  </div>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Detailed: why ρ(𝒵_ℍ(I)) = 𝒵_ℝ(I')</button>
+  <div class="expand-body">
+    <p>The bijection ρ: ℍⁿ → ℝ⁴ⁿ sends (q₁,…,qₙ) with qₛ = a_{s1} + ia_{s2} + ja_{s3} + ka_{s4} to the matrix (a_{ij}). The substitution formula (3.1) gives f(q₁,…,qₙ) = φ(f)(a_{ij}) for all f ∈ ℍ[x]. Therefore f vanishes at (q₁,…,qₙ) iff φ(f) vanishes at ρ(q₁,…,qₙ). Since I' = φ(I) ∩ S' generates the same real ideal as φ(I) (by the Goodearl–Warfield correspondence), 𝒵_ℝ(I') = 𝒵_ℝ(φ(I)) = ρ(𝒵_ℍ(I)).</p>
+    <p>Note: not every point in ℝ⁴ⁿ is in the image of ρ — the image is all of ℝ⁴ⁿ (since any 4-tuple of reals determines a quaternion). So ρ is a bijection, not merely injective. This is what makes the correspondence exact rather than approximate.</p>
+  </div>
+</div>
+
+<div class="section" id="math-div">
+  <div class="section-tag tag-math">Mathematical</div>
+  <h2>Division algebra generality</h2>
+
+  <h3>The paper's results hold for any division algebra D</h3>
+  <p>Theorems 5 and 6 (the ring isomorphism and GPI generation) are stated and proved for <em>any</em> division algebra over its centre — ℍ is only the motivating special case. This generality spawns a family of Nullstellensätze:</p>
+
+  <table>
+    <thead><tr><th>Division algebra D</th><th>dim/centre</th><th>GPI generators</th><th>Nullstellensatz status</th></tr></thead>
+    <tbody>
+      <tr><td>ℝ (field)</td><td>m=1</td><td>0 (commutative, trivial GPI)</td><td>Classical real Nullstellensatz</td></tr>
+      <tr><td>ℂ (field)</td><td>m=1/ℝ is 2</td><td>0 as field; nontrivial over ℝ</td><td>Hilbert's Nullstellensatz (algebraically closed)</td></tr>
+      <tr><td>ℍ (Hamilton)</td><td>m=4/ℝ</td><td>19 (n=1)</td><td>Proved in this paper</td></tr>
+      <tr><td>Quaternion algebras (a,b/F)</td><td>m=4/F</td><td>19 over F; F-specific radical needed</td><td>Open for general F</td></tr>
+      <tr><td>Cyclic division algebras</td><td>m=p²/F</td><td>3C(p,2)+1</td><td>Open; requires analogue of real radical for F</td></tr>
+      <tr><td>Crossed product algebras</td><td>m²/F</td><td>3C(m,2)+1 per variable</td><td>Open</td></tr>
+      <tr><td>p-adic division algebras</td><td>m²/ℚₚ</td><td>Finite, explicit</td><td>Open; p-adic real algebra needed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The obstruction: what is the "real radical" over a general field?</h3>
+  <p>The paper's proof reduces to the Real Nullstellensatz over ℝ. For a general division algebra D with centre F, one needs a Nullstellensatz over F — available when F is real closed (Artin–Lang), algebraically closed (Hilbert), or p-adically closed (Ax–Kochen). Over other fields, the Nullstellensatz is the obstruction.</p>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Detailed: the Goodearl–Warfield correspondence used in the proof</button>
+  <div class="expand-body">
+    <p>The proof of Theorem 9 uses [Goodearl–Warfield, Prop 17.5]: for S = ℍ_c[y_{ij}] with centre S' = ℝ[y_{ij}], there is a bijection between ideals of S and ideals of S' via I' ↔ I'⊗ℍ, with I = (I∩S')⊗ℍ. This is a consequence of S being an Azumaya algebra over S'.</p>
+    <p>The key point: an ideal I of ℍ[x] is <em>entirely determined</em> by its intersection with ℝ-valued polynomial functions. This is why the non-commutative problem reduces exactly to the commutative one — not just approximately or after passing to a quotient.</p>
+    <p>Extension to other D: any central simple algebra D over F for which D[x₁,…,xₙ] satisfies the analogous Azumaya property will admit the same reduction. This holds for all finite-dimensional central simple algebras over infinite fields (by Wedderburn–Artin + density of F in D).</p>
+  </div>
+</div>
+
+<div class="section" id="math-ext">
+  <div class="section-tag tag-math">Mathematical</div>
+  <h2>Extensions and generalisations</h2>
+
+  <h3>Seven structural generalisations</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Infinite-variable case</h5>
+      <p>The paper handles finite n. For power series rings ℍ[[x₁,x₂,…]] or the colimit over n of ℍ[x₁,…,xₙ], the isomorphism extends formally; convergence and topology require completions.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Quaternionic manifolds</h5>
+      <p>Replace ℍⁿ with a quaternionic manifold M. The ring of quaternionic polynomial (or analytic) functions on M carries a Nullstellensatz for compact M (where algebraic and analytic coincide by quaternionic Serre GAGA).</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Weighted/graded versions</h5>
+      <p>Graded ℍ[x₁,…,xₙ] with weight vector w admits a graded version of the isomorphism φ. The quaternionic radical respects the grading; graded quaternionic ideals correspond to graded real ideals.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Hilbert's 17th over ℍ</h5>
+      <p>Artin's solution to Hilbert's 17th problem characterises non-negative real polynomials as sums of squares of rational functions. The ℍ-analogue asks: which f with f(q)≥0 (as real numbers) for all q ∈ ℍ are sums of ff̄-type expressions of rational quaternionic functions?</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Convexity and spectrahedra</h5>
+      <p>The set {q ∈ ℍ : f(q) ≥ 0} for real-valued f is a real semialgebraic set in ℝ⁴. Its intersection with ℍ-algebraic varieties gives quaternionic spectrahedra — relevant to quaternionic SDP.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Scheme theory over ℍ</h5>
+      <p>The bijection between quaternionic ideals and real ideals defines a functor from quaternionic affine "schemes" to real affine schemes over ℝ⁴ⁿ. The geometric fibres are orbits of the Sp(1) action on ℍ.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Generalisation</span>
+      <h5>Tropical quaternionic geometry</h5>
+      <p>Tropical geometry replaces (ℝ,+,×) with (ℝ∪{−∞}, max, +). A tropical version of the quaternionic Nullstellensatz would require a tropical analogue of quaternionic conjugation — unexplored territory.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHICAL -->
+<div class="section" id="phil-points">
+  <div class="section-tag tag-phil">Philosophical</div>
+  <h2>What is a "point" in non-commutative geometry?</h2>
+
+  <p class="lead">Hilbert's Nullstellensatz is a theorem about points: maximal ideals of k[x₁,…,xₙ] over an algebraically closed field k correspond bijectively to points of kⁿ. The quaternionic version forces a rethinking of what "a point" means.</p>
+
+  <h3>The non-commutative point problem</h3>
+  <p>In ℍ[x], the ideal (x − q) for q ∈ ℍ is not maximal in the usual sense — the quotient ℍ[x]/(x−q) ≅ ℍ is a non-commutative ring, not a field. The "points" of ℍ[x] are therefore not in bijection with maximal ideals (which correspond to the spheres of quaternions conjugate to q, since ax̄a⁻¹ also satisfies the same minimal polynomial over ℝ).</p>
+
+  <div class="math-block">
+    <span class="label">Key distinction</span>
+    Over ℂ: max ideals of ℂ[x] ↔ points of ℂ (one ideal per point).<br>
+    Over ℍ: each "geometric point" q has a conjugacy class {aqa⁻¹ : a ∈ ℍ×}, a 2-sphere S² ⊂ ℍ. The polynomial function x²+1 has a 2-sphere of zeros {q : q² = −1} = {ai+bj+ck : a²+b²+c²=1}.
+  </div>
+
+  <p>The paper's approach sidesteps this by working with <em>polynomial functions</em> (not formal polynomials), where two polynomials that agree on all of ℍⁿ are identified. This is the correct geometric notion: the ring of regular functions on ℍⁿ as an algebraic variety over ℝ.</p>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Relation to Connes' non-commutative geometry</button>
+  <div class="expand-body">
+    <p>Alain Connes' non-commutative geometry (NCG) replaces spaces by algebras of functions: a "non-commutative space" is simply a non-commutative C*-algebra. The paper lives in a different but related tradition: instead of C*-algebras and spectral triples, it works with polynomial functions and ideal-variety correspondences.</p>
+    <p>Connection: ℍ[x₁,…,xₙ] can be completed to a C*-algebra by taking operator norm completions. The quaternionic radical corresponds under this completion to a notion related to the positivity condition in Connes' real structure (the J-operator satisfies JJ* = 1, similar to conjugation ff̄ ≥ 0).</p>
+    <p>Difference: NCG is primarily analytic (C*-algebras, spectral triples, K-theory). The paper is purely algebraic. The bridge — an algebraic NCG Nullstellensatz — connects them but has not been fully developed.</p>
+  </div>
+</div>
+
+<div class="section" id="phil-truth">
+  <div class="section-tag tag-phil">Philosophical</div>
+  <h2>Ideal–variety duality and the nature of algebraic truth</h2>
+
+  <h3>The correspondence as epistemology</h3>
+  <p>The Nullstellensatz says: the only way a polynomial f can vanish everywhere that I vanishes is if f belongs to the radical of I. This is a form of <em>completeness</em> — the ideal knows everything about its variety. Each version of the Nullstellensatz reflects the epistemological constraints of its coefficient ring:</p>
+
+  <table>
+    <thead><tr><th>Setting</th><th>What the radical adds</th><th>Philosophical reading</th></tr></thead>
+    <tbody>
+      <tr><td>ℂ (alg. closed)</td><td>nth roots: fⁿ ∈ I ⟹ f ∈ √I</td><td>Complete: no information is hidden</td></tr>
+      <tr><td>ℝ (real closed)</td><td>Sum-of-squares: Σfᵢ² ∈ I ⟹ fᵢ ∈ I</td><td>Positivity is the obstruction to algebraic closure</td></tr>
+      <tr><td>ℍ (quaternionic)</td><td>Hermitian sums: Σfᵢf̄ᵢ ∈ I ⟹ fᵢ ∈ I</td><td>Non-commutativity is encoded in conjugation, not ordering</td></tr>
+    </tbody>
+  </table>
+
+  <p>The progression ℂ → ℝ → ℍ shows that as the coefficient ring loses algebraic closure, the radical must encode more structure (positivity, then Hermitian positivity) to maintain the correspondence.</p>
+
+  <h3>Gelfand duality analogue</h3>
+  <p>Classical Gelfand duality: compact Hausdorff spaces ↔ commutative C*-algebras. The paper's result is an algebraic step toward a Gelfand-type duality for ℍⁿ: quaternionic varieties ↔ quaternionic ideals in ℍ[x₁,…,xₙ]. The exact nature of this duality (topology on the variety side, appropriate algebra on the ring side) remains to be made precise.</p>
+</div>
+
+<div class="section" id="phil-logic">
+  <div class="section-tag tag-phil">Philosophical</div>
+  <h2>Logic and model theory</h2>
+
+  <h3>The first-order theory of ℍ</h3>
+  <p>ℍ is not a field — it is a real closed ring in a suitable sense. The first-order theory of ℍ as an ℝ-algebra (in the language of rings augmented with the constant symbols i, j, k) is decidable, since ℍ ≅ M₂(ℝ) as ℝ-algebras and the theory of M₂(ℝ) is a definitional extension of the decidable theory of real closed fields.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Logic</span>
+      <h5>Quantifier elimination</h5>
+      <p>The isomorphism φ provides effective quantifier elimination for ℍ[x]: a statement ∃x ∈ ℍ, f(x)=0 reduces via φ to ∃(y₁,y₂,y₃,y₄) ∈ ℝ⁴, φ(f)(y)=0, which is decidable by Tarski's algorithm.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Logic</span>
+      <h5>Model-completeness</h5>
+      <p>The theory of ℍ as an ordered ℝ-algebra (via the norm) is model-complete in its language — a consequence of the real Nullstellensatz and the translation via φ.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Logic</span>
+      <h5>Non-commutative Ax–Grothendieck</h5>
+      <p>Ax–Grothendieck: an injective polynomial map ℂⁿ → ℂⁿ is surjective. Via φ, an analogous statement holds for polynomial maps ℍⁿ → ℍⁿ, reducing to the real case in ℝ⁴ⁿ.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Open</span>
+      <h5>GPI and identities</h5>
+      <p>GPI(ℍ,n) is finitely generated (Theorem 6). Is every ideal of D⟨x₁,…,xₙ⟩ that vanishes on Dⁿ finitely generated? This is an analogue of the Nullstellensatz for the full free algebra.</p>
+    </div>
+  </div>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Detailed: decidability of quaternionic polynomial equations</button>
+  <div class="expand-body">
+    <p>Given a system of quaternionic polynomial equations f₁=…=fₖ=0 with fᵢ ∈ ℍ[x₁,…,xₙ], deciding whether this system has a solution in ℍⁿ proceeds as follows:</p>
+    <ul>
+      <li>Apply φ: translate each fᵢ to φ(fᵢ) ∈ ℝ[y_{ij}].</li>
+      <li>The original system has a solution iff the real system {φ(fᵢ) = 0} has a solution in ℝ⁴ⁿ.</li>
+      <li>Decidability of real polynomial system solvability follows from Tarski's theorem (1948): the first-order theory of (ℝ, +, ×, ≤, 0, 1) admits quantifier elimination.</li>
+      <li>Complexity: the best known algorithms (cylindrical algebraic decomposition) run in doubly exponential time in n; Ben-Or–Kozen–Reif gives single exponential for fixed degree.</li>
+    </ul>
+    <p>This gives an effective algorithm for quaternionic system solving — something not available from the non-commutative algebra side alone.</p>
+  </div>
+</div>
+
+<div class="section" id="phil-found">
+  <div class="section-tag tag-phil">Philosophical</div>
+  <h2>Foundational implications</h2>
+
+  <h3>What the paper tells us about algebra itself</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h5>Non-commutativity is tamed by positivity</h5>
+        <p>The passage from the Hilbert Nullstellensatz (over ℂ) to the Real Nullstellensatz (over ℝ) was made by replacing roots with sums of squares — a positivity condition. The paper shows the passage from real to quaternionic is made by replacing sums of squares with Hermitian sums Σfᵢf̄ᵢ. The pattern: each step from a "nicer" ring to a "harder" one requires enriching the radical with the ring's additional structure.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h5>Polynomial functions ≠ formal polynomials</h5>
+        <p>The paper works throughout with polynomial functions (elements of the function ring Dⁿ → D), not formal polynomials (elements of D⟨x₁,…,xₙ⟩). This distinction is crucial: the kernel of D⟨x⟩ → D[x] (as functions) is exactly GPI(D,n), which the paper determines. Working with functions avoids the pathologies of the free algebra while retaining geometric content.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h5>Central simple algebras as geometric objects</h5>
+        <p>The proof uses that ℍ is a central simple algebra over ℝ in an essential way (the Goodearl–Warfield correspondence, the density of ℝ in ℍ). This positions central simple algebras not just as abstract algebraic objects but as coefficient rings for a viable algebraic geometry.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <h5>Conjugation as the fundamental structure</h5>
+        <p>In ℝ: the fundamental structure is the ordering (a ≥ 0). In ℂ: complex conjugation z ↦ z̄. In ℍ: quaternionic conjugation q ↦ q̄. The Nullstellensatz in each case is controlled by the norm |q|² = qq̄. This suggests a uniform framework: algebras with a positive-definite involution admit a Nullstellensatz where the radical is defined using the involution norm.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPLIED -->
+<div class="section" id="app-physics">
+  <div class="section-tag tag-app">Applied</div>
+  <h2>Physics</h2>
+
+  <h3>Quaternions in physics — where the algebra matters</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Quantum mechanics</span>
+      <h5>Quaternionic quantum mechanics</h5>
+      <p>Adler (1995) and others proposed QM over ℍ instead of ℂ. The Hilbert space is a right-ℍ-module; observables are Hermitian quaternionic operators. A Nullstellensatz for operator-valued quaternionic polynomials would characterise the spectrum of such operators — the quaternionic analogue of the spectral theorem.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Quantum field theory</span>
+      <h5>Quaternionic gauge fields</h5>
+      <p>Yang–Mills theories with structure group Sp(1) ≅ SU(2) (the unit quaternions) are central to electroweak theory. The polynomial ring ℍ[x₁,…,xₙ] appears naturally in the description of Sp(1)-equivariant maps; the Nullstellensatz constrains which polynomial gauge conditions are consistent.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Relativity</span>
+      <h5>Spinors and Clifford algebras</h5>
+      <p>ℍ ≅ Cl₀,₂(ℝ) (the even Clifford algebra in 2D). Spinors in 4D spacetime live in Cl₁,₃(ℝ) ⊃ ℍ. The GPI result identifies the relations between non-commuting spinor variables — directly relevant to spinor polynomial identities in QFT.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">String theory</span>
+      <h5>Instantons and ADHM construction</h5>
+      <p>The ADHM (Atiyah–Drinfeld–Hitchin–Manin) construction of instantons on ℝ⁴ = ℍ uses quaternionic linear algebra. The moduli space of instantons is the solution set of quaternionic polynomial equations (ADHM equations). The Nullstellensatz characterises the ideal of relations among these moduli.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Condensed matter</span>
+      <h5>Quaternionic band theory</h5>
+      <p>Kramers-degenerate systems with time-reversal symmetry T with T²=−1 (class AII) carry a natural ℍ-module structure. Bloch Hamiltonians are sections of quaternionic vector bundles; the spectrum is determined by quaternionic polynomial conditions.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Open</span>
+      <h5>Quaternionic Seiberg–Witten</h5>
+      <p>The Seiberg–Witten equations are polynomial in the spinor and connection variables over a quaternionic-Kähler manifold. A Nullstellensatz would describe the SW moduli space ideal — connecting algebraic geometry to 4-manifold topology.</p>
+    </div>
+  </div>
+
+  <button class="expand-btn" onclick="toggle(this)">▸ Detailed: the ADHM connection</button>
+  <div class="expand-body">
+    <p>The ADHM construction encodes a self-dual Yang–Mills connection (instanton) on ℝ⁴ in terms of matrices B₁, B₂ ∈ Mₖ(ℂ), I ∈ Mₖₓᵣ(ℂ), J ∈ Mᵣₓₖ(ℂ) satisfying the ADHM equations:</p>
+    <ul>
+      <li>[B₁,B₂†] + II† − J†J = 0 (real part)</li>
+      <li>[B₁,B₂] + IJ = 0 (complex part)</li>
+    </ul>
+    <p>These are polynomial equations in the matrix entries. The moduli space Mₖ of charge-k instantons is the solution set modulo gauge equivalence. The Nullstellensatz over ℍ (or over the appropriate non-commutative ring) characterises the ideal of polynomial relations among the moduli — which polynomial functions on Mₖ vanish everywhere that the ADHM equations hold.</p>
+    <p>Connection to the paper: if one rewrites ADHM in terms of quaternionic matrices (using ℍ ≅ M₂(ℂ) as real algebras), the equations become quaternionic polynomial equations. Theorem 1 then applies to characterise their solution ideal.</p>
+  </div>
+</div>
+
+<div class="section" id="app-cs">
+  <div class="section-tag tag-app">Applied</div>
+  <h2>Computer science</h2>
+
+  <h3>Symbolic computation and verification</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Symbolic computation</span>
+      <h5>Gröbner bases for quaternionic systems</h5>
+      <p>Via φ, a quaternionic polynomial system translates to a real system in 4n variables. Standard Gröbner basis algorithms (Buchberger, F4, F5) apply to the real system; the solution is then decoded via φ⁻¹. This gives a complete, algorithmic method for quaternionic system solving.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Cryptography</span>
+      <h5>Quaternionic lattice problems</h5>
+      <p>Lattice-based cryptography (NTRU, Ring-LWE) uses polynomial rings modulo an ideal. NTRU variants over ℤ[i,j,k]/(n) (quaternionic integers modulo n) are proposed in the literature. The GPI result constrains the algebraic structure of these rings and may affect hardness assumptions.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Verification</span>
+      <h5>Non-commutative polynomial identity testing</h5>
+      <p>Polynomial identity testing (PIT) asks: does a given algebraic circuit compute the zero polynomial? The GPI result gives an explicit basis for the kernel of D⟨x⟩ → D[x], directly applicable to PIT for circuits over division algebras.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Type theory</span>
+      <h5>Dependent types over ℍ</h5>
+      <p>Homotopy type theory (HoTT) has connections to quaternionic topology (ℍP¹ ≅ S⁴). The ideal–variety correspondence gives a computational interpretation of quaternionic algebraic geometry in a proof assistant via the Curry–Howard correspondence.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Optimisation</span>
+      <h5>Quaternionic SDP</h5>
+      <p>Semidefinite programming (SDP) over quaternionic matrices (QSP/QSDP) arises in quantum information. The Hermitian sum condition Σfᵢf̄ᵢ ∈ I in the quaternionic radical is precisely the quaternionic analogue of the SOS (sum-of-squares) certificate used in real SDP relaxations.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">ML/AI</span>
+      <h5>Quaternionic neural networks</h5>
+      <p>Quaternionic neural networks (QNNs) use ℍ-valued weights and activations to encode 3D rotational equivariance. The ring structure of ℍ[x₁,…,xₙ] determines which polynomial functions a QNN layer can represent — a quaternionic version of the universal approximation theorem boundary.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="app-eng">
+  <div class="section-tag tag-app">Applied</div>
+  <h2>Engineering</h2>
+
+  <h3>Signal processing, control, and structural mechanics</h3>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Signal processing</span>
+      <h5>Quaternionic Fourier analysis</h5>
+      <p>The quaternionic Fourier transform (QFT) decomposes signals with two distinct phase components (left and right QFT). The algebraic structure of ℍ[x] determines the polynomial convolution identities that underlie fast QFT algorithms.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Control theory</span>
+      <h5>Attitude control systems</h5>
+      <p>Spacecraft attitude control uses unit quaternions to represent SO(3) without gimbal lock. The polynomial system describing equilibria and stability conditions of a quaternion-based PID controller is exactly a system in ℍ[x]. The Nullstellensatz characterises when such a system has a feasible solution.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Mechanics</span>
+      <h5>Rigid body kinematics</h5>
+      <p>The configuration space of a rigid body is SE(3) = ℝ³ ⋊ SO(3). Dual quaternions (elements of ℍ ⊕ εℍ, ε² = 0) represent SE(3) elements. Polynomial constraints on dual quaternionic configurations (closure conditions for mechanisms) form ideals in the dual quaternionic polynomial ring — a direct extension of the paper's setting.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Structural engineering</span>
+      <h5>Quaternionic finite elements</h5>
+      <p>Quaternionic interpolation (slerp and squad) is used in structural FEM for large-rotation problems. The polynomial relations among quaternionic shape functions determine the consistency conditions of the FEM discretisation.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Electromagnetics</span>
+      <h5>Maxwell's equations in quaternion form</h5>
+      <p>Maxwell's equations can be written as a single quaternionic equation ∂F/∂q̄ = J (Fueter operator). Polynomial solutions to this PDE live in ℍ[x₁,x₂,x₃,x₄]; the Nullstellensatz characterises the ideal of polynomial constraints on electromagnetic fields.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Colour science</span>
+      <h5>Colour image processing</h5>
+      <p>Colour images are ℝ³-valued; quaternions (with zero real part) encode RGB triples. Quaternionic polynomial filters on images must satisfy consistency conditions that are exactly GPI relations — polynomial identities that hold for all colour values.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="app-robotics">
+  <div class="section-tag tag-app">Applied</div>
+  <h2>Robotics and computer vision</h2>
+
+  <h3>Where quaternionic algebra meets geometry in practice</h3>
+
+  <p>Robotics and computer vision provide the most direct applied setting for quaternionic polynomial systems: the kinematics of articulated robots, camera calibration, and 3D pose estimation all reduce to polynomial systems over ℍ or dual-ℍ.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-tag">Kinematics</span>
+      <h5>Forward / inverse kinematics</h5>
+      <p>An n-joint robot arm's forward kinematics is a quaternionic polynomial map q₁×…×qₙ ↦ pose. Inverse kinematics solves this map — it is a system of quaternionic polynomial equations. Theorem 1 characterises when such a system is consistent.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Vision</span>
+      <h5>Essential matrix estimation</h5>
+      <p>The essential matrix E in stereo vision satisfies det(E)=0 and 2EEᵀE − tr(EEᵀ)E = 0 — polynomial constraints. These constraints have a quaternionic interpretation via the rotation part; the Nullstellensatz characterises the ideal of essential matrices.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">SLAM</span>
+      <h5>Rotation averaging</h5>
+      <p>Rotation averaging (finding the mean of a set of rotations in SO(3)) is equivalent to a quaternionic polynomial optimisation problem. The quaternionic radical gives the algebraic certificates for global optimality conditions.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">Calibration</span>
+      <h5>Hand-eye calibration</h5>
+      <p>Hand-eye calibration (finding the transformation between a camera and a robot end-effector) reduces to solving AX = XB for quaternionic matrices. This is a polynomial system in the quaternionic entries of X; the Nullstellensatz determines when it is solvable and what the solution set looks like.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-node hl">ℍ[x₁,…,xₙ]</div>
+    <div class="flow-arr">⟶ φ</div>
+    <div class="flow-node">ℝ[y₁,…,y₄ₙ]</div>
+    <div class="flow-arr">⟶ solve</div>
+    <div class="flow-node">ℝ⁴ⁿ solution</div>
+    <div class="flow-arr">⟶ ρ⁻¹</div>
+    <div class="flow-node hl">ℍⁿ solution</div>
+  </div>
+  <p style="font-size:.8rem;color:var(--fg3);margin-top:.4rem">The translation pipeline: every quaternionic polynomial system is solvable via existing real algebraic geometry tools.</p>
+</div>
+
+<!-- OPEN PROBLEMS -->
+<div class="section" id="open">
+  <div class="section-tag tag-open">Open</div>
+  <h2>Open problems</h2>
+
+  <table>
+    <thead><tr><th>#</th><th>Problem</th><th>Difficulty</th><th>Required tools</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Nullstellensatz over a quaternion algebra (a,b/F) for general real closed F</td><td>Medium</td><td>Real algebra over F, Morita theory</td></tr>
+      <tr><td>2</td><td>Hilbert's 17th problem over ℍ: characterise ff̄ ≥ 0 polynomials</td><td>Hard</td><td>Hermitian sums-of-squares, Positivstellensatz</td></tr>
+      <tr><td>3</td><td>Gröbner basis theory for ℍ[x₁,…,xₙ] intrinsically (without φ)</td><td>Hard</td><td>Non-commutative Buchberger, orderings</td></tr>
+      <tr><td>4</td><td>Nullstellensatz for octonion polynomial functions (non-associative)</td><td>Very hard</td><td>New framework; ring theory inapplicable</td></tr>
+      <tr><td>5</td><td>GPI generators for ℍ[x₁,…,xₙ] for n≥2: explicit count and basis</td><td>Medium</td><td>Multilinear algebra, PI-theory</td></tr>
+      <tr><td>6</td><td>Quaternionic real spectrum as a topological space: compactness, Hausdorff?</td><td>Medium</td><td>Real spectral spaces, Stone duality</td></tr>
+      <tr><td>7</td><td>Effective Nullstellensatz: degree bounds on the certificate (ff̄)ᵐ + Σfᵢf̄ᵢ ∈ I</td><td>Hard</td><td>Effective real AG, complexity theory</td></tr>
+      <tr><td>8</td><td>Quaternionic tropical geometry: tropical Nullstellensatz analogue</td><td>Open/speculative</td><td>Tropical algebra, idempotent analysis</td></tr>
+      <tr><td>9</td><td>QSDP certificate: when does Σfᵢf̄ᵢ yield an SDP-verifiable certificate?</td><td>Medium</td><td>Operator systems, Helton–Nie theory</td></tr>
+      <tr><td>10</td><td>Scheme-theoretic interpretation: quaternionic affine schemes as a category</td><td>Medium</td><td>Relative algebraic geometry over non-commutative bases</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- HISTORICAL LINEAGE -->
+<div class="section" id="hist">
+  <div class="section-tag tag-math">History</div>
+  <h2>Historical lineage</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1843 — Hamilton discovers quaternions</h5><p>Hamilton's Brougham Bridge inscription: i²=j²=k²=ijk=−1. The first non-commutative division algebra, originally motivated by 3D rotation composition.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1900 — Hilbert's Nullstellensatz</h5><p>As part of Hilbert's basis theorem programme: over an algebraically closed field, the ideal–variety correspondence is exact. Cornerstone of algebraic geometry.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1927 — Artin, real closed fields</h5><p>Artin–Schreier theory: real closed fields are characterised by ordering axioms. Foundation for the Real Nullstellensatz.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1965 — Amitsur, GPI theory</h5><p>Amitsur introduces generalised polynomial identities over division rings. Lays the algebraic foundation for the GPI portion of the paper (Theorem 6).</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1974 — Stengle, Positivstellensatz; Real Nullstellensatz (Risler, Efroymson)</h5><p>The Real Nullstellensatz (see [Bochnak–Coste–Roy 1998]): 𝒮_ℝ(𝒵(I)) = √<sup>ℝ</sup>I. The paper's proof reduces to this theorem.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>1980s–90s — Non-commutative geometry (Connes)</h5><p>Connes' programme replaces spaces with C*-algebras. Parallel but distinct from the algebraic approach of the paper; the connection via completion of polynomial rings is an open bridge.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>2014 — Wilczyński's isomorphism</h5><p>Wilczyński proves D[x₁,…,xₙ] ≅ D_c[y_{ij}] ([7] in the paper) — the ring isomorphism that the paper makes explicit and uses as its key tool.</p></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h5>2019 — Alon &amp; Paran, this paper</h5><p>Combines Wilczyński's isomorphism, the Real Nullstellensatz, and Amitsur's GPI theory to prove Theorems 1, 5, 6 — the first complete Nullstellensatz over ℍ.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTIONS MAP -->
+<div class="section" id="map">
+  <div class="section-tag tag-math">Map</div>
+  <h2>Connections map</h2>
+  <p>Every implication in this atlas traces back to one of the three core results. Here is the dependency graph:</p>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin:1rem 0;overflow-x:auto">
+    <table style="margin:0;min-width:600px">
+      <thead><tr><th>Source result</th><th>Intermediate step</th><th>Domain</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>Theorem 1 (Nullstellensatz)</td><td>—</td><td>Algebra</td><td>Quaternionic radical = smallest quaternionic ideal ⊇ I</td></tr>
+        <tr><td>Theorem 1</td><td>Corollary 10</td><td>Algebra</td><td>Prime quaternionic ideals characterise the radical</td></tr>
+        <tr><td>Theorem 5 (isomorphism)</td><td>φ explicit</td><td>Logic</td><td>Decidability of quaternionic polynomial systems</td></tr>
+        <tr><td>Theorem 5</td><td>ρ bijection</td><td>Geometry</td><td>ℍⁿ geometry = O(4)-structured ℝ⁴ⁿ geometry</td></tr>
+        <tr><td>Theorem 5</td><td>Wilczyński + Goodearl–Warfield</td><td>Algebra</td><td>Ideal lattice of ℍ[x] ≅ ideal lattice of ℝ[y]</td></tr>
+        <tr><td>Theorem 6 (GPI)</td><td>19 generators for n=1</td><td>PI theory</td><td>Finite basis theorem for ℍ-identities</td></tr>
+        <tr><td>Theorem 1 + φ</td><td>Real Nullstellensatz</td><td>Real AG</td><td>Semialgebraic quaternionic sets (Tarski transfer)</td></tr>
+        <tr><td>Theorem 1 + φ</td><td>Positivstellensatz</td><td>Optimisation</td><td>Quaternionic SOS certificates (QSDP)</td></tr>
+        <tr><td>Theorem 5 + norm</td><td>ff̄ = |f|²</td><td>Analysis</td><td>Fueter regularity vs. polynomial regularity</td></tr>
+        <tr><td>GPI + φ</td><td>Coordinate functions Y_ij</td><td>Engineering</td><td>Polynomial constraints on rotation representations</td></tr>
+        <tr><td>Theorem 1 (general D)</td><td>Requires Nullstellensatz over F=Z(D)</td><td>Algebra</td><td>Division-algebra Nullstellensätze for each F</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function toggle(btn){
+  const body=btn.nextElementSibling;
+  const open=body.classList.toggle('open');
+  btn.textContent=(open?'▾':'▸')+btn.textContent.slice(1);
+}
+function navClick(a){
+  document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
+}
+function doSearch(q){
+  const lq=q.toLowerCase().trim();
+  const main=document.getElementById('main');
+  if(!lq){main.querySelectorAll('mark').forEach(m=>{const t=document.createTextNode(m.textContent);m.replaceWith(t)});return;}
+  function walk(node){
+    if(node.nodeType===3){
+      const t=node.textContent;const li=t.toLowerCase();
+      if(li.includes(lq)){
+        const frag=document.createDocumentFragment();
+        let i=0,j;
+        while((j=li.indexOf(lq,i))!==-1){
+          frag.appendChild(document.createTextNode(t.slice(i,j)));
+          const m=document.createElement('mark');m.textContent=t.slice(j,j+lq.length);frag.appendChild(m);
+          i=j+lq.length;
+        }
+        frag.appendChild(document.createTextNode(t.slice(i)));
+        node.replaceWith(frag);
+      }
+    } else if(node.nodeType===1&&!['SCRIPT','STYLE'].includes(node.tagName)){
+      Array.from(node.childNodes).forEach(walk);
+    }
+  }
+  main.querySelectorAll('mark').forEach(m=>{const t=document.createTextNode(m.textContent);m.replaceWith(t)});
+  walk(main);
+}
+// highlight active nav on scroll
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('nav a').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

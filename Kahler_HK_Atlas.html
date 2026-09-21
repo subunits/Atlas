@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kähler & Hyperkähler Geometry — Full Implications Atlas</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B1820;--slate:#163248;--mid:#1E4060;
+  --violet:#6B3FA0;--teal:#1A8080;--rose:#A03060;--green:#1A7A50;
+  --amber:#C88010;--amber-b:#E8A020;
+  --fg:#F0F4F8;--fg2:#B8C8D8;--fg3:#6888A0;
+  --card:#122030;--card2:#1A2E45;--border:#1E3855;
+  --v-dim:rgba(107,63,160,.15);--t-dim:rgba(26,128,128,.15);
+  --r-dim:rgba(160,48,96,.15);--g-dim:rgba(26,122,80,.15);
+  --r:6px;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{min-height:100%;background:var(--navy);color:var(--fg);font-family:Georgia,serif;font-size:16px;line-height:1.75}
+a{color:var(--amber-b);text-decoration:none}
+a:hover{text-decoration:underline}
+#shell{display:flex;min-height:100vh}
+#nav{width:268px;flex-shrink:0;background:var(--slate);border-right:1px solid var(--border);
+     position:sticky;top:0;height:100vh;overflow-y:auto;padding-bottom:2rem}
+#main{flex:1;min-width:0;padding:3rem 3.5rem;max-width:920px}
+#nav-head{padding:1.4rem 1.4rem .9rem;border-bottom:1px solid var(--border)}
+#nav-head h1{font-size:.78rem;font-family:system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-b);font-weight:700;line-height:1.4}
+#nav-head p{font-size:.7rem;color:var(--fg3);font-family:system-ui,sans-serif;margin-top:.3rem}
+nav ul{list-style:none;padding:.4rem 0}
+nav li a{display:block;padding:.38rem 1.4rem;font-size:.79rem;font-family:system-ui,sans-serif;color:var(--fg2);transition:background .15s,color .15s;border-left:2px solid transparent}
+nav li a:hover,nav li a.active{background:rgba(200,128,16,.08);color:var(--amber-b);border-left-color:var(--amber-b);text-decoration:none}
+nav li.sub a{padding-left:2.2rem;font-size:.73rem;color:var(--fg3)}
+nav li.sub a:hover{color:var(--fg2)}
+.nav-sec{padding:.55rem 1.4rem .15rem;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);font-family:system-ui,sans-serif;margin-top:.4rem}
+#sw{padding:.8rem 1.4rem}
+#sw input{width:100%;background:var(--navy);border:1px solid var(--border);border-radius:var(--r);color:var(--fg);font-family:system-ui,sans-serif;font-size:.78rem;padding:.42rem .8rem}
+#sw input:focus{outline:none;border-color:var(--amber-b)}
+#sw input::placeholder{color:var(--fg3)}
+mark{background:rgba(200,128,16,.2);color:var(--amber-b);border-radius:2px;padding:0 2px}
+h2{font-size:1.65rem;font-weight:normal;color:var(--fg);margin-bottom:.3rem;line-height:1.25}
+h3{font-size:1.05rem;color:var(--amber-b);font-weight:normal;font-family:system-ui,sans-serif;letter-spacing:.02em;margin:2rem 0 .6rem}
+h4{font-size:.88rem;color:var(--fg2);font-family:system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin:1.3rem 0 .4rem}
+p{margin-bottom:1rem;color:var(--fg2);max-width:72ch}
+.lead{font-size:1.05rem;color:var(--fg);line-height:1.85;margin-bottom:1.4rem}
+.smeta{font-size:.77rem;color:var(--fg3);font-family:system-ui,sans-serif;margin-bottom:1.8rem}
+.sec{padding:3rem 0;border-bottom:1px solid var(--border)}
+.sec:last-child{border-bottom:none}
+.stag{display:inline-block;font-size:.67rem;font-family:system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:3px;margin-bottom:.8rem;font-weight:700}
+.tv{background:var(--v-dim);color:#9B6FD0}
+.tt{background:var(--t-dim);color:#2AAFAF}
+.tr{background:var(--r-dim);color:#D06090}
+.tg{background:var(--g-dim);color:#2AAA70}
+.to{background:rgba(255,255,255,.05);color:var(--fg3)}
+.math{background:var(--card);border-left:3px solid var(--amber-b);padding:.9rem 1.2rem;margin:1rem 0;border-radius:0 var(--r) var(--r) 0;font-family:Georgia,serif;font-size:.91rem;color:var(--fg);line-height:1.85}
+.math .ml{font-size:.68rem;font-family:system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-b);margin-bottom:.35rem;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1rem;margin:1.2rem 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.15rem 1.25rem;transition:border-color .2s,background .2s}
+.card:hover{border-color:var(--amber-b);background:var(--card2)}
+.card h5{font-size:.87rem;font-family:system-ui,sans-serif;font-weight:700;color:var(--fg);margin-bottom:.38rem}
+.card p{font-size:.79rem;color:var(--fg3);margin:0;line-height:1.55}
+.card .ct{font-size:.64rem;font-family:system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-b);margin-bottom:.45rem;display:block}
+.xbtn{background:none;border:1px solid var(--border);color:var(--fg2);font-family:system-ui,sans-serif;font-size:.77rem;padding:.33rem .78rem;border-radius:3px;cursor:pointer;margin:.5rem 0;transition:border-color .15s,color .15s}
+.xbtn:hover{border-color:var(--amber-b);color:var(--amber-b)}
+.xbody{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.15rem 1.35rem;margin:.4rem 0 1rem}
+.xbody.open{display:block}
+.xbody p{font-size:.84rem}
+.xbody ul{padding-left:1.4rem;margin:.5rem 0}
+.xbody li{font-size:.84rem;color:var(--fg2);margin-bottom:.38rem}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem;font-family:system-ui,sans-serif}
+th{text-align:left;padding:.58rem .88rem;background:var(--slate);color:var(--fg2);font-weight:700;border-bottom:1px solid var(--border)}
+td{padding:.52rem .88rem;border-bottom:1px solid var(--border);color:var(--fg3);vertical-align:top}
+tr:hover td{background:var(--card);color:var(--fg2)}
+.tl{margin:1rem 0}
+.tli{display:flex;gap:1.1rem;margin-bottom:1.15rem}
+.tld{width:9px;height:9px;border-radius:50%;background:var(--amber-b);flex-shrink:0;margin-top:.58rem}
+.tlb h5{font-size:.87rem;font-family:system-ui,sans-serif;font-weight:700;color:var(--fg);margin-bottom:.18rem}
+.tlb p{font-size:.79rem;margin:0;color:var(--fg3)}
+.flow{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0;align-items:center}
+.fn{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:.45rem .9rem;font-size:.79rem;font-family:system-ui,sans-serif;color:var(--fg2)}
+.fn.hl{border-color:var(--amber-b);color:var(--amber-b)}
+.fa{color:var(--fg3)}
+@media(max-width:720px){
+  #shell{flex-direction:column}
+  #nav{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border)}
+  #main{padding:1.8rem 1.2rem}
+  nav ul{display:flex;flex-wrap:wrap;padding:.4rem .6rem}
+  nav li a{padding:.3rem .65rem;border-left:none;border-bottom:2px solid transparent;white-space:nowrap}
+  nav li a.active{border-bottom-color:var(--amber-b)}
+  .nav-sec{display:none}
+  nav li.sub{display:none}
+  #sw{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="shell">
+
+<aside id="nav">
+  <div id="nav-head">
+    <h1>Kähler &amp; Hyperkähler Geometry</h1>
+    <p>Full Implications Atlas</p>
+  </div>
+  <div id="sw"><input type="search" placeholder="Search topics…" oninput="doSearch(this.value)"></div>
+  <nav>
+    <div class="nav-sec">Foundations</div>
+    <ul>
+      <li><a href="#core" onclick="nc(this)">Core structures</a></li>
+      <li class="sub"><a href="#core-kahler" onclick="nc(this)">Kähler geometry</a></li>
+      <li class="sub"><a href="#core-hk" onclick="nc(this)">Hyperkähler geometry</a></li>
+      <li class="sub"><a href="#core-rel" onclick="nc(this)">Kähler → HK hierarchy</a></li>
+    </ul>
+    <div class="nav-sec">Mathematical</div>
+    <ul>
+      <li><a href="#math-hodge" onclick="nc(this)">Hodge theory</a></li>
+      <li><a href="#math-bb" onclick="nc(this)">Beauville–Bogomolov</a></li>
+      <li><a href="#math-moduli" onclick="nc(this)">Moduli &amp; deformation</a></li>
+      <li><a href="#math-twistor" onclick="nc(this)">Twistor theory</a></li>
+      <li><a href="#math-ext" onclick="nc(this)">Extensions &amp; generalisations</a></li>
+    </ul>
+    <div class="nav-sec">Philosophical</div>
+    <ul>
+      <li><a href="#phil-sympl" onclick="nc(this)">Symplectic philosophy</a></li>
+      <li><a href="#phil-mirror" onclick="nc(this)">Mirror symmetry</a></li>
+      <li><a href="#phil-found" onclick="nc(this)">Foundational questions</a></li>
+    </ul>
+    <div class="nav-sec">Applied</div>
+    <ul>
+      <li><a href="#app-physics" onclick="nc(this)">Physics</a></li>
+      <li><a href="#app-cs" onclick="nc(this)">Computer science</a></li>
+      <li><a href="#app-eng" onclick="nc(this)">Engineering &amp; signal</a></li>
+    </ul>
+    <div class="nav-sec">Landscape</div>
+    <ul>
+      <li><a href="#open" onclick="nc(this)">Open problems</a></li>
+      <li><a href="#hist" onclick="nc(this)">Historical lineage</a></li>
+      <li><a href="#map" onclick="nc(this)">Connections map</a></li>
+      <li><a href="#quat" onclick="nc(this)">Link to quaternionic NS</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main id="main">
+
+<!-- HERO -->
+<div class="sec" id="hero">
+  <div class="stag tv">Synthesis</div>
+  <h2>Kähler &amp; Hyperkähler Geometry — Full Implications Atlas</h2>
+  <p class="smeta">Covering: Kähler manifolds · Hyperkähler manifolds · Quaternionic Kähler · HKT · connections to physics, CS, and engineering</p>
+  <p class="lead">This atlas exhausts every implication of Kähler and hyperkähler geometry across mathematics, philosophy, physics, and engineering. Kähler geometry is the common setting of complex algebraic geometry, Hodge theory, and symplectic topology. Hyperkähler geometry is its quaternionic refinement — richer, rarer, and deeply tied to physics through instantons, monopoles, and mirror symmetry.</p>
+  <p>The two subjects are linked by a strict hierarchy: every hyperkähler manifold is Kähler (in three ways simultaneously), but most Kähler manifolds are not hyperkähler. This atlas tracks both levels and all connections between them.</p>
+</div>
+
+<!-- CORE STRUCTURES -->
+<div class="sec" id="core">
+  <div class="stag tv">Foundations</div>
+  <h2>Core structures</h2>
+
+  <h3 id="core-kahler">Kähler geometry</h3>
+  <div class="math">
+    <span class="ml">Definition — Kähler manifold</span>
+    A complex manifold (M, J) with Hermitian metric g is Kähler if any of these equivalent conditions holds:<br>
+    (1) dω = 0, where ω(X,Y) = g(JX,Y) is the Kähler form<br>
+    (2) ∇J = 0 (complex structure is parallel w.r.t. Levi-Civita connection)<br>
+    (3) Hol(g) ⊆ U(n)  (holonomy contained in unitary group)<br>
+    (4) Locally: ω = i∂∂̄φ for a real-valued potential φ (Kähler potential)
+  </div>
+  <p>The closure dω = 0 is deceptively simple — it simultaneously encodes compatibility of the symplectic, complex, and Riemannian structures, giving Kähler manifolds extraordinary rigidity and richness.</p>
+
+  <h3 id="core-hk">Hyperkähler geometry</h3>
+  <div class="math">
+    <span class="ml">Definition — Hyperkähler manifold</span>
+    A Riemannian manifold (M, g) of real dimension 4n is hyperkähler if:<br>
+    Hol(g) ⊆ Sp(n)  (holonomy in the symplectic group)<br><br>
+    Equivalently: M carries three complex structures I, J, K with<br>
+    I² = J² = K² = IJK = −1  (quaternionic relations)<br>
+    each making (M, g) Kähler, with Kähler forms ω_I, ω_J, ω_K.<br><br>
+    Holomorphic symplectic form: Ω = ω_J + iω_K is a holomorphic 2-form<br>
+    with Ω^n ≠ 0 (non-degenerate) and dΩ = 0 (closed).
+  </div>
+
+  <h3 id="core-rel">The Kähler → Hyperkähler hierarchy</h3>
+  <table>
+    <thead><tr><th>Structure</th><th>Holonomy</th><th>Dimension</th><th>Key property</th></tr></thead>
+    <tbody>
+      <tr><td>Riemannian</td><td>SO(n)</td><td>any</td><td>Baseline</td></tr>
+      <tr><td>Kähler</td><td>⊆ U(n)</td><td>2n (real)</td><td>dω = 0, Hodge theory</td></tr>
+      <tr><td>Calabi–Yau</td><td>SU(n)</td><td>2n (real)</td><td>Ricci-flat Kähler, c₁ = 0</td></tr>
+      <tr><td>Hyperkähler</td><td>Sp(n)</td><td>4n (real)</td><td>Three Kähler structures, holomorphic symplectic form</td></tr>
+      <tr><td>Quaternionic Kähler</td><td>Sp(n)·Sp(1)</td><td>4n (real)</td><td>Not Kähler (unless flat); Einstein with nonzero scalar curvature</td></tr>
+      <tr><td>HKT (HK with torsion)</td><td>—</td><td>4n (real)</td><td>Hypercomplex + compatible metric; not Levi-Civita parallel</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.8rem;color:var(--fg3)">Note: Quaternionic Kähler is NOT Kähler in general — the name is historical. Hyperkähler is simultaneously Kähler in three ways.</p>
+</div>
+
+<!-- HODGE THEORY -->
+<div class="sec" id="math-hodge">
+  <div class="stag tv">Mathematical</div>
+  <h2 id="math-hodge">Hodge theory</h2>
+
+  <p class="lead">The Kähler condition dω = 0 forces the Hodge decomposition — a splitting of cohomology that is the foundation of all complex algebraic geometry.</p>
+
+  <div class="math">
+    <span class="ml">Hodge Decomposition Theorem</span>
+    For a compact Kähler manifold M of complex dimension n:<br>
+    Hᵏ(M, ℂ) = ⊕_{p+q=k} Hᵖ·ᑫ(M)<br>
+    where Hᵖ·ᑫ = ker(∂̄) ∩ Aᵖ·ᑫ / im(∂̄) (Dolbeault cohomology)<br><br>
+    Consequences: h^{p,q} = h^{q,p} (Hodge symmetry)<br>
+    b_k = Σ_{p+q=k} h^{p,q}  (Betti number formula)<br>
+    b_{2k+1} ≡ 0 (mod 2)  (odd Betti numbers are even)
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Hard Lefschetz</h5>
+      <p>For a compact Kähler manifold with Kähler form ω, the map L^k: H^{n-k} → H^{n+k} given by L(α) = ω∧α is an isomorphism. Forces symmetry b_{n-k} = b_{n+k} in Betti numbers.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>∂∂̄-lemma</h5>
+      <p>On a compact Kähler manifold: if a form is d-exact, ∂-exact, and ∂̄-closed (or any two of these), it is ∂∂̄-exact. This is the key technical lemma underpinning deformation theory and mirror symmetry.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Hyperkähler upgrade</span>
+      <h5>LLK decomposition</h5>
+      <p>On a hyperkähler manifold, there are three Lefschetz operators L_I, L_J, L_K. Together they generate an 𝔰𝔬(4,1) action on cohomology (Looijenga–Lunts–Verbitsky decomposition), far richer than the single 𝔰𝔩(2) of Kähler.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Fujiki relation</h5>
+      <p>For a hyperkähler manifold of dimension 2n and any class α ∈ H²(M,ℤ): ∫_M α^{2n} = c_M · q(α)^n where q is the Beauville–Bogomolov–Fujiki form and c_M is a topological constant. Crucial for enumerative geometry.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Extension</span>
+      <h5>Non-Kähler Hodge theory</h5>
+      <p>The ∂∂̄-lemma fails for non-Kähler complex manifolds (e.g. Hopf surfaces). Bott–Chern and Aeppli cohomologies measure the failure. HKT manifolds satisfy a weaker version using the quaternionic ∂ operator.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Integral Hodge conjecture</h5>
+      <p>Which integral cohomology classes in H^{p,p} ∩ H^{2p}(M,ℤ) are algebraic? The rational version follows from Hodge theory; the integral version fails in general. Status for hyperkähler manifolds: open in dimension ≥ 4.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: why dω = 0 forces the Hodge decomposition</button>
+  <div class="xbody">
+    <p>The key is the Kähler identity: [Λ, ∂] = −i∂̄*, where Λ is the adjoint of L = ω∧ and * is the Hodge star. This identity implies Δ_d = 2Δ_∂ = 2Δ_∂̄ (the three natural Laplacians on a Kähler manifold coincide up to a factor of 2). Since harmonic forms for Δ_d split by type (p,q) — because Δ_d preserves type — the Hodge decomposition follows: every class has a unique harmonic representative, and that representative has a well-defined type decomposition.</p>
+    <p>On a non-Kähler Hermitian manifold, Δ_d ≠ 2Δ_∂̄ in general, so harmonic forms need not split by type, and the Hodge decomposition fails.</p>
+  </div>
+</div>
+
+<!-- BEAUVILLE–BOGOMOLOV -->
+<div class="sec" id="math-bb">
+  <div class="stag tv">Mathematical</div>
+  <h2>Beauville–Bogomolov decomposition</h2>
+
+  <div class="math">
+    <span class="ml">Beauville–Bogomolov Decomposition Theorem (1983)</span>
+    Let M be a compact Kähler manifold with c₁(M) = 0. Then there exists a finite étale cover M̃ → M such that:<br>
+    M̃ ≅ T × ∏ᵢ Yᵢ × ∏ⱼ Zⱼ<br>
+    where:<br>
+    • T = complex torus (Hol = {1})<br>
+    • Yᵢ = irreducible Calabi–Yau (Hol = SU(mᵢ), mᵢ ≥ 3)<br>
+    • Zⱼ = irreducible holomorphic symplectic / hyperkähler (Hol = Sp(nⱼ))
+  </div>
+
+  <p>The proof proceeds via: (1) Yau's theorem providing a Ricci-flat Kähler metric; (2) de Rham decomposition of the universal cover by holonomy; (3) Cheeger–Gromoll splitting off the flat Euclidean factor; (4) Berger's classification of Riemannian holonomy groups.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Corollary</span>
+      <h5>Classification of IHS manifolds</h5>
+      <p>Known irreducible holomorphic symplectic (= hyperkähler) manifolds up to deformation: K3 surfaces (dim 2), K3^[n]-type (Hilbert schemes of K3), Kummer^n-type (generalized Kummer), OG6 and OG10 (O'Grady's exceptional examples). Classification in higher dimensions is open.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Extension 2020s</span>
+      <h5>Singular BB decomposition</h5>
+      <p>Druel, Guenancia, Greb, Höring, Kebekus, Peternell (2011–2020): the BB decomposition extends to compact Kähler varieties with klt singularities and c₁ = 0. Uses minimal model program and extension theorems for differential forms.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Bogomolov–Tian–Todorov</h5>
+      <p>The local deformation space of a compact Kähler manifold with c₁ = 0 is smooth (unobstructed). For hyperkähler manifolds: the deformation space is locally isomorphic to an open set in H²(M,ℂ), of dimension b₂ − 2.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>BBF quadratic form</h5>
+      <p>Every irreducible hyperkähler manifold carries a canonical integral quadratic form q on H²(M,ℤ) of signature (3, b₂−3), generalising the intersection form on K3 surfaces. Analogous to the intersection form in algebraic geometry.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>New IHS deformation types</h5>
+      <p>Only six deformation types of IHS manifolds are known. Are there others in dimension 6 or above? Computational and geometric obstruction: constructing new examples requires either new moduli space constructions or unexpected geometry in high dimension.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Torelli problem</h5>
+      <p>The (global) Torelli theorem for hyperkähler manifolds: is a hyperkähler manifold determined up to isomorphism by its Hodge structure on H²? Proved for K3 surfaces (Pjateckii-Šapiro–Šafarevič 1971); known for K3^[n]-type; open in general.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODULI -->
+<div class="sec" id="math-moduli">
+  <div class="stag tv">Mathematical</div>
+  <h2>Moduli spaces and deformation theory</h2>
+
+  <p>Many moduli spaces arising in geometry and physics are themselves hyperkähler — a phenomenon that is both unexpected and extremely useful.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Key example</span>
+      <h5>Hilbert scheme of K3</h5>
+      <p>For a K3 surface S, the Hilbert scheme S^[n] of n points is an irreducible hyperkähler manifold of dimension 2n. The BBF form on H²(S^[n],ℤ) is the Beauville lattice Λ_n = H²(S,ℤ) ⊕ ℤ·δ with δ² = −2(n−1).</p>
+    </div>
+    <div class="card">
+      <span class="ct">Key example</span>
+      <h5>Moduli of sheaves</h5>
+      <p>The moduli space of stable sheaves on a K3 or abelian surface with coprime Mukai vector is a smooth hyperkähler manifold (Mukai, Beauville, O'Grady). The Mukai vector v = (r, c₁, χ) in the Mukai lattice encodes the Chern character data.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Key example</span>
+      <h5>Hitchin moduli space</h5>
+      <p>The moduli space of Higgs bundles M_Higgs(C, G) over a Riemann surface C is hyperkähler (Hitchin 1987). The three complex structures correspond to: flat connections, Higgs bundles, and harmonic maps. The hyperkähler quotient construction is central.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Key example</span>
+      <h5>Monopole moduli spaces</h5>
+      <p>The moduli space of magnetic monopoles in ℝ³ is hyperkähler (Atiyah–Hitchin 1985, Mendizabal 2024 for arbitrary symmetry breaking). The metric encodes scattering data; geodesics describe slow monopole dynamics.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Hyperkähler quotient (HKLR)</h5>
+      <p>Hitchin–Karlhede–Lindström–Roček (1987): if a group G acts on a hyperkähler manifold M preserving all three Kähler forms, the hyperkähler quotient M////G = μ⁻¹(0)/G is again hyperkähler. Fundamental construction for all examples above.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Extension</span>
+      <h5>Nakajima quiver varieties</h5>
+      <p>Nakajima (1994): for any quiver Q, the quiver variety M(v,w) is a hyperkähler quotient of a linear space. Encodes representation theory of Kac–Moody algebras and provides geometric realisations of highest weight modules.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: the hyperkähler quotient construction</button>
+  <div class="xbody">
+    <p>Let (M, g, I, J, K) be hyperkähler with three moment maps μ_I, μ_J, μ_K: M → 𝔤* for a Lie group G action. Combine them: μ = (μ_I, μ_J, μ_K): M → 𝔤* ⊗ ℝ³. The hyperkähler quotient is:</p>
+    <ul>
+      <li>μ⁻¹(ζ) / G for a central value ζ ∈ ℤ(𝔤)* ⊗ ℝ³</li>
+      <li>When smooth, this is hyperkähler of dimension dim M − 4 dim G</li>
+      <li>The metric, complex structures, and Kähler forms all descend from M</li>
+      <li>Complex moment map: μ_ℂ = μ_J + iμ_K is holomorphic w.r.t. I</li>
+    </ul>
+    <p>The ADHM construction of instantons is a special case: M = linear space of matrices, G = U(k), ζ = 0 gives the instanton moduli space. The Nakajima quiver varieties are obtained by taking M = T*(Rep(Q)) for a representation space of a quiver Q.</p>
+  </div>
+</div>
+
+<!-- TWISTOR -->
+<div class="sec" id="math-twistor">
+  <div class="stag tv">Mathematical</div>
+  <h2>Twistor theory</h2>
+
+  <p>Every hyperkähler manifold comes with a canonical twistor space — a complex manifold encoding the entire family of Kähler structures simultaneously.</p>
+
+  <div class="math">
+    <span class="ml">Twistor space (Penrose–Ward–Salamon)</span>
+    For a hyperkähler manifold M of real dimension 4n, the twistor space is:<br>
+    Z = M × S²<br>
+    with complex structure: at (m, ζ) ∈ M × ℂP¹, use I_ζ = aI + bJ + cK<br>
+    where (a,b,c) are the coordinates of ζ on S² ⊂ ℝ³.<br><br>
+    Z is a complex manifold of (complex) dimension 2n+1.<br>
+    The projection π: Z → ℂP¹ is holomorphic with fibres ≅ (M, I_ζ).<br>
+    Twistor lines: sections ℂP¹ → Z corresponding to points of M.<br>
+    The real structure (quaternionic involution) σ: Z → Z with σ² = −id.
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Penrose non-linear graviton</h5>
+      <p>A 4-dimensional self-dual Einstein manifold (e.g. hyperkähler with dim=4) is equivalent to a 3-dimensional complex manifold Z with: a fibration Z → ℂP¹, a family of rational curves with normal bundle O(1)⊕O(1), and a real structure. This is the Penrose non-linear graviton construction.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Kodaira deformation ↔ HK metric</h5>
+      <p>By Kodaira's theorem, twistor lines deform in a 4n-parameter family (= the manifold M itself). The hyperkähler metric on M is recovered from the complex geometry of Z via the periods of the twistor lines. This identifies HK geometry with complex geometry on Z.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Application</span>
+      <h5>Legendre transform construction</h5>
+      <p>Lindström–Roček (1987): hyperkähler metrics on cotangent bundles of Kähler manifolds are constructed via a Legendre transform of a holomorphic function on Z. Gives explicit local descriptions of HK metrics in terms of Kähler potentials.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Application</span>
+      <h5>Ward correspondence</h5>
+      <p>Self-dual Yang–Mills connections on ℝ⁴ ≅ ℍ correspond to holomorphic bundles on the twistor space ℂP³. The ADHM construction of instantons is the translation back to matrix data. Entire instanton theory lives in this twistor framework.</p>
+    </div>
+  </div>
+</div>
+
+<!-- EXTENSIONS -->
+<div class="sec" id="math-ext">
+  <div class="stag tv">Mathematical</div>
+  <h2>Extensions and generalisations</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>HKT manifolds</h5>
+      <p>Hyperkähler with torsion (HKT): hypercomplex manifold with a metric g such that the three Kähler forms satisfy d^c_I ω_I = d^c_J ω_J = d^c_K ω_K. Appear naturally in string theory / (4,0) sigma models. The Obata connection replaces the Levi-Civita connection.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Quaternionic Kähler manifolds</h5>
+      <p>Holonomy Sp(n)·Sp(1): NOT hyperkähler. The quaternionic Kähler condition is preserved under quaternionic Kähler reduction (analogue of hyperkähler quotient). Wolf spaces provide all known compact positive-QK examples.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>Generalised Kähler geometry</h5>
+      <p>Hitchin–Gualtieri: a generalised Kähler structure is a pair of commuting generalised complex structures. Includes ordinary Kähler and bi-Hermitian structures. Appears in (2,2) supersymmetric sigma models.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>∞-categorical Kähler geometry</h5>
+      <p>Lurie's derived algebraic geometry gives a notion of derived Kähler manifold where the tangent complex replaces the tangent bundle. The Hodge decomposition extends to a filtration on the derived de Rham complex.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Generalisation</span>
+      <h5>p-adic / non-Archimedean Kähler</h5>
+      <p>Berkovich spaces carry a non-Archimedean analogue of the Kähler condition (Chambert-Loir–Ducros). The Hodge decomposition has a non-Archimedean version via tropical geometry and skeleton maps.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Compact HKT with holonomy exactly SL(n,ℍ)</h5>
+      <p>All known compact HKT manifolds either have torsion that prevents a standard holonomy classification, or are constructed as homogeneous spaces. Existence of compact HKT manifolds with "generic" holonomy is open.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHICAL -->
+<div class="sec" id="phil-sympl">
+  <div class="stag tt">Philosophical</div>
+  <h2>The symplectic philosophy</h2>
+
+  <p class="lead">Kähler geometry is the intersection of three fundamental structures: Riemannian (metric), complex (integrable J), and symplectic (dω = 0). The Kähler condition is the compatibility condition among all three — and this triple compatibility has deep philosophical consequences.</p>
+
+  <h3>Three philosophies, one structure</h3>
+  <table>
+    <thead><tr><th>Viewpoint</th><th>Primary object</th><th>Key theorems</th><th>Philosophical content</th></tr></thead>
+    <tbody>
+      <tr><td>Riemannian</td><td>Metric g, curvature</td><td>Calabi conjecture, Yau's theorem</td><td>Existence: curvature conditions are realised</td></tr>
+      <tr><td>Complex algebraic</td><td>Line bundles, sheaves</td><td>Kodaira embedding, GAGA</td><td>Algebraicity: analytic = algebraic for projective Kähler</td></tr>
+      <tr><td>Symplectic</td><td>Kähler form ω</td><td>Hard Lefschetz, Arnold conjecture</td><td>Topology is constrained by the form</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hyperkähler as quaternionic philosophy</h3>
+  <p>If Kähler is "complex geometry done right," hyperkähler is "quaternionic geometry done right." The three complex structures I, J, K — satisfying IJ = K — encode the quaternion algebra ℍ in the tangent bundle. This gives hyperkähler manifolds a rigidity that is absent in generic Kähler manifolds:</p>
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Philosophical</span>
+      <h5>Rigidity vs. flexibility</h5>
+      <p>Kähler manifolds in dimension ≥ 4 are flexible enough to carry moduli (deformations). Hyperkähler manifolds are more rigid — the deformation space is governed by the single BBF quadratic form on H². The quaternionic structure leaves less freedom.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Philosophical</span>
+      <h5>The quaternionic constraint</h5>
+      <p>The holonomy condition Hol ⊆ Sp(n) is the quaternionic analogue of Hol ⊆ U(n) for Kähler. Just as U(n) ⊂ SO(2n) forces complex structure, Sp(n) ⊂ SO(4n) forces quaternionic structure. The geometry encodes ℍ-linearity.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Philosophical</span>
+      <h5>Twistor democracy</h5>
+      <p>On a hyperkähler manifold, no single complex structure I is preferred — the entire 2-sphere's worth of structures (aI + bJ + cK, a²+b²+c²=1) are equally valid. This "democracy" of complex structures is the twistor philosophy: study M via the whole family at once.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="phil-mirror">
+  <div class="stag tt">Philosophical</div>
+  <h2>Mirror symmetry</h2>
+
+  <p>Mirror symmetry — the exchange of two Calabi–Yau manifolds X and X̌ — is one of the deepest implications of Kähler geometry, originally discovered through physics (string theory) and still not fully understood mathematically.</p>
+
+  <div class="math">
+    <span class="ml">Mirror symmetry (heuristic statement)</span>
+    For mirror Calabi–Yau manifolds X and X̌:<br>
+    H^{p,q}(X) ≅ H^{n-p,q}(X̌)  (Hodge number mirror)<br>
+    Gromov–Witten theory of X ↔ variation of Hodge structure of X̌<br>
+    Derived category D^b(Coh(X)) ≅ D^b(Fuk(X̌))  (Kontsevich HMS)<br><br>
+    For hyperkähler: mirror symmetry acts as a rotation in the twistor sphere,<br>
+    exchanging symplectic and complex structures.
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>SYZ conjecture</h5>
+      <p>Strominger–Yau–Zaslow (1996): mirror Calabi–Yau manifolds are dual special Lagrangian torus fibrations. For hyperkähler manifolds this specialises: the Hitchin fibration M_Higgs → B is self-mirror, with fibres being dual abelian varieties (Langlands duality).</p>
+    </div>
+    <div class="card">
+      <span class="ct">Theorem</span>
+      <h5>Homological mirror symmetry</h5>
+      <p>Kontsevich (1994): the derived category of coherent sheaves on X is equivalent to the Fukaya category of X̌ as A∞-categories. Proved for elliptic curves (Polishchuk–Zaslow), K3 surfaces, and certain CY3s. Open for general CY.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Application</span>
+      <h5>Langlands duality via HK</h5>
+      <p>The hyperkähler structure on the Hitchin moduli space underlies geometric Langlands: rotating the complex structure on M_Higgs from I to J exchanges G-bundles with Ǧ-bundles (Langlands dual group), implementing the duality geometrically.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Quantum mirror symmetry for HK</h5>
+      <p>The "quantum" corrections to mirror symmetry (instanton contributions) are much harder on the A-side. For hyperkähler targets of sigma models, a fully quantum mirror map remains open: the theory of quantum cohomology of HK manifolds is far from complete.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="phil-found">
+  <div class="stag tt">Philosophical</div>
+  <h2>Foundational questions</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Question</span>
+      <h5>Which topological spaces admit Kähler metrics?</h5>
+      <p>Necessary: even odd Betti numbers, Hard Lefschetz, formality of the rational homotopy type (DGMS theorem). Sufficient conditions beyond algebraic varieties: unknown. The Kodaira problem (is every compact Kähler manifold deformable to a projective one?) is the central open question.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Question</span>
+      <h5>Existence of new HK manifolds</h5>
+      <p>The six known deformation types of compact IHS manifolds were all found before 2000. Is the list finite? Infinite? There are no known obstructions to new types existing in high dimension, and no known constructions producing them.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Principle</span>
+      <h5>Kähler = analytically tractable</h5>
+      <p>The Kähler condition is the boundary between "hard" and "tractable" complex geometry. Theorems that require Kähler include: Kodaira embedding, Hodge decomposition, ∂∂̄-lemma, Calabi–Yau existence. Without it, essentially all of these fail.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Principle</span>
+      <h5>Holonomy as the organising principle</h5>
+      <p>Berger's classification (1955, proved 1990s) of irreducible Riemannian holonomy groups shows that Kähler (U(n)), CY (SU(n)), HK (Sp(n)), and QK (Sp(n)·Sp(1)) are the ONLY special holonomy groups (plus G₂ and Spin(7) in exceptional dimensions). The list is finite and exhaustive.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHYSICS -->
+<div class="sec" id="app-physics">
+  <div class="stag tr">Applied</div>
+  <h2>Physics</h2>
+
+  <h3>String theory and supersymmetry</h3>
+  <p>Kähler and hyperkähler manifolds are the geometries forced on target spaces and moduli spaces by supersymmetry — they are not a choice but a consequence.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">String theory</span>
+      <h5>Calabi–Yau compactification</h5>
+      <p>To compactify superstring theory from 10D to 4D preserving N=1 SUSY, the internal 6 dimensions must form a Calabi–Yau threefold. The Hodge numbers h^{1,1} and h^{2,1} count the massless scalar moduli (Kähler moduli and complex structure moduli).</p>
+    </div>
+    <div class="card">
+      <span class="ct">SUSY</span>
+      <h5>N=2 SUSY → HK target</h5>
+      <p>In N=2 supersymmetric sigma models in 2D (or N=2 gauge theory in 4D), the target space of hypermultiplets must be hyperkähler. This is a direct consequence of the supersymmetry algebra — the three complex structures correspond to the three conserved supercharges.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Gauge theory</span>
+      <h5>Instantons and ADHM</h5>
+      <p>Self-dual Yang–Mills instantons on ℝ⁴ = ℍ are classified by the ADHM data — a hyperkähler quotient construction (as noted in the Quaternionic Nullstellensatz atlas). The instanton moduli space is itself hyperkähler.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Seiberg–Witten</span>
+      <h5>SW theory and HK geometry</h5>
+      <p>The Seiberg–Witten moduli space over a Kähler surface is a smooth algebraic variety. Over a hyperkähler surface (K3 or T⁴) it acquires a hyperkähler structure (Pidstrygach 2004, Schumacher 2010). SW invariants of Kähler manifolds are computed via Gromov–Taubes equivalence.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Black holes</span>
+      <h5>BPS black hole moduli</h5>
+      <p>The moduli space of BPS (Bogomolny–Prasad–Sommerfield) black holes in 5D supergravity is hyperkähler with torsion (HKT). The HKT geometry encodes the near-horizon geometry of extremal black holes.</p>
+    </div>
+    <div class="card">
+      <span class="ct">M-theory</span>
+      <h5>G₂ and Spin(7) compactifications</h5>
+      <p>M-theory compactified on a G₂ manifold gives N=1 SUSY in 4D. G₂ holonomy manifolds contain associative and co-associative submanifolds whose intersection theory is related to the Kähler geometry of their boundary K3 fibrations.</p>
+    </div>
+  </div>
+
+  <button class="xbtn" onclick="xt(this)">▸ Detailed: why SUSY forces Kähler / HK geometry on target spaces</button>
+  <div class="xbody">
+    <p>The argument is representation-theoretic. In a 2D sigma model with N supercharges, the supersymmetry algebra includes operators Q^a satisfying {Q^a, Q^b} = 2δ^{ab}H. For the model to be consistent on a target space M:</p>
+    <ul>
+      <li>N=1: M must be Riemannian (no constraint beyond smoothness)</li>
+      <li>N=2: Q¹ and Q² define two covariantly constant tensors on M; they square to −id and anti-commute, giving a single complex structure J with ∇J = 0, i.e. M is Kähler</li>
+      <li>N=4: three operators Q¹, Q², Q³ satisfying the quaternion relations give three parallel complex structures I, J, K — exactly the hyperkähler condition</li>
+      <li>N=8: forces the target to be a symmetric space with holonomy Sp(n) (rare and highly constrained)</li>
+    </ul>
+    <p>This is not a choice: if you write down an N=4 SUSY sigma model, the target must be HK, or the theory is inconsistent. This is why HK geometry appears so pervasively in SUSY physics.</p>
+  </div>
+</div>
+
+<!-- CS -->
+<div class="sec" id="app-cs">
+  <div class="stag tr">Applied</div>
+  <h2>Computer science</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Optimisation</span>
+      <h5>Kähler geometry in ML</h5>
+      <p>The parameter space of neural networks with complex-valued weights carries a Kähler structure when equipped with the Fisher information metric (natural gradient). The Kähler condition ensures the natural gradient update is well-defined and avoids flat regions.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Optimisation</span>
+      <h5>Hyperkähler SDP</h5>
+      <p>Semidefinite programs over quaternionic matrices (QSDP) arise in quantum information. The feasibility region is determined by hyperkähler moment map conditions — the three moment maps μ_I, μ_J, μ_K correspond to the three matrix inequality constraints.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Computation</span>
+      <h5>Symplectic integrators</h5>
+      <p>Kähler manifolds provide the geometric setting for symplectic numerical integration of Hamiltonian systems. Structure-preserving algorithms (Störmer–Verlet, RATTLE) preserve the Kähler form ω, giving long-time stability guarantees absent in generic integrators.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Algebraic computation</span>
+      <h5>Period computation</h5>
+      <p>Computing periods of algebraic varieties (integrals of holomorphic forms over cycles) is a core problem in computational algebraic geometry. For Kähler manifolds, the Hodge decomposition provides the framework; algorithms based on Picard–Fuchs ODEs are the main tool.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Quantum computing</span>
+      <h5>Kähler quantisation</h5>
+      <p>Geometric quantisation of a Kähler manifold (M, ω) with integral Kähler class gives a Hilbert space H = H⁰(M, L) (holomorphic sections of a prequantum line bundle L). This is the mathematical foundation of several quantum computing architectures.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Cryptography</span>
+      <h5>Abelian variety cryptography</h5>
+      <p>Abelian varieties are compact Kähler manifolds that are also algebraic groups. Jacobians of genus-2 curves (Kummer surfaces) and their endomorphism rings (related to HK geometry) underlie hyperelliptic curve cryptography and isogeny-based post-quantum schemes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ENGINEERING -->
+<div class="sec" id="app-eng">
+  <div class="stag tr">Applied</div>
+  <h2>Engineering &amp; signal processing</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Signal processing</span>
+      <h5>Quaternionic Kähler signal models</h5>
+      <p>Quaternionic Fourier and wavelet transforms exploit the HK structure of ℍ. The three complex structures I, J, K give three independent phase planes, enabling joint processing of 3-channel signals (RGB images, 3D motion) without cross-channel leakage.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Control theory</span>
+      <h5>Kähler manifolds as state spaces</h5>
+      <p>The phase space of many mechanical systems (rigid bodies, fluids) is a Kähler manifold (often a cotangent bundle with a Kähler structure from a complex potential). Optimal control on Kähler phase spaces exploits the Hamiltonian formalism and symplectic structure.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Robotics</span>
+      <h5>Configuration spaces via HK reduction</h5>
+      <p>The configuration space of a multi-body robotic system with symmetry (e.g. redundant arms) is obtained by symplectic or hyperkähler reduction. The reduced space is Kähler or HK when the symmetry group is compact and the potential is chosen correctly.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Materials science</span>
+      <h5>Kähler geometry in elasticity</h5>
+      <p>The moduli space of elastic deformations of a material (configurations of a crystal lattice) can be given a Kähler structure when the material is isotropic. The Kähler potential encodes the strain energy; geodesics describe deformation paths of minimal energy.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Optics</span>
+      <h5>Ray optics as symplectic geometry</h5>
+      <p>Geometric optics is symplectic geometry: rays are Lagrangian submanifolds of the Kähler phase space T*ℝ³ ≅ ℝ⁶. Kähler manifold methods (moment maps, reduction) classify optical systems by their symmetry groups.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Fluid dynamics</span>
+      <h5>Kähler structure on Diff(M)</h5>
+      <p>The diffeomorphism group of a Kähler manifold M carries a (formal, infinite-dimensional) Kähler structure; geodesics on Diff(M) are solutions to the Euler equations for ideal fluid flow. Arnold's hydrodynamic framework is the Kähler geometric origin of fluid dynamics.</p>
+    </div>
+  </div>
+</div>
+
+<!-- OPEN PROBLEMS -->
+<div class="sec" id="open">
+  <div class="stag to">Open problems</div>
+  <h2>Open problems</h2>
+  <table>
+    <thead><tr><th>#</th><th>Problem</th><th>Area</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Kodaira problem: is every compact Kähler manifold deformable to a projective variety?</td><td>Kähler</td><td>Open in dim ≥ 4; known false for dim ≥ 6 in some formulations</td></tr>
+      <tr><td>2</td><td>Integral Hodge conjecture for HK manifolds</td><td>Hodge theory</td><td>Open; related to the Bloch–Beilinson filtration</td></tr>
+      <tr><td>3</td><td>Classification of compact IHS manifolds in dimension ≥ 6</td><td>HK moduli</td><td>Open; only 6 deformation types known</td></tr>
+      <tr><td>4</td><td>Global Torelli theorem for all IHS manifolds</td><td>HK moduli</td><td>Proved for K3^[n]-type; open in general</td></tr>
+      <tr><td>5</td><td>Existence of compact HKT manifolds with prescribed holonomy</td><td>HKT</td><td>Open; no examples with holonomy exactly SL(n,ℍ)</td></tr>
+      <tr><td>6</td><td>Quantum mirror symmetry for HK manifolds (all instanton corrections)</td><td>Mirror symmetry</td><td>Open; partial results via GW theory on HK targets</td></tr>
+      <tr><td>7</td><td>Non-Archimedean / p-adic hyperkähler geometry</td><td>Arithmetic</td><td>Foundational; Berkovich HK spaces not yet defined</td></tr>
+      <tr><td>8</td><td>Homological mirror symmetry for general Calabi–Yau 3-folds</td><td>HMS</td><td>Proved for special cases; open in general</td></tr>
+      <tr><td>9</td><td>Kähler–Einstein metrics on Fano manifolds with symmetry (Yau–Tian–Donaldson for non-K-stable)</td><td>Kähler</td><td>K-stability = KE solved (2015); effective criterion open</td></tr>
+      <tr><td>10</td><td>Connection between HK geometry and the quaternionic Nullstellensatz</td><td>Algebra / geometry</td><td>Open; the atlas in this conversation is the starting point</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- HISTORY -->
+<div class="sec" id="hist">
+  <div class="stag tv">History</div>
+  <h2>Historical lineage</h2>
+  <div class="tl">
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1933 — Kähler, "Über eine bemerkenswerte Hermitesche Metrik"</h5><p>Erich Kähler introduces the condition dω = 0 and proves local existence of the potential. The paper is three pages long and triggers a century of geometry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1954 — Kodaira embedding theorem</h5><p>A compact complex manifold embeds in projective space iff it admits a Kähler metric whose cohomology class is integral. Bridges complex and algebraic geometry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1957 — Calabi conjecture</h5><p>Calabi conjectures existence of Kähler metrics with prescribed Ricci curvature. Proved by Yau in 1978 (Fields Medal), establishing Calabi–Yau manifolds as physical compactification spaces.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1978 — Yau solves Calabi conjecture</h5><p>Complex Monge–Ampère PDE solved using a priori estimates. Every compact Kähler manifold with c₁ = 0 admits a unique Ricci-flat Kähler metric. Opens the door to string theory compactification.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1983 — Beauville–Bogomolov decomposition</h5><p>Classification of compact Ricci-flat Kähler manifolds into tori, CY, and IHS components. Identifies hyperkähler manifolds as one of three irreducible building blocks.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1985 — Atiyah–Hitchin metric on monopole moduli</h5><p>The first explicit compact-ish HK metric on a moduli space of physical objects. Monopole scattering is described by geodesics on a 4-dimensional HK manifold.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1987 — HKLR hyperkähler quotient; Hitchin moduli of Higgs bundles</h5><p>Two foundational papers in the same year: HKLR gives the construction tool; Hitchin applies it to produce M_Higgs, a cornerstone of geometric Langlands.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1994 — Nakajima quiver varieties; Kontsevich HMS</h5><p>Quiver varieties unify HK quotient constructions in representation theory. HMS proposes the categorical framework for mirror symmetry.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>1999–2000 — O'Grady's exceptional HK manifolds (OG6, OG10)</h5><p>Two new deformation types of IHS manifolds, constructed as resolutions of singular moduli spaces of sheaves on K3 and abelian surfaces. No new types found since.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>2015 — Yau–Tian–Donaldson conjecture solved (Chen–Donaldson–Sun)</h5><p>Kähler–Einstein metrics on Fano manifolds exist iff the manifold is K-polystable. Closes a 30-year programme connecting analysis, geometry, and GIT stability.</p></div></div>
+    <div class="tli"><div class="tld"></div><div class="tlb"><h5>2020–2025 — Singular BB decomposition completed for Kähler varieties</h5><p>Druel–Guenancia–Greb–Höring–Kebekus–Peternell: BB decomposition extended to klt singularities in the full Kähler (non-projective) setting. State of the art.</p></div></div>
+  </div>
+</div>
+
+<!-- CONNECTIONS MAP -->
+<div class="sec" id="map">
+  <div class="stag tv">Map</div>
+  <h2>Connections map</h2>
+  <table>
+    <thead><tr><th>Source</th><th>Arrow</th><th>Target</th><th>Key tool</th></tr></thead>
+    <tbody>
+      <tr><td>Kähler condition (dω=0)</td><td>⟹</td><td>Hodge decomposition</td><td>Kähler identities, Δ_d = 2Δ_∂̄</td></tr>
+      <tr><td>Hodge decomposition</td><td>⟹</td><td>Hard Lefschetz</td><td>Primitive decomposition, sl(2) action</td></tr>
+      <tr><td>c₁ = 0 + Kähler</td><td>⟹</td><td>Ricci-flat metric (Yau)</td><td>Complex Monge–Ampère equation</td></tr>
+      <tr><td>Ricci-flat + Hol=Sp(n)</td><td>⟺</td><td>Hyperkähler</td><td>Berger classification + holonomy reduction</td></tr>
+      <tr><td>Hyperkähler</td><td>⟹</td><td>Twistor space Z = M × S²</td><td>Quaternionic structure on tangent bundle</td></tr>
+      <tr><td>HK quotient (HKLR)</td><td>⟹</td><td>Moduli spaces are HK</td><td>Moment maps μ_I, μ_J, μ_K</td></tr>
+      <tr><td>HK moduli of Higgs bundles</td><td>⟹</td><td>Geometric Langlands</td><td>Rotation I → J exchanges G and Ǧ</td></tr>
+      <tr><td>Calabi–Yau (c₁=0, SU-hol)</td><td>⟹</td><td>Mirror symmetry</td><td>SYZ fibration, HMS (Kontsevich)</td></tr>
+      <tr><td>N=4 SUSY sigma model</td><td>⟹</td><td>HK target space (forced)</td><td>Representation theory of SUSY algebra</td></tr>
+      <tr><td>ADHM construction</td><td>⟺</td><td>Instanton moduli (HK)</td><td>HK quotient + twistor Ward correspondence</td></tr>
+      <tr><td>BBF quadratic form on H²</td><td>⟹</td><td>Deformation theory (b₂−2 dim)</td><td>BTT theorem + Verbitsky's Torelli</td></tr>
+      <tr><td>Kähler form ω (integral)</td><td>⟹</td><td>Projective embedding</td><td>Kodaira embedding theorem</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- LINK TO QUAT NS -->
+<div class="sec" id="quat">
+  <div class="stag tv">Bridge</div>
+  <h2>Link to the Quaternionic Nullstellensatz</h2>
+
+  <p class="lead">Kähler/hyperkähler geometry and the Quaternionic Nullstellensatz of Alon–Paran are not merely adjacent — they share a common root in the geometry of ℍⁿ and the algebra of quaternionic polynomial functions.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="ct">Direct connection</span>
+      <h5>ℍⁿ as flat hyperkähler</h5>
+      <p>ℍⁿ = ℝ⁴ⁿ with its standard metric is the flat hyperkähler manifold. The three complex structures I, J, K on ℍⁿ are exactly left-multiplication by i, j, k. The Quaternionic Nullstellensatz describes the algebraic geometry of subvarieties of this flat HK space.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Direct connection</span>
+      <h5>Holomorphic symplectic form on ℍⁿ</h5>
+      <p>The holomorphic symplectic form Ω = ω_J + iω_K on ℍⁿ (w.r.t. the complex structure I) is exactly the form that vanishes on Lagrangian submanifolds. Quaternionic polynomial functions that vanish on a variety define an ideal whose radical (in the Nullstellensatz sense) encodes the Lagrangian condition.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Bridge</span>
+      <h5>ADHM equations as quaternionic polynomials</h5>
+      <p>The ADHM equations are a system of quaternionic polynomial equations in the matrix entries. The Nullstellensatz over ℍ (Theorem 1 of Alon–Paran) characterises the ideal of all polynomial relations on the ADHM moduli space — connecting instanton geometry to quaternionic commutative algebra.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Bridge</span>
+      <h5>HK moment maps and the quaternionic radical</h5>
+      <p>The three moment maps μ_I, μ_J, μ_K of a HK quotient are quaternionic polynomial equations when the HK manifold is ℍⁿ. The quaternionic radical of the ideal (μ_I, μ_J, μ_K) is the ideal of all polynomial functions vanishing on the HK quotient.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>Quaternionic Nullstellensatz on HK manifolds</h5>
+      <p>Can the Alon–Paran Nullstellensatz be extended from flat ℍⁿ to a general hyperkähler manifold M? The ring of regular functions on M is no longer a polynomial ring, but local models are quaternionic polynomial rings. A sheaf-theoretic generalisation is open.</p>
+    </div>
+    <div class="card">
+      <span class="ct">Open</span>
+      <h5>HK algebraic geometry via the isomorphism φ</h5>
+      <p>The ring isomorphism φ: ℍ[x₁,...,xₙ] → ℝ[y_{ij}] translates HK polynomial geometry into real algebraic geometry on ℝ⁴ⁿ. The image of quaternionic varieties under φ are O(4)ⁿ-equivariant varieties — a structured subclass of real algebraic varieties. Their HK geometry is encoded in the O(4) equivariance.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="fn hl">ℍⁿ (flat HK)</div>
+    <div class="fa">⊂</div>
+    <div class="fn">HK manifolds</div>
+    <div class="fa">←</div>
+    <div class="fn">HK quotient</div>
+    <div class="fa">↑</div>
+    <div class="fn hl">Quat. polynomial eqs.</div>
+    <div class="fa">←</div>
+    <div class="fn hl">Nullstellensatz (Alon–Paran)</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function nc(a){document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}
+function xt(btn){const b=btn.nextElementSibling;const o=b.classList.toggle('open');btn.textContent=(o?'▾':'▸')+btn.textContent.slice(1)}
+function doSearch(q){
+  const main=document.getElementById('main');
+  main.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));
+  if(!q.trim())return;
+  const lq=q.toLowerCase();
+  function walk(n){
+    if(n.nodeType===3){const t=n.textContent,li=t.toLowerCase();if(!li.includes(lq))return;
+      const f=document.createDocumentFragment();let i=0,j;
+      while((j=li.indexOf(lq,i))!==-1){f.appendChild(document.createTextNode(t.slice(i,j)));const m=document.createElement('mark');m.textContent=t.slice(j,j+lq.length);f.appendChild(m);i=j+lq.length}
+      f.appendChild(document.createTextNode(t.slice(i)));n.replaceWith(f);
+    }else if(n.nodeType===1&&!['SCRIPT','STYLE'].includes(n.tagName)){Array.from(n.childNodes).forEach(walk)}
+  }
+  walk(main);
+}
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('nav a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id)})}})},{threshold:.15});
+document.querySelectorAll('.sec[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
